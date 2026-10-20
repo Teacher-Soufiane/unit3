@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Writing a Report Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&amp;family=Poppins:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root{--blue:#123b67;--blue2:#2563eb;--light:#eaf4ff;--green:#15803d;--red:#dc2626;--gray:#64748b;--ink:#17324d}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Poppins,Cairo,sans-serif;color:var(--ink);background:#f4f7fb}
+    button{font:inherit}
+    button:focus-visible,[tabindex]:focus-visible{outline:3px solid #f59e0b;outline-offset:3px}
+    .quiz-shell{width:100%;min-height:calc(100 * min(var(--vh, 1vh), 1vh));padding-bottom:24px}
+    .quiz-header{background-color:#eaf4ff;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:12px 22px;border-bottom:1px solid #cfe1f3}
+    .header-side{display:flex;align-items:center;min-width:0}.header-side.right{justify-content:flex-end}
+    .header-teacher-img,.header-logo-img{height:64px;width:auto;max-width:none;object-fit:contain;display:block}
+    .header-title{text-align:center;line-height:1.2}.title-line1{font-family:'Poppins',sans-serif;font-size:26px;font-weight:800;color:#1e3a5f}.title-line2{font-family:'Poppins',sans-serif;font-size:18px;font-weight:400;color:#2563eb}.title-line3{font-family:'Poppins',sans-serif;font-size:14px;font-weight:400;color:#64748b}
+    .info-bar{width:100%;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;background:#fff;border-bottom:1px solid #dce5ef;padding:11px max(20px,5vw);font-size:12px;font-weight:700;letter-spacing:.06em;color:#365570}.info-bar span:nth-child(2){text-align:center}.info-bar span:last-child{text-align:right}
+    .main-content{width:100%;max-width:1060px;margin:0 auto;padding:28px 18px}
+    .quiz-panel,.result-panel,.review-panel{background:white;border:1px solid #dce6ef;border-radius:20px;box-shadow:0 14px 34px rgba(23,50,77,.09);overflow:hidden}
+    .question-instruction{background:#123b67;color:#fff;padding:20px 28px;font-size:19px;font-weight:800;letter-spacing:.025em}
+    .question-body{padding:28px}
+    .task-card{background:#f7f9fc;border-left:5px solid #2563eb;padding:20px 21px;border-radius:10px;white-space:pre-line;line-height:1.75;font-size:16px;margin-bottom:22px}
+    .choices{display:grid;gap:13px}.choice{width:100%;border:2px solid #d7e0ea;background:#fff;border-radius:12px;padding:16px 18px;text-align:left;color:#193754;line-height:1.55;transition:.18s ease;cursor:pointer;display:flex;align-items:flex-start;gap:12px}.choice:hover:not(:disabled){border-color:#2563eb;background:#f5f9ff;transform:translateY(-1px)}.choice:disabled{cursor:default}.choice-letter{flex:0 0 29px;height:29px;border-radius:50%;display:grid;place-items:center;background:#eaf4ff;color:#1e5aa6;font-size:13px;font-weight:800}.choice.correct{background:#ecfdf3;border-color:#22a559;color:#126c38}.choice.correct .choice-letter{background:#22a559;color:#fff}.choice.wrong{background:#fff1f1;border-color:#dc2626;color:#a51d1d}.choice.wrong .choice-letter{background:#dc2626;color:#fff}
+    .paragraph-choice{padding:23px 25px;line-height:1.85;max-width:960px}
+    .feedback{margin-top:20px;border-radius:12px;padding:16px 18px;display:none;line-height:1.65}.feedback.show{display:block}.feedback.good{background:#ecfdf3;border:1px solid #a7f3c4;color:#126c38}.feedback.bad{background:#fff1f1;border:1px solid #fecaca;color:#9f1f1f}.feedback strong{display:block;font-size:17px;margin-bottom:4px}
+    .navigation{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px;padding:20px 28px 14px;border-top:1px solid #e5edf4}.nav-btn,.action-btn,.move-btn{border:0;border-radius:10px;font-weight:700;cursor:pointer;transition:.18s ease}.nav-btn{padding:12px 17px;background:#123b67;color:#fff}.nav-btn:last-child{justify-self:end}.nav-btn:disabled{opacity:.42;cursor:not-allowed}.nav-btn:not(:disabled):hover,.action-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}.counter{font-weight:800;color:#526b83}
+    .stats{display:flex;justify-content:center;align-items:center;gap:17px;flex-wrap:nowrap;padding:0 20px 22px;font-size:13px;font-weight:700;color:#3d5871}.stats span{white-space:nowrap}
+    .timeline-hint{font-size:14px;color:#56718d;font-weight:600;margin:0 0 16px}.timeline{position:relative;padding:2px 0 2px 37px;display:grid;gap:13px}.timeline:before{content:"";position:absolute;left:14px;top:19px;bottom:19px;width:3px;background:#bed2e8}.timeline-item{position:relative;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}.timeline-node{position:absolute;left:-30px;top:50%;transform:translateY(-50%);width:17px;height:17px;background:#fff;border:4px solid #2563eb;border-radius:50%;z-index:2}.timeline-card{background:#fff;border:2px solid #cddceb;border-radius:13px;padding:15px 16px;box-shadow:0 5px 14px rgba(35,68,102,.07);cursor:grab;touch-action:none;line-height:1.55}.timeline-card.dragging{opacity:.48}.timeline-card.correct{background:#effdf5;border-color:#20a45b}.timeline-card.wrong{background:#fff2f2;border-color:#dc2626}.timeline-node.correct{border-color:#20a45b}.timeline-node.wrong{border-color:#dc2626}.part-id{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#123b67;color:#fff;font-size:12px;font-weight:800;margin-right:8px}.move-controls{display:flex;gap:6px}.move-btn{width:38px;height:38px;background:#eaf4ff;color:#174c81;font-size:19px}.move-btn:disabled{opacity:.35;cursor:not-allowed}.check-btn{margin-top:18px;padding:12px 19px;background:#15803d;color:#fff}
+    .correct-order{margin-top:17px;border:1px solid #b7e4c7;background:#f0fdf4;border-radius:12px;padding:16px;line-height:1.65}.correct-order h3{margin:0 0 8px;font-size:15px}
+    .fact-card{background:#f2f4f7;border-radius:14px;padding:20px 23px;margin-bottom:22px;line-height:1.75}.fact-card h2{font-size:16px;margin:0 0 8px;color:#1d3e60}.fact-card ul{margin:0;padding-left:22px}
+    .result-panel,.review-panel{padding:34px}.result-heading{text-align:center;color:#123b67;margin:0}.result-sub{text-align:center;color:#60768b;margin:8px 0 20px;font-weight:600}.score-badge{width:190px;height:190px;border-radius:50%;margin:16px auto;display:grid;place-items:center;text-align:center;background:#123b67;color:#fff;border:9px solid #d9ecff;box-shadow:0 10px 25px rgba(18,59,103,.2)}.score-badge strong{font-size:35px;line-height:1}.score-badge span{font-size:14px;font-weight:700}.remark{text-align:center;min-height:42px;font-size:22px;font-weight:800;color:#2563eb;margin:18px 0}.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:25px 0}.summary-item{background:#f7f9fc;border-radius:12px;padding:13px 15px}.summary-item b{display:block;font-size:12px;color:#668098;text-transform:uppercase;letter-spacing:.04em}.summary-item span{font-size:19px;font-weight:800;color:#173d62}.section-breakdown{background:#f7f9fc;border-radius:14px;padding:20px}.section-breakdown h2{font-size:17px;margin:0 0 10px}.section-breakdown p{margin:8px 0}.action-row{display:flex;flex-wrap:wrap;gap:11px;justify-content:center;margin-top:25px}.action-btn{padding:12px 17px;background:#123b67;color:white}.action-btn.secondary{background:#eaf4ff;color:#164d83}.action-btn.green{background:#15803d}
+    .review-section{margin:22px 0}.review-section h2{font-size:19px;color:#123b67;border-bottom:2px solid #dcebf8;padding-bottom:8px}.review-card{border:1px solid #dce5ef;border-radius:12px;padding:16px;margin-top:12px;line-height:1.65}.review-card.correct{border-left:5px solid #15803d}.review-card.wrong{border-left:5px solid #dc2626}.review-card h3{margin:0 0 9px;font-size:16px}.review-card p{margin:6px 0}.hidden{display:none!important}
+    .confetti{position:fixed;top:-15px;width:10px;height:16px;z-index:30;animation:fall 3.7s linear forwards}@keyframes fall{to{transform:translate(var(--drift),calc(100 * min(var(--vh, 1vh), 1vh))) rotate(720deg);opacity:0}}
+    @media(min-width:600px){.header-teacher-img,.header-logo-img{height:80px}}
+    @media(min-width:1024px){.header-teacher-img,.header-logo-img{height:96px}}
+    @media(max-width:640px){.quiz-header{padding:8px 12px;gap:7px}.header-teacher-img,.header-logo-img{height:45px}.title-line1{font-size:16px}.title-line2{font-size:11px}.title-line3{font-size:9px}.info-bar{padding:9px 12px;font-size:9px;letter-spacing:.025em}.main-content{padding:14px 10px}.question-instruction{padding:16px;font-size:15px}.question-body{padding:17px}.task-card{padding:15px;font-size:14px}.choice{padding:13px;font-size:14px}.paragraph-choice{padding:18px;line-height:1.7}.navigation{padding:16px 14px 10px}.nav-btn{padding:10px;font-size:13px}.stats{gap:9px;flex-wrap:wrap;padding:0 12px 17px;font-size:11px}.timeline{padding-left:30px}.timeline:before{left:11px}.timeline-node{left:-25px}.timeline-item{grid-template-columns:1fr}.move-controls{justify-content:flex-end;margin-top:-7px}.result-panel,.review-panel{padding:20px 15px}.summary-grid{grid-template-columns:repeat(2,1fr)}.score-badge{width:160px;height:160px}.score-badge strong{font-size:29px}}
+    @media print{.quiz-header,.info-bar,.action-row,.confetti{display:none!important}body{background:white}.main-content{padding:0;max-width:none}.result-panel{box-shadow:none;border:none}.summary-grid{grid-template-columns:repeat(3,1fr)}}
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  
+  
+  
+ <script>(function(){var ok=true;try{window.localStorage.getItem("__t")}catch(e){ok=false}
+if(!ok){var m={};try{Object.defineProperty(window,"localStorage",{configurable:true,value:{
+getItem:function(k){return Object.prototype.hasOwnProperty.call(m,k)?m[k]:null},
+setItem:function(k,v){m[k]=String(v)},removeItem:function(k){delete m[k]},clear:function(){m={}}}})}catch(e2){}}})();</script></head>
+ <body>
+  <div class="quiz-shell">
+   <header class="quiz-header">
+    <div class="header-side">
+     <img class="header-teacher-img" loading="lazy" src="teacher.png" alt="Teacher Soufiane">
+    </div>
+    <div class="header-title" aria-label="English 2BAC Quizzes">
+     <div class="title-line1">
+      English2BAC Quizzes
+     </div>
+     <div class="title-line2">
+      Learn • Practice • Succeed
+     </div>
+     <div class="title-line3">
+      with Teacher.Soufiane
+     </div>
+    </div>
+    <div class="header-side right">
+     <img class="header-logo-img" loading="lazy" src="logo.png" alt="Level-UP 2BAC">
+    </div>
+   </header>
+   <div class="info-bar" aria-label="Quiz information">
+    <span class="">UNIT: 3</span> <span class="">WRITING A REPORT</span> <span class="">REPORT WRITING - QUIZ</span>
+   </div>
+   <main class="main-content">
+    <section id="quizView" class="quiz-panel" aria-live="polite">
+     <div id="instructionBox" class="question-instruction"></div>
+     <div id="questionBody" class="question-body"></div>
+     <div class="navigation">
+      <button id="previousButton" class="nav-btn" type="button">◀ Previous</button> <span id="questionCounter" class="counter">1 / 20</span> <button id="nextButton" class="nav-btn" type="button">Next ▶</button>
+     </div>
+     <div class="stats" aria-label="Live quiz statistics">
+      <span id="correctStat">✅ Correct: 0</span> <span id="wrongStat">❌ Wrong: 0</span> <span id="remainingStat">Remaining: 20</span> <span id="scoreStat">Score: 0.00 /20</span> <span id="timerStat">Timer 00:00</span>
+     </div>
+    </section>
+    <section id="resultView" class="result-panel hidden">
+     <h1 class="result-heading">WRITING A REPORT</h1>
+     <p class="result-sub">REPORT WRITING - QUIZ</p>
+     <div class="score-badge">
+      <div><strong id="finalScore"></strong><br><span>/20</span>
+      </div>
+     </div>
+     <div id="finalRemark" class="remark" aria-live="polite"></div>
+     <div id="summaryGrid" class="summary-grid"></div>
+     <div class="section-breakdown">
+      <h2>Section Breakdown</h2>
+      <div id="sectionResults"></div>
+     </div>
+     <div class="action-row">
+      <button id="reviewButton" class="action-btn" type="button">Review My Answers</button> <button id="restartButton" class="action-btn green" type="button">Restart Quiz</button> <button id="printButton" class="action-btn secondary" type="button">Print Results</button> <button id="saveButton" class="action-btn secondary" type="button">Save Results</button>
+     </div>
+    </section>
+    <section id="reviewView" class="review-panel hidden">
+     <h1 class="result-heading">Review My Answers</h1>
+     <div id="reviewContent"></div>
+     <div class="action-row"><button id="backResultsButton" class="action-btn" type="button">Back to Results</button>
+     </div>
+    </section>
+   </main>
+  </div>
+  <script>
+    /* Quiz configuration and all required lesson content. */
+    const quizConfig = {
+      unit:"3",title:"WRITING A REPORT",lesson:"REPORT WRITING - QUIZ",teacherName:"Teacher Soufiane",
+      teacherImage:"https://i.imgur.com/vvyZAnr.png",logo:"https://i.imgur.com/XPOYllA.png",
+      randomizeQuestions:false,randomizeChoices:true,timerEnabled:true,timerMode:"countup",showConfetti:true,enableSounds:true,totalPoints:20,
+      questions:[
+        {type:"single-choice",category:"Identify the Purpose of the Report",question:"CHOOSE THE MAIN PURPOSE OF THE REPORT.",task:"A school organized a cultural week. The administration wants a written account of the event. What is the main purpose of this report?",choices:["To describe and evaluate the event","To tell a fictional story","To describe someone's childhood","To persuade people to buy something"],correctAnswer:"To describe and evaluate the event",explanation:"A report objectively describes what happened and evaluates the outcome, rather than telling a story, describing a person's life, or persuading people to buy something.",points:1},
+        {type:"single-choice",category:"Identify the Purpose of the Report",question:"CHOOSE THE MAIN PURPOSE OF THE REPORT.",task:"A group of students organized a seminar on road safety for their school. They want to write an account of what happened and assess how well it went. What is the main purpose of this report?",choices:["To describe and evaluate the event","To express personal feelings about road safety","To advertise an upcoming seminar","To write a short story about road safety"],correctAnswer:"To describe and evaluate the event",explanation:"A report objectively describes what happened and evaluates its outcome, rather than expressing personal feelings, advertising, or telling a story.",points:1},
+        {type:"single-choice",category:"Report Information Hunt",question:"IDENTIFY THE CORRECT INFORMATION FROM THE FACT CHART.",task:"Fact chart: School Cultural Week | First week of March 2019 | School premises | School administration + parents' association | Teachers, students, parents and guests | Poetry, clean-up activities, sports competitions, songs and drama.\n\nAccording to the fact chart, WHAT event took place?",choices:["School Cultural Week","Sports competitions","A parents' association meeting","Clean-up activities"],correctAnswer:"School Cultural Week",explanation:"The fact chart identifies the event itself as School Cultural Week. The other options are activities that happened during it, not the event's name.",points:1},
+        {type:"single-choice",category:"Report Information Hunt",question:"IDENTIFY THE CORRECT INFORMATION FROM THE FACT CHART.",task:"Fact chart: School Cultural Week | First week of March 2019 | School premises | School administration + parents' association | Teachers, students, parents and guests | Poetry, clean-up activities, sports competitions, songs and drama.\n\nAccording to the fact chart, WHO organized the event?",choices:["The school administration and the parents' association.","The teachers only.","The students' council.","A private company."],correctAnswer:"The school administration and the parents' association.",explanation:"The fact chart lists the school administration and parents' association as the organizers of the event.",points:1},
+        {type:"single-choice",category:"Choose the Best Report Opening",question:"CHOOSE THE MOST APPROPRIATE REPORT OPENING.",task:"Which opening is most appropriate for a formal report?",choices:["A seminar on education was held at the Town Hall on November 20th.","Once upon a time, there was a seminar about education.","I think seminars about education are usually boring.","Education is very important, don't you think?"],correctAnswer:"A seminar on education was held at the Town Hall on November 20th.",explanation:"A report opens factually with the event, venue and date, rather than with narrative language or a personal opinion.",points:1},
+        {type:"single-choice",category:"Build the Report from a Fact Chart",question:"CHOOSE THE SENTENCE THAT CORRECTLY REPORTS THE FACT.",task:"FACT: Organizers = school administration + parents' association. Which sentence correctly reports this fact?",choices:["The event was organized by the school administration and the parents' association.","The school administration and the parents' association attended the event.","The event will be organized by the school administration.","Organizing events is the job of the school administration."],correctAnswer:"The event was organized by the school administration and the parents' association.",explanation:"This sentence correctly reports the fact using the past passive, matching how reports describe who organized an event.",points:1},
+        {type:"single-choice",category:"Build the Report from a Fact Chart",question:"CHOOSE THE SENTENCE THAT CORRECTLY REPORTS THE FACT.",task:"FACT: Participants = teachers, students, parents and guests. Which sentence correctly reports this fact?",choices:["The event was attended by teachers, students, parents and guests.","Teachers, students, parents and guests organized the event.","The event will be attended by teachers, students, parents and guests.","Teachers, students, parents and guests recommended the event."],correctAnswer:"The event was attended by teachers, students, parents and guests.",explanation:"This sentence correctly reports who attended the event, using the past passive appropriate for a completed event.",points:1},
+        {type:"single-choice",category:"Identify the Function of Each Part",question:"IDENTIFY WHAT THE SENTENCE DOES IN THE REPORT.",task:"“The occasion was a seminar organised by the local education authorities.” What does this sentence do?",choices:["Introducing the event","Giving a recommendation","Evaluating the event","Giving a personal opinion"],correctAnswer:"Introducing the event",explanation:"This sentence states what the event was and who organized it, which is the function of an introduction.",points:1},
+        {type:"single-choice",category:"Identify the Function of Each Part",question:"IDENTIFY WHAT THE SENTENCE DOES IN THE REPORT.",task:"“They suggested that we should encourage dropouts to return to school.” What does this sentence do?",choices:["Describing participants","Reporting recommendations","Introducing the event","Giving the date"],correctAnswer:"Reporting recommendations",explanation:"They suggested that we should introduces a recommendation made by participants, not a description of the event or its participants.",points:1},
+        {type:"sentence-ordering",category:"Put the report in the correct order",question:"ARRANGE THE PARTS IN THE CORRECT REPORT ORDER.",structureHint:"Event & Date → Topic → Participants → Recommendations → Evaluation",sentences:[{id:"A",text:"Participants recommended supporting poor families and raising parents' awareness."},{id:"B",text:"The seminar took place in the Town Hall conference room on November 20th."},{id:"C",text:"About 200 people attended, including parents' associations, educators and political officials."},{id:"D",text:"The seminar focused on dropping out in rural schools."},{id:"E",text:"The event was considered fruitful, although some participants called for further action."}],correctOrder:["B","D","C","A","E"],explanation:"A well-organized report follows this order: when and where the event happened, what it focused on, who attended, what was recommended, and finally how it was evaluated.",points:1},
+        {type:"single-choice",category:"Choose the Best Report Language",question:"CHOOSE THE MOST APPROPRIATE REPORT LANGUAGE.",task:"The event ______ around the issue of school dropout.",choices:["revolved","played","happened","went"],correctAnswer:"revolved",explanation:"Revolved around is the natural collocation meaning was centered on, which fits formal report language.",points:1},
+        {type:"single-choice",category:"Choose the Best Report Language",question:"CHOOSE THE MOST APPROPRIATE REPORT LANGUAGE.",task:"The activities ______ mini-lectures and workshops.",choices:["included","consisted","happened","contained"],correctAnswer:"included",explanation:"Included is correct here; consisted would require consisted of to be grammatically correct in this sentence.",points:1},
+        {type:"single-choice",category:"Past Tense in a Report",question:"CHOOSE THE CORRECT TENSE.",task:"The seminar ______ on November 20th.",choices:["took place","takes place","has taken place","had been taking place"],correctAnswer:"took place",explanation:"Past simple, took place, is used to describe a completed dated event in a report.",points:1},
+        {type:"single-choice",category:"Past Tense in a Report",question:"CHOOSE THE CORRECT TENSE.",task:"By the time the guests arrived, the organizers ______ the preparations.",choices:["had completed","complete","were complete","have completed"],correctAnswer:"had completed",explanation:"Past perfect, had completed, is used for an action completed before another past action: the guests arriving.",points:1},
+        {type:"single-choice",category:"Past Tense in a Report",question:"CHOOSE THE CORRECT TENSE.",task:"By the time the event ended, the participants ______ for nearly three hours.",choices:["had been discussing the issue","discuss the issue","will discuss the issue","have discussed the issue"],correctAnswer:"had been discussing the issue",explanation:"Past perfect continuous emphasizes the duration of an action that was ongoing up to another point in the past.",points:1},
+        {type:"single-choice",category:"Recommendations Challenge",question:"CHOOSE THE MOST APPROPRIATE RECOMMENDATION.",task:"Problem: Many students are dropping out of rural schools. Which recommendation is appropriate?",choices:["Schools should support poor families and raise parents' awareness.","Students should buy more expensive school materials.","Parents should stop sending their children to school.","Schools should organize fewer educational activities."],correctAnswer:"Schools should support poor families and raise parents' awareness.",explanation:"This recommendation directly addresses the causes of dropout: poverty and lack of awareness.",points:1},
+        {type:"single-choice",category:"Recommendations Challenge",question:"CHOOSE THE MOST APPROPRIATE RECOMMENDATION.",task:"Problem: Many students are dropping out of rural schools. Which option contains the most complete set of appropriate recommendations?",choices:["Supporting poor families financially and raising parents' awareness about the importance of education.","Supporting poor families financially only, with no other action needed.","Raising parents' awareness while reducing the number of school activities.","Encouraging families to rely only on private tutoring."],correctAnswer:"Supporting poor families financially and raising parents' awareness about the importance of education.",explanation:"This option combines two complementary, realistic recommendations addressing both financial and awareness-related causes of dropout.",points:1},
+        {type:"single-choice",category:"Evaluate the Event",question:"CHOOSE THE BEST EVALUATION SENTENCE.",task:"Choose the best evaluation sentence for this report, given that the seminar was generally considered successful.",choices:["The event was well organized and most participants were satisfied with the results.","The event was a waste of everyone's time.","The event happened last year.","The event took place in the Town Hall."],correctAnswer:"The event was well organized and most participants were satisfied with the results.",explanation:"An evaluation sentence assesses how the event went. This option evaluates the outcome rather than only restating a fact.",points:1},
+        {type:"single-choice",category:"Find the Irrelevant Sentence",question:"IDENTIFY THE SENTENCE THAT DOES NOT BELONG IN THE REPORT.",task:"Read the sentences and identify the one that does NOT belong in a report about a school seminar on road safety.",choices:["The seminar was held in the school hall on May 10th.","About 150 students and teachers attended.","The guest speaker usually drives a red car.","Participants recommended organizing more awareness campaigns."],correctAnswer:"The guest speaker usually drives a red car.",explanation:"The guest speaker's car color is a trivial personal detail unrelated to the event's facts, structure, or outcome.",points:1},
+        {type:"single-choice",category:"Build the Complete Report",question:"CHOOSE THE PARAGRAPH THAT PRESENTS THE INFORMATION MOST EFFECTIVELY.",task:"Q20_FACTS",choices:["A seminar on dropping out in rural schools took place in the Town Hall conference room on November 20th. About 200 people attended, including parents' associations, educators and political officials. Participants recommended supporting poor families and raising parents' awareness. The event was considered fruitful, although some participants called for further action.","A seminar will take place in the Town Hall conference room. Participants recommended supporting poor families. About 200 people attended, and the event focused on dropping out in rural schools. It was considered fruitful.","Dropping out in rural schools is a seminar. The event was considered fruitful before 200 people attended. The seminar will focus on supporting poor families.","Participants recommended supporting poor families and raising parents' awareness. About 200 people attended, including parents' associations, educators and political officials. A seminar on dropping out in rural schools took place in the Town Hall conference room on November 20th. The event was considered fruitful, although some called for further action."],correctAnswer:"A seminar on dropping out in rural schools took place in the Town Hall conference room on November 20th. About 200 people attended, including parents' associations, educators and political officials. Participants recommended supporting poor families and raising parents' awareness. The event was considered fruitful, although some participants called for further action.",explanation:"This paragraph presents the event, topic, participants, recommendations and evaluation in logical order using consistent past tenses. The other options scramble the order or use incorrect tenses.",points:1}
+      ]
+    };
+
+    const state={index:0,answers:Array(20).fill(null),choices:{},timelineOrder:[],dragId:null,touchStartY:0};
+    const sections=[
+      {name:"Section 1 — Report Basics",start:0,end:4},
+      {name:"Section 2 — Organizing Information",start:5,end:9},
+      {name:"Section 3 — Report Language & Past Tenses",start:10,end:14},
+      {name:"Section 4 — Build and Evaluate a Complete Report",start:15,end:19}
+    ];
+    const correctMessages=["Excellent!","Great Job!","Perfect!","Keep Going!"];
+    const wrongMessages=["Almost!","Review this rule.","Keep learning!","You'll get the next one!"];
+
+    /* Independent count-up timer module. */
+    const timer=(()=>{
+      let seconds=0,interval=null;
+      const format=()=>`${String(Math.floor(seconds/60)).padStart(2,"0")}:${String(seconds%60).padStart(2,"0")}`;
+      const render=()=>document.getElementById("timerStat").textContent=`Timer ${format()}`;
+      return {
+        start(){if(!interval){interval=setInterval(()=>{seconds++;render()},1000)}render()},
+        pause(){clearInterval(interval);interval=null},
+        reset(){this.pause();seconds=0;render()},
+        getSeconds(){return seconds},format
+      };
+    })();
+
+    function shuffle(array){
+      const copy=[...array];
+      for(let i=copy.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[copy[i],copy[j]]=[copy[j],copy[i]]}
+      return copy;
+    }
+    function escaped(text){const d=document.createElement("div");d.textContent=text;return d.innerHTML}
+    function playTone(type){
+      if(!quizConfig.enableSounds)return;
+      try{
+        const ctx=new (window.AudioContext||window.webkitAudioContext)();
+        const osc=ctx.createOscillator(),gain=ctx.createGain();
+        const map={correct:[660,.12],wrong:[210,.16],move:[420,.05],complete:[523,.15]};
+        osc.frequency.value=map[type][0];gain.gain.setValueAtTime(.06,ctx.currentTime);gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+map[type][1]);
+        osc.connect(gain);gain.connect(ctx.destination);osc.start();osc.stop(ctx.currentTime+map[type][1]);
+      }catch(e){}
+    }
+    function stats(){
+      const answered=state.answers.filter(Boolean),correct=answered.filter(a=>a.correct).length,wrong=answered.length-correct;
+      document.getElementById("correctStat").textContent=`✅ Correct: ${correct}`;
+      document.getElementById("wrongStat").textContent=`❌ Wrong: ${wrong}`;
+      document.getElementById("remainingStat").textContent=`Remaining: ${20-answered.length}`;
+      document.getElementById("scoreStat").textContent=`Score: ${correct.toFixed(2)} /20`;
+      return {correct,wrong,answered};
+    }
+    function feedback(isCorrect,explanation){
+      return `<div class="feedback ${isCorrect?"good":"bad"} show"><strong>${isCorrect?correctMessages[Math.floor(Math.random()*4)]:wrongMessages[Math.floor(Math.random()*4)]}</strong>${escaped(explanation)}</div>`;
+    }
+
+    function renderQuestion(){
+      const q=quizConfig.questions[state.index];
+      document.getElementById("instructionBox").textContent=q.question;
+      document.getElementById("questionCounter").textContent=`${state.index+1} / 20`;
+      document.getElementById("previousButton").disabled=state.index===0;
+      const answered=state.answers[state.index];
+      document.getElementById("nextButton").disabled=!answered;
+      document.getElementById("nextButton").textContent=state.index===19?"Finish ▶":"Next ▶";
+      if(q.type==="sentence-ordering")renderTimeline(q,answered);else renderSingleChoice(q,answered);
+      stats();
+    }
+
+    function taskMarkup(task){
+      if(task==="Q20_FACTS"){
+        return `<div class="fact-card"><h2>Key information</h2><ul><li>Seminar held in the Town Hall conference room on November 20th</li><li>Focused on dropping out in rural schools</li><li>About 200 people attended, including parents' associations, educators and political officials</li><li>Participants recommended supporting poor families and raising parents' awareness</li><li>The event was considered fruitful, although some called for further action</li></ul></div>`;
+      }
+      return `<div class="task-card">${escaped(task)}</div>`;
+    }
+
+    function renderSingleChoice(q,answer){
+      if(!state.choices[state.index])state.choices[state.index]=quizConfig.randomizeChoices?shuffle(q.choices):[...q.choices];
+      const choices=state.choices[state.index], isParagraph=state.index===19;
+      let html=taskMarkup(q.task)+`<div class="choices">`;
+      choices.forEach((choice,i)=>{
+        let classes=`choice ${isParagraph?"paragraph-choice":""}`;
+        if(answer){if(choice===q.correctAnswer)classes+=" correct";if(choice===answer.value&&!answer.correct)classes+=" wrong"}
+        html+=`<button type="button" class="${classes}" data-choice="${escaped(choice)}" ${answer?"disabled":""}><span class="choice-letter ${state.index===18?"hidden":""}">${i+1}</span><span>${escaped(choice)}</span></button>`;
+      });
+      html+=`</div>${answer?feedback(answer.correct,q.explanation):""}`;
+      document.getElementById("questionBody").innerHTML=html;
+      if(!answer)document.querySelectorAll("[data-choice]").forEach(button=>button.addEventListener("click",()=>selectChoice(button.dataset.choice)));
+    }
+    function selectChoice(choice){
+      if(state.answers[state.index])return;
+      const q=quizConfig.questions[state.index],correct=choice===q.correctAnswer;
+      state.answers[state.index]={correct,value:choice};
+      playTone(correct?"correct":"wrong");renderQuestion();
+    }
+
+    /* Q10: timeline state is one array; arrow, pointer and touch actions always update it then re-render. */
+    function ensureTimelineOrder(q){
+      if(!state.timelineOrder.length){
+        state.timelineOrder=shuffle(q.sentences.map(item=>item.id));
+        if(state.timelineOrder.join("")===q.correctOrder.join(""))[state.timelineOrder[0],state.timelineOrder[1]]=[state.timelineOrder[1],state.timelineOrder[0]];
+      }
+    }
+    function renderTimeline(q,answer){
+      ensureTimelineOrder(q);
+      const byId=Object.fromEntries(q.sentences.map(x=>[x.id,x]));
+      let html=`<p class="timeline-hint">${escaped(q.structureHint)}</p><div id="timeline" class="timeline">`;
+      state.timelineOrder.forEach((id,index)=>{
+        const item=byId[id];let resultClass="";
+        if(answer)resultClass=answer.correct||id===q.correctOrder[index]?"correct":"wrong";
+        html+=`<div class="timeline-item"><span class="timeline-node ${resultClass}"></span><div class="timeline-card ${resultClass}" draggable="${answer?"false":"true"}" tabindex="${answer?"-1":"0"}" data-id="${id}" aria-label="Report part ${id}. Use Arrow Up or Arrow Down to move."><span class="part-id">${id}</span>${escaped(item.text)}</div><div class="move-controls"><button class="move-btn up" type="button" data-id="${id}" ${answer||index===0?"disabled":""} aria-label="Move part ${id} up">↑</button><button class="move-btn down" type="button" data-id="${id}" ${answer||index===state.timelineOrder.length-1?"disabled":""} aria-label="Move part ${id} down">↓</button></div></div>`;
+      });
+      html+=`</div><button id="checkOrder" class="action-btn check-btn" type="button" ${answer?"disabled":""}>Check Order</button>`;
+      if(answer&&!answer.correct)html+=`<div class="correct-order"><h3>Correct Order</h3>${q.correctOrder.map(id=>`<div><b>${id}.</b> ${escaped(byId[id].text)}</div>`).join("")}</div>`;
+      if(answer)html+=feedback(answer.correct,q.explanation);
+      document.getElementById("questionBody").innerHTML=html;
+      if(!answer)bindTimelineHandlers();
+    }
+    function movePart(id,direction){
+      const current=state.timelineOrder.indexOf(id),next=current+direction;
+      if(next<0||next>=state.timelineOrder.length)return;
+      [state.timelineOrder[current],state.timelineOrder[next]]=[state.timelineOrder[next],state.timelineOrder[current]];
+      playTone("move");renderQuestion();
+    }
+    function moveDraggedTo(draggedId,targetId){
+      if(draggedId===targetId)return;
+      const from=state.timelineOrder.indexOf(draggedId),to=state.timelineOrder.indexOf(targetId);
+      state.timelineOrder.splice(from,1);state.timelineOrder.splice(to,0,draggedId);
+      playTone("move");renderQuestion();
+    }
+    function bindTimelineHandlers(){
+      document.querySelectorAll(".move-btn.up").forEach(btn=>btn.addEventListener("click",()=>movePart(btn.dataset.id,-1)));
+      document.querySelectorAll(".move-btn.down").forEach(btn=>btn.addEventListener("click",()=>movePart(btn.dataset.id,1)));
+      document.getElementById("checkOrder").addEventListener("click",evaluateOrder);
+      document.querySelectorAll(".timeline-card").forEach(card=>{
+        card.addEventListener("dragstart",e=>{state.dragId=card.dataset.id;card.classList.add("dragging");e.dataTransfer.effectAllowed="move"});
+        card.addEventListener("dragover",e=>e.preventDefault());
+        card.addEventListener("drop",e=>{e.preventDefault();moveDraggedTo(state.dragId,card.dataset.id)});
+        card.addEventListener("dragend",()=>{state.dragId=null;card.classList.remove("dragging")});
+        card.addEventListener("touchstart",e=>{state.dragId=card.dataset.id;state.touchStartY=e.touches[0].clientY;card.classList.add("dragging")},{passive:true});
+        card.addEventListener("touchmove",e=>e.preventDefault(),{passive:false});
+        card.addEventListener("touchend",e=>{
+          const touch=e.changedTouches[0],target=document.elementFromPoint(touch.clientX,touch.clientY)?.closest(".timeline-card");
+          card.classList.remove("dragging");if(target)moveDraggedTo(state.dragId,target.dataset.id);state.dragId=null;
+        });
+        card.addEventListener("keydown",e=>{
+          if(e.key==="ArrowUp"){e.preventDefault();movePart(card.dataset.id,-1)}
+          if(e.key==="ArrowDown"){e.preventDefault();movePart(card.dataset.id,1)}
+          if(e.key==="Enter"){e.preventDefault();evaluateOrder()}
+        });
+      });
+    }
+    /* Check Order locks Q10, scores it, and enables Next immediately. */
+    function evaluateOrder(){
+      if(state.answers[state.index])return;
+      const q=quizConfig.questions[state.index],correct=state.timelineOrder.every((id,i)=>id===q.correctOrder[i]);
+      state.answers[state.index]={correct,value:[...state.timelineOrder]};
+      playTone(correct?"correct":"wrong");renderQuestion();
+    }
+
+    function nextQuestion(){
+      if(!state.answers[state.index])return;
+      if(state.index===19){showResults();return}
+      state.index++;state.timelineOrder=[];renderQuestion();
+    }
+    function previousQuestion(){if(state.index>0){state.index--;state.timelineOrder=[];renderQuestion()}}
+
+    function remarkFor(score){
+      if(score>=18)return["Excellent","You can organize and write a clear, well-structured report."];
+      if(score>=15)return["Very Good","You understand the main conventions of report writing."];
+      if(score>=12)return["Good","Review report structure, recommendations, and evaluation."];
+      if(score>=8)return["Needs Improvement","Review the structure and language of a report."];
+      return["Keep Practising","Start with the basic purpose and structure of a report."];
+    }
+    function sectionScore(section){return state.answers.slice(section.start,section.end+1).filter(a=>a?.correct).length}
+    function showResults(){
+      timer.pause();playTone("complete");
+      const {correct,wrong}=stats(),score=correct,attempts=(Number(localStorage.getItem("reportQuizAttempts"))||0)+1,best=Math.max(Number(localStorage.getItem("reportQuizBest"))||0,score);
+      localStorage.setItem("reportQuizAttempts",attempts);localStorage.setItem("reportQuizBest",best);localStorage.setItem("reportQuizLastScore",score);localStorage.setItem("reportQuizTime",timer.format());
+      document.getElementById("quizView").classList.add("hidden");document.getElementById("resultView").classList.remove("hidden");
+      document.getElementById("finalScore").textContent=score.toFixed(2);
+      const accuracy=((correct/20)*100).toFixed(0);
+      document.getElementById("summaryGrid").innerHTML=[
+        ["Final Score",`${score.toFixed(2)} /20`],["Correct Answers",correct],["Wrong Answers",wrong],["Accuracy",`${accuracy}%`],["Time Taken",timer.format()],["Number of Attempts",attempts],["Best Score",`${best.toFixed(2)} /20`]
+      ].map(x=>`<div class="summary-item"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("");
+      document.getElementById("sectionResults").innerHTML=sections.map(s=>`<p>${s.name}: <b>${sectionScore(s)}/5</b></p>`).join("");
+      animateRemark(remarkFor(score));
+      if(score>=18&&quizConfig.showConfetti)confetti();
+    }
+    function animateRemark(final){
+      const labels=["Excellent","Very Good","Good","Needs Improvement","Keep Practising"];let i=0,cycles=0,delay=85,target=document.getElementById("finalRemark");
+      const spin=()=>{target.textContent=labels[i++%labels.length];cycles++;if(cycles<20){delay+=15;setTimeout(spin,delay)}else target.innerHTML=`${final[0]}<div style="font-size:13px;font-weight:600;color:#64748b;margin-top:5px">${final[1]}</div>`};
+      spin();
+    }
+    function confetti(){["#2563eb","#15803d","#f59e0b","#dc2626","#fff"].forEach((color,index)=>{for(let i=0;i<13;i++){const c=document.createElement("i");c.className="confetti";c.style.left=`${Math.random()*100}%`;c.style.background=color;c.style.setProperty("--drift",`${(Math.random()-.5)*260}px`);c.style.animationDelay=`${(index*.03)+(Math.random()*.5)}s`;document.body.appendChild(c);setTimeout(()=>c.remove(),4500)}})}
+    function showReview(){
+      document.getElementById("resultView").classList.add("hidden");document.getElementById("reviewView").classList.remove("hidden");
+      document.getElementById("reviewContent").innerHTML=sections.map(s=>{
+        let cards="";for(let i=s.start;i<=s.end;i++){const q=quizConfig.questions[i],a=state.answers[i],answerText=q.type==="sentence-ordering"?(a.value||[]).join(" → "):a.value,correctText=q.type==="sentence-ordering"?q.correctOrder.join(" → "):q.correctAnswer;
+          cards+=`<article class="review-card ${a.correct?"correct":"wrong"}"><h3>Question ${i+1}</h3><p><b>${q.question}</b></p><p><b>${q.type==="sentence-ordering"?"Student's Submitted Order":"Student Answer"}:</b> ${escaped(answerText)}</p><p><b>Correct Answer:</b> ${escaped(correctText)}</p><p><b>Explanation:</b> ${escaped(q.explanation)}</p></article>`}
+        return `<section class="review-section"><h2>${s.name}</h2>${cards}</section>`;
+      }).join("");
+    }
+    function restart(){
+      state.index=0;state.answers=Array(20).fill(null);state.choices={};state.timelineOrder=[];state.dragId=null;
+      timer.reset();document.getElementById("reviewView").classList.add("hidden");document.getElementById("resultView").classList.add("hidden");document.getElementById("quizView").classList.remove("hidden");timer.start();renderQuestion();
+    }
+    function reportText(){
+      const {correct,wrong}=stats(),score=correct;
+      return `WRITING A REPORT\nREPORT WRITING - QUIZ\n\nFinal Score: ${score.toFixed(2)} /20\nCorrect Answers: ${correct}\nWrong Answers: ${wrong}\nAccuracy: ${((correct/20)*100).toFixed(0)}%\nTime Taken: ${timer.format()}\n\n${sections.map(s=>`${s.name}: ${sectionScore(s)}/5`).join("\n")}`;
+    }
+    function printResults(){
+      const popup=window.open("","_blank");if(!popup)return;
+      popup.document.write(`<html><head><title>Quiz Results</title><style>body{font-family:Arial;padding:35px;line-height:1.7;white-space:pre-line;color:#17324d}h1{color:#123b67}</style></head><body><h1>Writing a Report — Quiz Results</h1>${escaped(reportText())}</body></html>`);
+      popup.document.close();popup.focus();popup.print();
+    }
+    function saveResults(){
+      const blob=new Blob([reportText()],{type:"text/plain"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+      a.href=url;a.download="writing-a-report-quiz-results.txt";a.click();URL.revokeObjectURL(url);
+    }
+
+    document.getElementById("previousButton").addEventListener("click",previousQuestion);
+    document.getElementById("nextButton").addEventListener("click",nextQuestion);
+    document.getElementById("reviewButton").addEventListener("click",showReview);
+    document.getElementById("restartButton").addEventListener("click",restart);
+    document.getElementById("backResultsButton").addEventListener("click",()=>{document.getElementById("reviewView").classList.add("hidden");document.getElementById("resultView").classList.remove("hidden")});
+    document.getElementById("printButton").addEventListener("click",printResults);
+    document.getElementById("saveButton").addEventListener("click",saveResults);
+    document.addEventListener("keydown",e=>{
+      if(document.getElementById("quizView").classList.contains("hidden"))return;
+      const q=quizConfig.questions[state.index];
+      if(q.type==="single-choice"&&!state.answers[state.index]&&/^[1-4]$/.test(e.key)){const btn=document.querySelectorAll("[data-choice]")[Number(e.key)-1];if(btn)btn.click()}
+      if(q.type==="single-choice"&&state.answers[state.index]&&(e.key==="ArrowRight"||e.key==="Enter"||e.key===" ")){e.preventDefault();nextQuestion()}
+    });
+    document.addEventListener("DOMContentLoaded",()=>{timer.reset();timer.start();renderQuestion()});
+  </script>
+ 
+</body></html>

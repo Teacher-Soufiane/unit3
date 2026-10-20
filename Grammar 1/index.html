@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Past Simple Grammar Quiz</title>
+  <style>
+    :root{--blue:#1e3a5f;--accent:#2563eb;--pale:#eaf4ff;--green:#16803c;--red:#c83535;--gray:#eef2f6;--ink:#1e293b}
+    *{box-sizing:border-box} html,body{margin:0;padding:0;width:100%;min-height:100vh}
+    body{font-family:Poppins,Cairo,sans-serif;background:#eef5fb;color:var(--ink)}
+    button{font:inherit} button:focus-visible{outline:3px solid #f59e0b;outline-offset:3px}
+    .quiz-container{width:100%;max-width:100%;min-height:100vh;box-sizing:border-box;padding:16px}
+    .quiz-card{width:100%;max-width:1100px;margin:0 auto;box-sizing:border-box;background:#fff;border-radius:20px;box-shadow:0 14px 38px rgba(30,58,95,.14);overflow:hidden}
+    .quiz-header{background-color:#eaf4ff;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;padding:14px 24px}
+    .header-teacher-img,.header-logo-img{height:64px;width:auto;max-width:none;object-fit:contain;display:block}
+    .header-title{text-align:center;line-height:1.2}
+    .title-line1{font-family:Poppins,sans-serif;font-size:26px;font-weight:800;color:#1e3a5f}
+    .title-line2{font-family:Poppins,sans-serif;font-size:18px;font-weight:400;color:#2563eb}
+    .title-line3{font-family:Poppins,sans-serif;font-size:14px;font-weight:400;color:#64748b}
+    .info-bar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:11px 24px;background:#f8fafc;border-bottom:1px solid #dce7f1;font-weight:800;color:var(--blue);font-size:14px;letter-spacing:.04em}
+    .info-bar span:nth-child(2){text-align:center}.info-bar span:last-child{text-align:right}
+    .quiz-main{padding:26px}.instruction{background:#1e3a5f;color:#fff;padding:17px 22px;border-radius:12px;font-weight:800;letter-spacing:.035em}
+    .progress-line{height:7px;background:#dbe6f0;border-radius:10px;margin:20px 0}.progress-fill{height:100%;background:#2563eb;border-radius:inherit;transition:width .35s}
+    .question-meta{display:flex;justify-content:space-between;gap:15px;color:#64748b;font-size:14px;font-weight:700}
+    .task-box{margin:18px 0;padding:22px;background:#f8fafc;border-left:5px solid #2563eb;border-radius:10px;font-size:20px;line-height:1.5;font-weight:600}
+    .hint-btn,.nav-btn,.action-btn{border:0;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer;transition:.2s}
+    .hint-btn{color:#1e3a5f;background:#eaf4ff}.hint-btn:hover{background:#d8eaff}.hint-text{margin:12px 0 18px;padding:12px 16px;border-radius:9px;background:#fff8db;color:#765b00;display:none}
+    .choices{display:grid;grid-template-columns:1fr 1fr;gap:13px}.choice{width:100%;text-align:left;border:2px solid #d8e2ec;background:#fff;border-radius:12px;padding:16px;cursor:pointer;display:flex;gap:13px;align-items:flex-start;font-weight:600;color:#26374a;transition:.18s}.choice:hover:not(:disabled){border-color:#2563eb;background:#f2f7ff}.choice:disabled{cursor:default}.choice-letter{flex:0 0 29px;height:29px;border-radius:50%;display:grid;place-items:center;background:#eaf4ff;color:#1e3a5f;font-weight:800}.choice.correct{border-color:var(--green);background:#ecf9f0;color:#126631}.choice.wrong{border-color:var(--red);background:#fff0f0;color:#a52525}.choice.correct .choice-letter{background:var(--green);color:#fff}.choice.wrong .choice-letter{background:var(--red);color:#fff}
+    .feedback{display:none;margin-top:18px;padding:16px;border-radius:10px;background:#f8fafc;border:1px solid #dde6ee}.feedback strong{display:block;margin-bottom:5px}.feedback.good{border-color:#b7e3c4;background:#effbf2}.feedback.bad{border-color:#f0c1c1;background:#fff5f5}
+    .navigation{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:15px;margin-top:24px}.nav-btn{background:#1e3a5f;color:#fff}.nav-btn:last-child{justify-self:end}.nav-btn:disabled{opacity:.42;cursor:not-allowed}.counter{font-weight:800;color:#1e3a5f}
+    .stats{margin-top:15px;padding:13px 15px;border-radius:10px;background:#eef4f8;display:flex;justify-content:center;gap:18px;flex-wrap:nowrap;font-size:14px;font-weight:700;color:#34475b}.stats span{white-space:nowrap}
+    .result-page,.review-page{display:none;padding:28px}.result-top{text-align:center}.score-badge{width:190px;height:190px;border-radius:50%;display:grid;place-items:center;margin:22px auto;background:#1e3a5f;color:#fff;border:10px solid #d9ebff;font-size:30px;font-weight:800}.remark{font-size:29px;font-weight:800;color:#1e3a5f;min-height:42px}.remark-desc{max-width:740px;margin:10px auto 24px;line-height:1.5;color:#52657a}.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}.summary-item{background:#f7fafc;border:1px solid #dfe8f0;padding:15px;border-radius:11px}.summary-item b{display:block;color:#1e3a5f;font-size:19px;margin-top:5px}.level-list{margin:24px 0;text-align:left}.level-row{padding:13px 0;border-bottom:1px solid #e4ebf2;display:flex;justify-content:space-between;gap:15px;font-weight:600}.result-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}.action-btn{background:#2563eb;color:#fff}.action-btn.secondary{background:#eaf4ff;color:#1e3a5f}.review-question{border:1px solid #dce6ee;border-radius:12px;padding:18px;margin:14px 0}.review-question h3{margin:0 0 10px;color:#1e3a5f}.review-answer{padding:9px 11px;border-radius:8px;margin:7px 0}.review-answer.ok{background:#ecf9f0;color:#146c34}.review-answer.no{background:#fff0f0;color:#a52525}.review-back{margin-bottom:14px}.confetti{position:fixed;top:-15px;width:10px;height:14px;z-index:20;animation:fall 3.3s linear forwards}@keyframes fall{to{transform:translateY(calc(100 * min(var(--vh,1vh),1vh))) rotate(650deg);opacity:0}}@media(min-width:600px){.header-teacher-img,.header-logo-img{height:80px}}@media(min-width:1024px){.header-teacher-img,.header-logo-img{height:96px}}@media(max-width:640px){.quiz-container{padding:0}.quiz-card{border-radius:0;min-height:calc(100 * min(var(--vh,1vh),1vh))}.header-teacher-img,.header-logo-img{height:45px}.quiz-header{padding:8px 12px;gap:8px}.title-line1{font-size:16px}.title-line2{font-size:12px}.title-line3{font-size:10px}.info-bar{padding:10px 12px;font-size:10px}.quiz-main,.result-page,.review-page{padding:18px}.task-box{font-size:17px;padding:17px}.choices{grid-template-columns:1fr 1fr;gap:9px}.choice{padding:12px;font-size:13px;gap:8px}.choice-letter{flex-basis:24px;height:24px}.stats{flex-wrap:wrap;gap:8px 13px;font-size:12px}.summary-grid{grid-template-columns:1fr 1fr}.instruction{font-size:14px;padding:15px}.level-row{font-size:13px}}
+    @media print{body{background:#fff}.quiz-container{padding:0}.quiz-card{box-shadow:none}.quiz-header,.info-bar,.result-page{display:none!important}.review-page{display:block!important}.review-back{display:none!important}}
+  </style>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  
+  
+ <script>(function(){var ok=true;try{window.localStorage.getItem("__t")}catch(e){ok=false}
+if(!ok){var m={};try{Object.defineProperty(window,"localStorage",{configurable:true,value:{
+getItem:function(k){return Object.prototype.hasOwnProperty.call(m,k)?m[k]:null},
+setItem:function(k,v){m[k]=String(v)},removeItem:function(k){delete m[k]},clear:function(){m={}}}})}catch(e2){}}})();</script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&amp;display=swap"></head>
+ <body>
+  <div class="quiz-container">
+   <section class="quiz-card">
+    <header class="quiz-header canva-header"><img class="header-teacher-img" loading="lazy" src="teacher.png" alt="Teacher Soufiane">
+     <div class="header-title">
+      <div class="title-line1">English2BAC Quizzes</div>
+      <div class="title-line2">Learn • Practice • Succeed</div>
+      <div class="title-line3">with Teacher.Soufiane</div>
+     </div><img class="header-logo-img" loading="lazy" src="logo.png" alt="Level-UP 2BAC">
+    </header>
+    <div class="info-bar canva-banner"><span class="">UNIT: 3</span> <span class=""></span> <span class="">GRAMMAR QUIZ 1</span>
+    </div>
+    <main id="quizScreen" class="quiz-main">
+     <div id="instruction" class="instruction canva-banner"></div>
+     <div class="progress-line" aria-label="Quiz progress">
+      <div id="progressFill" class="progress-fill"></div>
+     </div>
+     <div class="question-meta">
+      <span id="levelText"></span><span id="pointsText"></span>
+     </div>
+     <div id="taskBox" class="task-box"></div><button id="hintButton" type="button" class="hint-btn"></button>
+     <div id="hintText" class="hint-text" aria-live="polite"></div>
+     <div id="choices" class="choices" role="group" aria-label="Answer choices"></div>
+     <div id="feedback" class="feedback" aria-live="polite"></div>
+     <div class="navigation"><button id="previousButton" type="button" class="nav-btn">◀ Previous</button> <span id="counter" class="counter" aria-live="polite"></span> <button id="nextButton" type="button" class="nav-btn">Next ▶</button>
+     </div>
+     <div class="stats canva-banner" aria-live="polite"><span id="correctStat"></span><span id="wrongStat"></span><span id="remainingStat"></span><span id="scoreStat"></span><span id="timerStat"></span>
+     </div>
+    </main>
+    <section id="resultPage" class="result-page" aria-live="polite">
+     <div class="result-top">
+      <h1 class="">Your Results</h1>
+      <div id="scoreBadge" class="score-badge"></div>
+      <div id="remark" class="remark"></div>
+      <p id="remarkDescription" class="remark-desc"></p>
+     </div>
+     <div id="summaryGrid" class="summary-grid"></div>
+     <div class="level-list">
+      <h2 class=""></h2>
+      <div id="levelBreakdown"></div>
+     </div>
+     <div class="result-actions"><button id="reviewButton" type="button" class="action-btn">Review My Answers</button> <button id="printButton" type="button" class="action-btn secondary">Print Results</button> <button id="saveButton" type="button" class="action-btn secondary">Save Results</button> <button id="restartButton" type="button" class="action-btn">Restart Quiz</button>
+     </div>
+    </section>
+    <section id="reviewPage" class="review-page"><button id="backResultsButton" type="button" class="action-btn secondary review-back">Back to Results</button>
+     <h1 class="">Review My Answers</h1>
+     <div id="reviewContent"></div>
+    </section>
+   </section>
+  </div>
+  
+  <script>
+    const quizConfig={unit:"3",title:"PAST SIMPLE",lesson:"GRAMMAR QUIZ 1",randomizeChoices:true,timerEnabled:true,timerMode:"countup",countdownSeconds:600};
+    const questions=[
+      [1,"Choose the Correct Form","CHOOSE THE CORRECT FORM.","Last summer, I ______ to Spain and met my old friends there.",["travel","travels","travelling","travelled"],"travelled","Regular verbs form the Past Simple by adding '-ed' (here doubling the final consonant): 'travel' → 'travelled'.","Think about how regular verbs change to show a completed past action."],
+      [1,"Choose the Correct Form","CHOOSE THE CORRECT FORM.","Ahmed ______ from university last year. At the moment, he is working for a big company.",["graduate","graduates","graduating","graduated"],"graduated","'Graduate' is a regular verb ending in 'e'; add '-d' to form the Past Simple: graduate → graduated.","Think about how regular verbs ending in 'e' form the Past Simple."],
+      [1,"Choose the Correct Form","CHOOSE THE CORRECT FORM.","She ______ her keys somewhere in the garden yesterday afternoon.",["lose","loses","losing","lost"],"lost","'Lose' is an irregular verb; its Past Simple form is 'lost', not 'losed'.","Think about the irregular past form of 'lose'."],
+      [2,"Complete the Sentence","COMPLETE THE SENTENCE.","We ______ this project only last Tuesday, so it isn't finished yet.",["start","starts","starting","started"],"started","'Start' is regular; add '-ed' for the Past Simple with 'last Tuesday'.","Think about the regular Past Simple form matching 'last Tuesday'."],
+      [2,"Complete the Sentence","COMPLETE THE SENTENCE.","Salah has just completed his part of the project. Last night, he ______ up late doing research on the internet.",["stay","stays","staying","stayed"],"stayed","'Stay' becomes 'stayed' in the Past Simple, matching 'last night'.","Think about the regular Past Simple form matching 'last night'."],
+      [2,"Complete the Sentence","COMPLETE THE SENTENCE.","Last week, Mike was reading a book when he ______ a phone call from his friend.",["receive","receives","receiving","received"],"received","'Receive' takes '-d' in the Past Simple: received.","Think about the regular Past Simple form of 'receive'."],
+      [3,"Know the Pattern","WHICH IS THE CORRECT PAST SIMPLE FORM?",'Which is the correct Past Simple form of "stop"?',["stoped","stopped","stopping","stops"],"stopped","One-syllable verbs ending in vowel + consonant double the consonant: stop → stopped.","Think about the spelling rule for short verbs ending in one vowel and one consonant."],
+      [3,"Know the Pattern","WHICH IS THE CORRECT PAST SIMPLE FORM?",'Which is the correct Past Simple form of "study"?',["studyed","studied","studying","studys"],"studied","Consonant + y changes to i before '-ed': study → studied.","Think about verbs ending in a consonant plus 'y'."],
+      [3,"Know the Pattern","WHICH IS THE CORRECT PAST SIMPLE FORM?",'Which is the correct Past Simple form of "go"?',["goed","went","going","goes"],"went","'Go' is irregular: its Past Simple is 'went'.","Think about the irregular past form of 'go'."],
+      [4,"Diagnose: Find and Correct the Error","CHOOSE THE CORRECT VERSION.","❌ Yesterday, she runned five kilometers before breakfast.",["Yesterday, she ran five kilometers before breakfast.","Yesterday, she runed five kilometers before breakfast.","Yesterday, she was ran five kilometers before breakfast.","Yesterday, she has ran five kilometers before breakfast."],"Yesterday, she ran five kilometers before breakfast.","'Run' is irregular; its Past Simple is 'ran', not 'runned'.","Think about the irregular past form of 'run'."],
+      [4,"Diagnose: Find and Correct the Error","CHOOSE THE CORRECT VERSION.","❌ Did you called your brother last night?",["Did you call your brother last night?","Did you calling your brother last night?","Did you calls your brother last night?","Did you have called your brother last night?"],"Did you call your brother last night?","After 'did', the main verb stays in its base form: 'did you call'.","Think about the verb form after 'did'."],
+      [5,"Understand the Meaning","CHOOSE THE CORRECT ANSWER.",'Why is the Past Simple NOT appropriate in this sentence? "I haven\'t received any answer from the university yet."',["Because 'yet' shows the action is connected to the present moment, so the Present Perfect is used instead.","Because the sentence describes a repeated past habit.","Because the verb 'receive' has no Past Simple form.","Because the action happened at a specific time in the past."],"Because 'yet' shows the action is connected to the present moment, so the Present Perfect is used instead.","'Yet' signals an unfinished period connected to now, needing the Present Perfect.","Think about whether this situation is finished or still relevant to now."],
+      [5,"Understand the Meaning","CHOOSE THE CORRECT ANSWER.",'What does this sentence tell us about when the action happened? "I called you twice yesterday."',["The action happened at a specific, finished time in the past.","The action is still happening now.","The action will happen in the future.","The action happens repeatedly every day."],"The action happened at a specific, finished time in the past.","'Yesterday' is a definite, finished past time marker.","Think about whether 'yesterday' is finished or ongoing."],
+      [5,"Understand the Meaning","CHOOSE THE CORRECT ANSWER.","Which time expression fits naturally with the Past Simple?",["three weeks ago","since last year","for two hours (up to now)","just now"],"three weeks ago","'Ago' expressions naturally show how far back a finished action occurred.","Choose the phrase that points to a completed point in the past."],
+      [6,"Transform","CHOOSE THE SENTENCE WITH THE SAME MEANING.",'Choose the sentence with the same meaning: "It\'s been three weeks since we started working on this song."',["We started working on this song three weeks ago.","We have started working on this song three weeks ago.","We are starting working on this song three weeks ago.","We were starting working on this song three weeks ago."],"We started working on this song three weeks ago.","'It has been X since...' and 'We did it X ago' express the same past start.","Look for an option using 'ago' with the same past action."],
+      [6,"Transform","CHOOSE THE SENTENCE WITH THE SAME MEANING.",'Choose the sentence with the same meaning: "Salah finished his part of the project. Then he stayed up late doing research."',["After finishing his part of the project, Salah stayed up late doing research.","Salah finishes his part of the project and stays up late doing research.","Salah was finishing his part of the project and staying up late doing research.","Salah will finish his part of the project and stay up late doing research."],"After finishing his part of the project, Salah stayed up late doing research.","Both structures preserve the sequence of completed past actions.","Choose the option keeping the same event order."],
+      [7,"Grammar in Context","COMPLETE THE CONTEXT.",'Lucas left Alex a message: "You ______ me twice yesterday, but my phone was off, so I didn\'t answer."',["call","calls","calling","called"],"called","'Called' matches the completed action and the time marker 'yesterday'.","Think about the regular Past Simple form matching 'yesterday'."],
+      [7,"Grammar in Context","COMPLETE THE CONTEXT.",'In her letter, Fatima wrote: "I ______ your e-mail yesterday. You seem to be worried."',["read","reads","reading","readed"],"read","Past Simple 'read' is spelled like the present form but pronounced differently.","Think about the irregular past form that looks the same as present tense."],
+      [8,"Final Challenge: Mixed Grammar","CHOOSE THE CORRECT SENTENCE.","Choose the correct sentence:",["Ahmed graduated from university last year, and then he travelled to Spain to visit his old friends.","Ahmed graduated from university last year, and then he travel to Spain to visit his old friends.","Ahmed graduate from university last year, and then he travelled to Spain to visit his old friends.","Ahmed has graduated from university last year, and then he was travelling to Spain to visit his old friends."],"Ahmed graduated from university last year, and then he travelled to Spain to visit his old friends.","With 'last year', both regular verbs need Past Simple: graduated and travelled.","Think about the form required for both regular verbs with a past time marker."],
+      [8,"Final Challenge: Mixed Grammar","CHOOSE THE CORRECT SENTENCE.","Choose the correct sentence:",["She lost her keys in the garden, so she went back inside to look for a spare set.","She losed her keys in the garden, so she goed back inside to look for a spare set.","She lost her keys in the garden, so she goes back inside to look for a spare set.","She was lost her keys in the garden, so she was going back inside to look for a spare set."],"She lost her keys in the garden, so she went back inside to look for a spare set.","'Lose' and 'go' are irregular: lost and went.","Think about the irregular past forms of both verbs."]
+    ].map(q=>({type:"single-choice",level:q[0],category:q[1],question:q[2],task:q[3],choices:q[4],correctAnswer:q[5],explanation:q[6],hint:q[7],points:1}));
+
+    let currentIndex=0,answers=Array(20).fill(null),choiceOrders=[],finalSeconds=0;
+    const $=id=>document.getElementById(id);
+    const timer=(()=>{
+      let seconds=0,interval=null;
+      const format=s=>`${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`;
+      function update(){ $("timerStat").textContent=`Timer: ${format(seconds)}`; }
+      return{start(){if(!interval){interval=setInterval(()=>{seconds++;update()},1000)}update()},pause(){clearInterval(interval);interval=null},reset(){this.pause();seconds=0;update()},value(){return seconds},format};
+    })();
+
+    function shuffle(arr){return [...arr].sort(()=>Math.random()-.5)}
+    function prepareOrders(){choiceOrders=questions.map(q=>quizConfig.randomizeChoices?shuffle(q.choices):[...q.choices])}
+    function stats(){const correct=answers.filter((a,i)=>a===questions[i].correctAnswer).length,answered=answers.filter(Boolean).length;return{correct,wrong:answered-correct,remaining:20-answered,score:correct}}
+    function updateStats(){const s=stats();$("correctStat").textContent=`✅ Correct: ${s.correct}`;$("wrongStat").textContent=`❌ Wrong: ${s.wrong}`;$("remainingStat").textContent=`Remaining: ${s.remaining}`;$("scoreStat").textContent=`Score: ${s.score.toFixed(2)} /20`}
+
+    // Reusable Type A renderer for all level-progression questions.
+    function renderQuestion(){
+      const q=questions[currentIndex],selected=answers[currentIndex],locked=!!selected;
+      $("instruction").textContent=q.question;$("levelText").textContent=`Level ${q.level} — ${q.category}`;$("pointsText").textContent="1 point";
+      $("taskBox").textContent=q.task;$("counter").textContent=`${currentIndex+1} / 20`;$("progressFill").style.width=`${((currentIndex+1)/20)*100}%`;
+      $("hintText").style.display="none";$("hintText").textContent=q.hint;$("hintButton").disabled=locked;
+      const choices=$("choices");choices.innerHTML="";
+      choiceOrders[currentIndex].forEach((choice,i)=>{
+        const btn=document.createElement("button");btn.type="button";btn.className="choice";btn.disabled=locked;btn.dataset.choice=choice;
+        btn.innerHTML=`<span class="choice-letter">${"ABCD"[i]}</span><span>${choice}</span>`;
+        if(locked){if(choice===q.correctAnswer)btn.classList.add("correct");if(choice===selected&&selected!==q.correctAnswer)btn.classList.add("wrong")}
+        btn.addEventListener("click",()=>answerQuestion(choice));choices.appendChild(btn);
+      });
+      const feedback=$("feedback");feedback.style.display=locked?"block":"none";
+      if(locked){const correct=selected===q.correctAnswer;feedback.className=`feedback ${correct?"good":"bad"}`;feedback.innerHTML=`<strong>${correct?["Excellent!","Great Job!","Perfect!","Keep Going!"][Math.floor(Math.random()*4)]:["Almost!","Review this rule.","Keep learning!","You'll get the next one!"][Math.floor(Math.random()*4)]}</strong><span>${q.explanation}</span>`}
+      $("previousButton").disabled=currentIndex===0;$("nextButton").disabled=!locked;$("nextButton").style.visibility=currentIndex===19&&locked?"visible":"visible";
+      updateStats();
+    }
+    function tone(ok){if(!quizConfig.enableSounds)return;const c=new AudioContext(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=ok?620:180;g.gain.setValueAtTime(.06,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.22);o.start();o.stop(c.currentTime+.22)}
+    function answerQuestion(choice){if(answers[currentIndex])return;answers[currentIndex]=choice;tone(choice===questions[currentIndex].correctAnswer);renderQuestion()}
+    function showHint(){$("hintText").style.display="block"}
+    function next(){if(!answers[currentIndex])return;if(currentIndex===19)showResults();else{currentIndex++;renderQuestion()}}
+    function previous(){if(currentIndex>0){currentIndex--;renderQuestion()}}
+    function remarkFor(score){if(score<=10.99)return["Keep Practising","Review regular verb spelling rules, common irregular verbs, and the difference between the Past Simple and the Present Perfect."];if(score<=14.99)return["Good Progress","You understand the basics, but you need more practice with irregular verbs and spelling changes."];if(score<=17.99)return["Very Good","You understand most Past Simple rules well. Review a few irregular verbs or spelling rules."];return["Excellent","You have a very strong command of the Past Simple, including tricky irregular verbs."]}
+    function levelBreakdown(){return[1,2,3,4,5,6,7,8].map(level=>{const qs=questions.filter(q=>q.level===level),score=qs.filter(q=>answers[questions.indexOf(q)]===q.correctAnswer).length;return `<div class="level-row"><span>Level ${level} — ${qs[0].category}</span><span>${score}/${qs.length}</span></div>`}).join("")}
+    function showResults(){timer.pause();finalSeconds=timer.value();$("quizScreen").style.display="none";$("resultPage").style.display="block";const s=stats(),best=Math.max(Number(localStorage.getItem("pastSimpleBest")||0),s.score),attempts=Number(localStorage.getItem("pastSimpleAttempts")||0)+1;localStorage.setItem("pastSimpleBest",best);localStorage.setItem("pastSimpleAttempts",attempts);localStorage.setItem("pastSimpleLast",s.score);localStorage.setItem("pastSimpleTime",timer.format(finalSeconds));$("scoreBadge").textContent=`${s.score.toFixed(2)} /20`;$("summaryGrid").innerHTML=[["Final Score",`${s.score.toFixed(2)} /20`],["Correct Answers",s.correct],["Wrong Answers",s.wrong],["Accuracy",`${Math.round(s.correct/20*100)}%`],["Time Taken",timer.format(finalSeconds)],["Attempts",attempts],["Best Score",`${best.toFixed(2)} /20`]].map(x=>`<div class="summary-item">${x[0]}<b>${x[1]}</b></div>`).join("");$("levelBreakdown").innerHTML=levelBreakdown();animateRemark(s.score);if(s.score>=18)confetti();tone(true)}
+    function animateRemark(score){const remarks=["Keep Practising","Good Progress","Very Good","Excellent"],target=remarkFor(score),el=$("remark");$("remarkDescription").textContent=target[1];let n=0,delay=80;function spin(){el.textContent=remarks[n++%4];if(delay<700){delay*=1.32;setTimeout(spin,delay)}else el.textContent=target[0]}spin()}
+    function confetti(){for(let i=0;i<70;i++){const d=document.createElement("i");d.className="confetti";d.style.left=Math.random()*100+"%";d.style.background=["#2563eb","#16a34a","#f59e0b","#ef4444"][i%4];d.style.animationDelay=Math.random()*1.2+"s";document.body.appendChild(d);setTimeout(()=>d.remove(),4500)}}
+    function review(){ $("resultPage").style.display="none";$("reviewPage").style.display="block";let html="";for(let l=1;l<=8;l++){const qs=questions.filter(q=>q.level===l);html+=`<h2>Level ${l} — ${qs[0].category}</h2>`;qs.forEach(q=>{const i=questions.indexOf(q),ok=answers[i]===q.correctAnswer;html+=`<article class="review-question"><h3>${i+1}. ${q.task}</h3><div class="review-answer ${ok?"ok":"no"}">Student Answer: ${answers[i]||"Unanswered"}</div><div class="review-answer ok">Correct Answer: ${q.correctAnswer}</div><p><b>Explanation:</b> ${q.explanation}</p></article>`})}$("reviewContent").innerHTML=html}
+    function restart(){answers=Array(20).fill(null);currentIndex=0;prepareOrders();timer.reset();$("resultPage").style.display="none";$("reviewPage").style.display="none";$("quizScreen").style.display="block";timer.start();renderQuestion()}
+    function saveResults(){const s=stats(),text=`PAST SIMPLE — GRAMMAR QUIZ 1\nScore: ${s.score.toFixed(2)} /20\nCorrect: ${s.correct}\nWrong: ${s.wrong}\nTime Taken: ${timer.format(finalSeconds)}\n\n${document.getElementById("levelBreakdown").innerText}`;const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([text],{type:"text/plain"}));a.download="past-simple-quiz-results.txt";a.click();URL.revokeObjectURL(a.href)}
+    $("hintButton").onclick=showHint;$("previousButton").onclick=previous;$("nextButton").onclick=next;$("reviewButton").onclick=review;$("restartButton").onclick=restart;$("backResultsButton").onclick=()=>{$("reviewPage").style.display="none";$("resultPage").style.display="block"};$("printButton").onclick=()=>window.print();$("saveButton").onclick=saveResults;
+    document.addEventListener("keydown",e=>{if($("quizScreen").style.display==="none")return;if(["1","2","3","4"].includes(e.key)&&!answers[currentIndex]){const b=$("choices").children[Number(e.key)-1];if(b)b.click()}if(e.key==="ArrowLeft")previous();if(e.key==="ArrowRight")next();if((e.key==="Enter"||e.key===" ")&&document.activeElement.tagName==="BUTTON")document.activeElement.click()});
+    prepareOrders();timer.start();renderQuestion();
+  </script>
+ 
+</body></html>

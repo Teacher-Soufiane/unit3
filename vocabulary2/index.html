@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Education Vocabulary Quiz 2</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700&amp;family=Poppins:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#082d62;--blue:#1267bd;--sky:#e9f5ff;--green:#159447;--red:#d83a3a;--gray:#667085;--paper:#f4f7fb}
+    *{box-sizing:border-box} body{margin:0;font-family:Poppins,Cairo,sans-serif;color:#14213d;background:#e9f0f8}
+    button{font:inherit} button:focus-visible{outline:3px solid #f5b942;outline-offset:3px}
+    .app-shell{width:100%;min-height:calc(100 * min(var(--vh,1vh),1vh));background:linear-gradient(145deg,#edf5ff,#f8fbff)}
+    .quiz-wrap{width:100%;max-width:1220px;margin:auto;padding:18px}
+    .top-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 20px;background:#fff;border-bottom:3px solid #1e3a5f;border-radius:22px 22px 0 0;box-shadow:none}
+    .header-teacher-img,.header-logo-img{height:56px;width:auto;max-width:none;object-fit:contain;display:block;flex-shrink:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+    .brand{flex:1;min-width:0;padding:0 8px;text-align:center;line-height:1.2}.brand h1{margin:0;color:#1e3a5f;font-family:Poppins,sans-serif;font-size:clamp(14px,4vw,26px);font-weight:800}.brand h2{margin:2px 0 0;color:#2563eb;font-family:Poppins,sans-serif;font-size:clamp(11px,3vw,18px);font-weight:400}.brand h3{margin:2px 0 0;color:#64748b;font-family:Poppins,sans-serif;font-size:clamp(9px,2.5vw,14px);font-weight:400}
+    .meta-row{display:grid;grid-template-columns:1fr 1fr 1fr;background:var(--navy);color:#fff;text-align:center;font-size:clamp(.67rem,1.7vw,.86rem);font-weight:700;letter-spacing:.04em}
+    .meta-row span{padding:11px 7px}.progress-track{height:7px;background:#c6d5e7}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#13aa56,#37c775);transition:width .5s ease}
+    .quiz-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;margin-top:18px}.main-card,.side-card,.result-card,.review-card{background:#fff;border-radius:20px;box-shadow:0 10px 28px #123a6814}
+    .main-card{padding:clamp(16px,3vw,30px)}.category-label{display:none;border-radius:999px;background:#dff1ff;color:#075b9f;padding:8px 14px;font-weight:800;font-size:.77rem;margin-bottom:16px}
+    .instruction-box{background:linear-gradient(135deg,#0b438f,#1277c9);color:#fff;border-radius:17px;padding:20px 22px;box-shadow:inset 0 1px #ffffff3d}.instruction-box h2{margin:0;font-size:clamp(.9rem,2vw,1.23rem);line-height:1.5;font-weight:800;letter-spacing:.025em}
+    .task-box{padding:22px 8px 16px;font-size:clamp(1rem,2.1vw,1.3rem);font-weight:600;line-height:1.75;color:#153860}.target-word{display:block;text-align:center;color:var(--navy);font-size:clamp(1.6rem,5vw,2.5rem);font-weight:800;letter-spacing:.08em;padding:10px}
+    .choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.choice{position:relative;border:2px solid #d6e1ef;border-radius:14px;background:#fff;color:#173a61;padding:16px 16px;text-align:left;font-weight:600;min-height:59px;transition:.2s;cursor:pointer;box-shadow:0 4px 9px #123a6808}.choice:hover:not(:disabled){transform:translateY(-2px);border-color:#4b9ce0;background:#f5faff}.choice:disabled{cursor:default}.choice.selected{border-color:#1372c6;background:#dff0ff;color:#075b9f}.choice.correct{border-color:var(--green);background:#dff7e8;color:#087235}.choice.wrong{border-color:var(--red);background:#ffe7e7;color:#b52020}.choice.muted{background:#eef1f5;color:#6b7280;border-color:#d6dbe2}.tag{font-size:.64rem;border-radius:999px;padding:3px 8px;background:#737d88;color:white;margin-left:7px;white-space:nowrap}
+    .feedback{display:none;margin-top:18px;border-radius:14px;padding:15px 17px;font-size:.93rem;line-height:1.6}.feedback.show{display:block}.feedback.good{background:#e4f8eb;color:#086a32;border-left:5px solid var(--green)}.feedback.bad{background:#fff0f0;color:#9f2020;border-left:5px solid var(--red)}.feedback strong{display:block;font-size:1rem;margin-bottom:3px}
+    .navigation{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:22px}.nav-btn,.action-btn{border:0;border-radius:12px;padding:11px 16px;font-weight:700;cursor:pointer;transition:.2s}.nav-btn{background:#e9f2fb;color:#0c4f90}.nav-btn:hover:not(:disabled){background:#d6eafb}.nav-btn:disabled{opacity:.45;cursor:not-allowed}.question-count{color:#315d87;font-weight:800}
+    .side-card{padding:18px;height:max-content;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:stretch;gap:0 14px}.side-card h3{display:none;color:var(--navy);margin:0 0 13px;font-size:1rem}.stat{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #e8eef4;padding:10px 0;font-size:.86rem}.stat b{color:var(--navy)}.timer{margin-top:0;text-align:center;background:#092f65;color:#fff;padding:9px 11px;border-radius:13px;font-size:1.05rem;font-weight:800;letter-spacing:.08em;display:flex;align-items:center;justify-content:center}.settings{grid-column:1/-1}
+    .navigator-title{margin:18px 0 10px;color:var(--navy);font-size:.82rem;font-weight:800}.nav-groups{display:grid;gap:8px}.nav-group{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.q-dot{border:0;border-radius:8px;height:32px;background:#dfe6ee;color:#667085;font-weight:700;cursor:pointer}.q-dot.answered{background:#d9f5e3;color:#087437}.q-dot.current{background:#1674c8;color:#fff}
+    .settings{margin-top:17px;padding-top:14px;border-top:1px solid #e6edf5}.setting{display:flex;align-items:center;gap:8px;font-size:.78rem;margin:8px 0;color:#41607b}.setting input{accent-color:#0c67b7}
+    .result-screen,.review-screen{display:none;margin-top:18px}.result-screen.show,.review-screen.show{display:block}.result-card{padding:clamp(22px,4vw,44px);text-align:center}.result-kicker{color:#1b72b6;font-weight:800;letter-spacing:.15em;margin:0}.result-card h2{margin:5px 0;color:var(--navy);font-size:clamp(1.6rem,5vw,2.5rem)}.result-lesson{color:#5f7891;margin:0 0 20px;font-weight:700}.score-circle{width:180px;height:180px;border-radius:50%;margin:15px auto;display:grid;place-items:center;background:conic-gradient(#159447 var(--score,0%),#dbe6f1 0);padding:12px;box-shadow:0 10px 25px #0b4a861c}.score-inner{background:#fff;width:100%;height:100%;border-radius:50%;display:grid;place-items:center;color:var(--navy);font-size:1.8rem;font-weight:800}.remark{min-height:46px;color:#1267bd;font-size:1.6rem;font-weight:800}.summary-grid{max-width:820px;margin:24px auto;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:left}.summary-item{padding:13px;border-radius:12px;background:#f4f8fc;color:#5d7186;font-size:.78rem}.summary-item b{display:block;color:var(--navy);font-size:1rem;margin-top:3px}.breakdown{max-width:820px;margin:12px auto;text-align:left;padding:18px;background:#f7fbff;border-radius:15px}.breakdown h3{margin:0 0 9px;color:var(--navy);font-size:1rem}.break-row{display:flex;justify-content:space-between;border-bottom:1px solid #e2edf6;padding:8px 0;font-size:.88rem}.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}.primary{background:#0d66b5;color:#fff}.green-btn{background:#159447;color:#fff}.soft{background:#e7f2fc;color:#075b9f}
+    .review-card{padding:22px}.review-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}.review-head h2{margin:0;color:var(--navy)}.review-group h3{margin:22px 0 10px;color:#0d66b5;font-size:1rem}.review-item{border:1px solid #e1e9f2;border-radius:14px;padding:16px;margin:10px 0}.review-item.correct-review{border-left:5px solid var(--green)}.review-item.wrong-review{border-left:5px solid var(--red)}.review-item p{margin:6px 0;font-size:.88rem;line-height:1.55}.answer-good{color:#087437;font-weight:700}.answer-bad{color:#b11f1f;font-weight:700}
+    #confetti{position:fixed;inset:0;pointer-events:none;z-index:20;overflow:hidden}.confetti-bit{position:absolute;width:9px;height:15px;animation:fall 3.4s linear forwards}@keyframes fall{to{transform:translate(var(--drift),110vh) rotate(720deg);opacity:0}}@media(min-width:600px){.header-teacher-img,.header-logo-img{height:72px}}@media(min-width:1024px){.header-teacher-img,.header-logo-img{height:90px}}
+    @media(max-width:860px){.side-card{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0 10px}.side-card h3,.navigator-title,.nav-groups,.settings{grid-column:1/-1}.timer{align-self:center}.summary-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.side-card{grid-template-columns:repeat(5,minmax(0,1fr));gap:0 5px}.stat{display:block;text-align:center;font-size:.67rem;padding:8px 2px}.stat b{display:block;margin-top:3px}.timer{padding:8px 2px;font-size:.9rem}.summary-grid{grid-template-columns:1fr 1fr}}@media(max-width:640px){.top-header{padding:8px 12px}.brand h3{margin-top:2px}}@media(max-width:520px){.quiz-wrap{padding:8px}.top-header{gap:12px}.meta-row span{padding:9px 3px}.choices{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.choice{padding:13px 10px;font-size:.83rem}.main-card{border-radius:16px}.navigation{font-size:.82rem}.nav-btn{padding:10px}.header-teacher-img,.header-logo-img{height:56px}}
+    @media print{body{background:#fff}.side-card,.actions,.navigation,.top-header,.meta-row,.progress-track,.result-screen .action-btn{display:none!important}.quiz-wrap{max-width:none}.result-screen{display:block!important}.result-card{box-shadow:none}.app-shell{background:#fff}}
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  
+  
+ <script>(function(){var ok=true;try{window.localStorage.getItem("__t")}catch(e){ok=false}
+if(!ok){var m={};try{Object.defineProperty(window,"localStorage",{configurable:true,value:{
+getItem:function(k){return Object.prototype.hasOwnProperty.call(m,k)?m[k]:null},
+setItem:function(k,v){m[k]=String(v)},removeItem:function(k){delete m[k]},clear:function(){m={}}}})}catch(e2){}}})();</script></head>
+ <body>
+  <div class="app-shell">
+   <div class="quiz-wrap">
+    <header class="top-header">
+     <img class="header-teacher-img" loading="lazy" src="teacher.png" alt="Teacher Soufiane">
+     <div class="brand">
+      <h1 class=""></h1>
+      <h2 class=""></h2>
+      <h3 class=""></h3>
+     </div><img class="header-logo-img" loading="lazy" src="logo.png" alt="Level-UP 2BAC">
+    </header>
+    <div class="meta-row">
+     <span class="">UNIT: UNIT 3</span> <span class=""></span> <span class="">VOCABULARY - QUIZ 2</span>
+    </div>
+    <div class="progress-track">
+     <div id="progressFill" class="progress-fill"></div>
+    </div>
+    <main id="quizView" class="quiz-grid">
+     <section class="main-card" aria-live="polite">
+      <div id="categoryLabel" class="category-label"></div>
+      <div class="instruction-box">
+       <h2 id="instruction"></h2>
+      </div>
+      <div id="taskBox" class="task-box"></div>
+      <div id="choices" class="choices"></div>
+      <div id="feedback" class="feedback"></div>
+      <div class="navigation">
+       <button id="previousBtn" class="nav-btn" type="button">◀ Previous</button> <span id="counter" class="question-count">1 / 20</span> <button id="nextBtn" class="nav-btn" type="button">Next ▶</button>
+      </div>
+     </section>
+     <aside class="side-card">
+      <h3>LIVE STATISTICS</h3>
+      <div class="stat"><span>✅ Correct</span><b id="correctCount">0</b>
+      </div>
+      <div class="stat"><span>❌ Wrong</span><b id="wrongCount">0</b>
+      </div>
+      <div class="stat"><span>Current Score</span><b id="scoreText">0.00 /20</b>
+      </div>
+      <div class="stat"><span>Remaining Questions</span><b id="remainingCount">20</b>
+      </div>
+      <div id="timerDisplay" class="timer">
+       00:00
+      </div>
+     </aside>
+    </main>
+    <section id="resultScreen" class="result-screen">
+     <div class="result-card">
+      <p class="result-kicker"></p>
+      <h2 class="">Your Results</h2>
+      <p class="result-lesson">VOCABULARY - QUIZ 2</p>
+      <div id="scoreCircle" class="score-circle">
+       <div id="finalScore" class="score-inner">
+        0.00 /20
+       </div>
+      </div>
+      <div id="remark" class="remark">
+       Excellent!
+      </div>
+      <div id="breakdown" class="breakdown"></div>
+      <div id="summaryGrid" class="summary-grid"></div>
+      <div class="actions">
+       <button id="reviewBtn" class="action-btn primary" type="button">Review My Answers</button> <button id="printBtn" class="action-btn soft" type="button">Print Results</button> <button id="saveBtn" class="action-btn soft" type="button">Save Results</button> <button id="restartBtn" class="action-btn green-btn" type="button">Restart Quiz</button>
+      </div>
+     </div>
+    </section>
+    <section id="reviewScreen" class="review-screen">
+     <div class="review-card">
+      <div class="review-head">
+       <h2>Review My Answers</h2><button id="backResultBtn" class="action-btn soft" type="button">Back to Results</button>
+      </div>
+      <div id="reviewContent"></div>
+     </div>
+    </section>
+   </div>
+   <div id="confetti"></div>
+  </div>
+  <script>
+    /* Quiz configuration and supplied question data */
+    const quizConfig = {
+      unit:"UNIT 3",title:"EDUCATION",lesson:"VOCABULARY - QUIZ 2",teacherName:"Teacher Soufiane",
+      teacherImage:"https://i.imgur.com/vvyZAnr.png",logo:"https://imgur.com/XPOYllA",
+      randomizeQuestions:false,randomizeChoices:true,timerEnabled:true,timerMode:"countup",countdownSeconds:600,showConfetti:true,enableSounds:true,
+      questions:[
+        ["single-choice","Choose the word that matches the definition","CHOOSE THE TYPE OF EDUCATION THAT BEST MATCHES THE DEFINITION.","Structured education that takes place in schools or colleges and leads to a recognized qualification.",["formal education","informal education","gifted education","non-formal education"],"formal education","Formal education is structured, school-based learning that leads to an official qualification."],
+        ["single-choice","Choose the word that matches the definition","CHOOSE THE WORD THAT MATCHES THE DEFINITION.","Learning gained through everyday experience, without a set curriculum or formal instruction.",["informal education","formal education","gifted education","special education"],"informal education","Informal education happens naturally through daily life experiences, without a structured curriculum."],
+        ["single-choice","Choose the word that matches the definition","CHOOSE THE WORD THAT MATCHES THE DEFINITION.","Programs designed to challenge and support exceptionally talented or intelligent students.",["gifted education","informal education","formal education","basic education"],"gifted education","Gifted education provides extra challenge and support for exceptionally talented students."],
+        ["single-choice","Choose the word that matches the definition","CHOOSE THE WORD THAT MATCHES THE DEFINITION.","The inability to read or write.",["illiteracy","literacy","ignorance","dropouts"],"illiteracy","Illiteracy refers to a person's inability to read or write."],
+        ["single-choice","Put the word in brackets in its correct form","PUT THE WORD IN BRACKETS IN ITS CORRECT FORM.","Students must obtain a professional ______ before they can start teaching. (certify)",["certification","certify","certified","certifying"],"certification","We need a noun after 'professional', so the verb 'certify' becomes 'certification'."],
+        ["single-choice","Put the word in brackets in its correct form","PUT THE WORD IN BRACKETS IN ITS CORRECT FORM.","Lina prefers to watch ______ documentaries instead of cartoons. (education)",["educational","education","educate","educated"],"educational","We need an adjective before 'documentaries', so 'education' becomes 'educational'."],
+        ["single-choice","Put the word in brackets in its correct form","PUT THE WORD IN BRACKETS IN ITS CORRECT FORM.","After four years at university, she finally attended her ______ ceremony. (graduate)",["graduation","graduate","graduated","graduating"],"graduation","We need a noun before 'ceremony', so the verb 'graduate' becomes 'graduation'."],
+        ["single-choice","Put the word in brackets in its correct form","PUT THE WORD IN BRACKETS IN ITS CORRECT FORM.","All new students must complete their ______ before the semester begins. (register)",["registration","register","registered","registering"],"registration","We need a noun after 'their', so the verb 'register' becomes 'registration'."],
+        ["single-choice","Fill in the gap with the appropriate word from the list","FILL IN THE GAP WITH THE APPROPRIATE WORD FROM THE LIST.","______ is important for building a bright future.",["Education","Literacy","Decrease","Increase"],"Education","'Education' fits because the sentence talks about its importance for a good future."],
+        ["single-choice","Fill in the gap with the appropriate word from the list","FILL IN THE GAP WITH THE APPROPRIATE WORD FROM THE LIST.","Reading programs in rural areas have helped improve adult ______ rates significantly.",["literacy","education","decrease","increase"],"literacy","'Literacy' fits because the sentence discusses the ability to read and write."],
+        ["single-choice","Fill in the gap with the appropriate word from the list","FILL IN THE GAP WITH THE APPROPRIATE WORD FROM THE LIST.","Extra tutoring helped to ______ the number of students struggling with math.",["decrease","increase","literacy","education"],"decrease","'Decrease' fits because tutoring reduced the number of struggling students."],
+        ["single-choice","Fill in the gap with the appropriate word from the list","FILL IN THE GAP WITH THE APPROPRIATE WORD FROM THE LIST.","New scholarship programs have led to a significant ______ in university enrollment.",["increase","decrease","literacy","education"],"increase","'Increase' fits because scholarships led to more students enrolling."],
+        ["single-choice","Choose the word that completes the collocation","CHOOSE THE WORD THAT COMPLETES THE COLLOCATION.","Culture for All is an organization which ______ citizens to the importance of adult literacy.",["sensitizes","informs","teaches","educates"],"sensitizes","'Sensitize citizens to' is the correct natural collocation meaning to raise awareness."],
+        ["single-choice","Choose the word that completes the collocation","CHOOSE THE WORD THAT COMPLETES THE COLLOCATION.","Vocational education helps students ______ into the job market easily.",["integrate","enter","join","register"],"integrate","'Integrate into the job market' is the correct natural collocation meaning to successfully join the workforce."],
+        ["single-choice","Choose the word that completes the collocation","CHOOSE THE WORD THAT COMPLETES THE COLLOCATION.","She has enrolled ______ a medical school to pursue a medical career.",["in","on","at","to"],"in","'Enroll in' is the correct natural collocation meaning to register for a school."],
+        ["single-choice","Choose the word that completes the collocation","CHOOSE THE WORD THAT COMPLETES THE COLLOCATION.","As children grow up, they look for more autonomy; they want to make their own ______.",["choices","decisions","opinions","options"],"choices","'Make your own choices' is the correct natural collocation meaning to decide for yourself."],
+        ["three-synonyms","Three Synonyms Challenge","SELECT THE THREE WORDS THAT ARE SYNONYMS OF THE TARGET WORD.","SUCCESSFUL",["victorious","accomplished","triumphant","unsuccessful"],["victorious","accomplished","triumphant"],"unsuccessful","'Victorious', 'accomplished', and 'triumphant' are synonyms of successful. 'Unsuccessful' is its antonym."],
+        ["three-synonyms","Three Synonyms Challenge","SELECT THE THREE WORDS THAT ARE SYNONYMS OF THE TARGET WORD.","AUTONOMOUS",["independent","self-governing","self-reliant","dependent"],["independent","self-governing","self-reliant"],"dependent","'Independent', 'self-governing', and 'self-reliant' are synonyms of autonomous. 'Dependent' is its antonym."],
+        ["three-synonyms","Three Synonyms Challenge","SELECT THE THREE WORDS THAT ARE SYNONYMS OF THE TARGET WORD.","AWARE",["conscious","informed","mindful","unaware"],["conscious","informed","mindful"],"unaware","'Conscious', 'informed', and 'mindful' are synonyms of aware. 'Unaware' is its antonym."],
+        ["three-synonyms","Three Synonyms Challenge","SELECT THE THREE WORDS THAT ARE SYNONYMS OF THE TARGET WORD.","TALENTED",["gifted","skilled","capable","incapable"],["gifted","skilled","capable"],"incapable","'Gifted', 'skilled', and 'capable' are synonyms of talented. 'Incapable' is its antonym."]
+      ]
+    };
+
+    const messages={good:["Excellent!","Great Job!","Perfect!","Keep Going!"],bad:["Almost!","Review this rule.","Keep learning!","You'll get the next one!"]};
+    const $=id=>document.getElementById(id);
+    const shuffle=a=>[...a].sort(()=>Math.random()-.5);
+    const categoryNames=["Definitions","Word Forms","Word Bank","Collocations","Synonyms Challenge"];
+    let questions=[],current=0,answers=[],synonymTimer=null,completed=false;
+
+    /* Independent timer module */
+    const timer={
+      seconds:0,interval:null,
+      start(){if(!quizConfig.timerEnabled||this.interval)return;this.interval=setInterval(()=>{this.seconds+=quizConfig.timerMode==="countdown"?-1:1;if(this.seconds<=0&&quizConfig.timerMode==="countdown"){this.seconds=0;this.pause();finishQuiz()}this.render()},1000)},
+      pause(){clearInterval(this.interval);this.interval=null},
+      reset(){this.pause();this.seconds=quizConfig.timerMode==="countdown"?quizConfig.countdownSeconds:0;this.render()},
+      format(){return `${String(Math.floor(this.seconds/60)).padStart(2,"0")}:${String(Math.abs(this.seconds%60)).padStart(2,"0")}`},
+      render(){$("timerDisplay").textContent=this.format()}
+    };
+
+    function makeQuestions(){
+      questions=quizConfig.questions.map((q,i)=>q[0]==="single-choice"?{type:q[0],category:q[1],question:q[2],task:q[3],choices:[...q[4]],correctAnswer:q[5],explanation:q[6],points:1,group:Math.floor(i/4)}:{type:q[0],category:q[1],question:q[2],targetWord:q[3],options:[...q[4]],correctSynonyms:q[5],antonym:q[6],explanation:q[7],points:1,group:4});
+    }
+    function play(type){
+      if(!quizConfig.enableSounds||!window.AudioContext)return;
+      const ctx=new AudioContext(),osc=ctx.createOscillator(),gain=ctx.createGain();
+      const tones={good:[660,880],bad:[180,130],click:[420,520],end:[523,659]}[type]||[440,440];
+      osc.frequency.value=tones[0];gain.gain.setValueAtTime(.05,ctx.currentTime);osc.connect(gain);gain.connect(ctx.destination);osc.start();
+      setTimeout(()=>{osc.frequency.value=tones[1];},90);setTimeout(()=>{gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.15);osc.stop(ctx.currentTime+.16);ctx.close()},170);
+    }
+    function getScore(){return answers.filter(a=>a&&a.correct).length}
+    function renderQuestion(){
+      const q=questions[current],a=answers[current];clearTimeout(synonymTimer);
+      $("categoryLabel").textContent=q.category;$("instruction").textContent=q.question;$("counter").textContent=`${current+1} / ${questions.length}`;
+      $("taskBox").innerHTML=q.type==="single-choice"?q.task:`<span class="target-word">${q.targetWord}</span>`;
+      $("choices").innerHTML="";$("feedback").className="feedback";
+      q.type==="single-choice"?renderSingle(q,a):renderSynonyms(q,a);
+      if(a)showFeedback(q,a);$("previousBtn").disabled=current===0;$("nextBtn").disabled=!a;
+      updateStats();
+    }
+    function renderSingle(q,a){
+      q.choices.forEach((choice,i)=>{const b=document.createElement("button");b.type="button";b.className="choice";b.textContent=`${i+1}. ${choice}`;b.disabled=!!a;
+        if(a){if(choice===q.correctAnswer)b.classList.add("correct");if(choice===a.selected&&!a.correct)b.classList.add("wrong")}
+        b.onclick=()=>answerSingle(choice);$("choices").appendChild(b)});
+    }
+    function answerSingle(choice){if(answers[current])return;const q=questions[current],correct=choice===q.correctAnswer;answers[current]={selected:choice,correct};play(correct?"good":"bad");renderQuestion()}
+    function renderSynonyms(q,a){
+      const selected=a?a.selected:[];q.options.forEach((option,i)=>{const b=document.createElement("button");b.type="button";b.className="choice";b.innerHTML=`${i+1}. ${option}`;
+        if(answers[current]){b.disabled=true;if(q.correctSynonyms.includes(option))b.classList.add("correct");if(!a.correct&&selected.includes(option)&&!q.correctSynonyms.includes(option))b.classList.add("wrong");if(option===q.antonym&&!selected.includes(option)){b.classList.add("muted");b.innerHTML+=` <span class="tag">antonym</span>`}if(option===q.antonym&&selected.includes(option))b.innerHTML+=` <span class="tag">antonym, not a synonym</span>`}
+        else if(selected.includes(option))b.classList.add("selected");
+        b.onclick=()=>toggleSynonym(option);$("choices").appendChild(b)});
+    }
+    /* Three-selection evaluation: users may deselect within the 500ms grace period. */
+    function toggleSynonym(option){
+      if(answers[current])return;let selected=window.pendingSynonyms||[];
+      selected=selected.includes(option)?selected.filter(x=>x!==option):selected.length<3?[...selected,option]:selected;
+      window.pendingSynonyms=selected;play("click");renderQuestionNoReset();
+      clearTimeout(synonymTimer);if(selected.length===3)synonymTimer=setTimeout(()=>evaluateSynonyms(selected),500);
+    }
+    function renderQuestionNoReset(){
+      const q=questions[current];$("choices").innerHTML="";renderSynonyms(q,{selected:[...(window.pendingSynonyms||[])],correct:false});
+    }
+    function evaluateSynonyms(selected){
+      if(selected.length!==3||answers[current])return;const q=questions[current],correct=q.correctSynonyms.every(x=>selected.includes(x));answers[current]={selected:[...selected],correct};window.pendingSynonyms=[];play(correct?"good":"bad");renderQuestion();
+    }
+    function showFeedback(q,a){const f=$("feedback");f.className=`feedback show ${a.correct?"good":"bad"}`;f.innerHTML=`<strong>${a.correct?messages.good[Math.floor(Math.random()*4)]:messages.bad[Math.floor(Math.random()*4)]}</strong>${q.explanation}`}
+
+    function updateStats(){const score=getScore(),answered=answers.filter(Boolean).length;$("correctCount").textContent=score;$("wrongCount").textContent=answered-score;$("scoreText").textContent=`${score.toFixed(2)} /20`;$("remainingCount").textContent=20-answered;$("progressFill").style.width=`${answered/20*100}%`}
+    function renderNavigator(){
+      const nav=$("navigator");nav.innerHTML="";for(let g=0;g<5;g++){const group=document.createElement("div");group.className="nav-group";questions.forEach((q,i)=>{if(q.group!==g)return;const b=document.createElement("button");b.type="button";b.className=`q-dot ${answers[i]?"answered":""} ${i===current?"current":""}`;b.textContent=i+1;b.onclick=()=>{current=i;window.pendingSynonyms=[];renderQuestion()};group.appendChild(b)});nav.appendChild(group)}
+    }
+    function navigate(direction){if(!answers[current]&&direction>0)return;if(direction<0&&current>0){current--;window.pendingSynonyms=[];renderQuestion()}else if(direction>0&&current<19){current++;window.pendingSynonyms=[];renderQuestion()}else if(direction>0&&current===19)finishQuiz()}
+    function finalRemark(score){return score<10?"Fail":score<12?"Pass":score<14?"Fairly Good":score<16?"Good":score<18?"Very Good":"Excellent!"}
+    function animateRemark(target){const list=["Fail","Pass","Fairly Good","Good","Very Good","Excellent!"];let n=0;const step=()=>{if(n++<20){$("remark").textContent=list[n%list.length];setTimeout(step,60+n*9)}else $("remark").textContent=target};step()}
+    function finishQuiz(){
+      if(completed)return;completed=true;timer.pause();$("quizView").style.display="none";$("resultScreen").classList.add("show");
+      const score=getScore(),wrong=20-score,accuracy=(score/20*100).toFixed(2),priorAttempts=Number(localStorage.getItem("eduQuizAttempts")||0),best=Math.max(score,Number(localStorage.getItem("eduQuizBest")||0));
+      localStorage.setItem("eduQuizAttempts",priorAttempts+1);localStorage.setItem("eduQuizBest",best);localStorage.setItem("eduQuizLast",score);localStorage.setItem("eduQuizTime",timer.format());
+      $("finalScore").textContent=`${score.toFixed(2)} /20`;$("scoreCircle").style.setProperty("--score",`${score/20*100}%`);
+      $("summaryGrid").innerHTML=[["Final Score",`${score.toFixed(2)} /20`],["Correct Answers",score],["Wrong Answers",wrong],["Accuracy Percentage",`${accuracy}%`],["Time Taken",timer.format()],["Number of Attempts",priorAttempts+1],["Best Score",`${best.toFixed(2)} /20`]].map(x=>`<div class="summary-item">${x[0]}<b>${x[1]}</b></div>`).join("");
+      $("breakdown").innerHTML=`<h3>Performance Summary</h3>${categoryNames.map((name,g)=>`<div class="break-row"><span>${name}</span><b>${questions.filter((q,i)=>q.group===g&&answers[i]?.correct).length}/4</b></div>`).join("")}`;
+      animateRemark(finalRemark(score));play("end");if(score>=16&&quizConfig.showConfetti)confetti();
+    }
+    function confetti(){const box=$("confetti");box.innerHTML="";["#159447","#1267bd","#f5b942","#d83a3a","#7b49be"].forEach((c,k)=>{for(let i=0;i<22;i++){const b=document.createElement("i");b.className="confetti-bit";b.style.background=c;b.style.left=Math.random()*100+"%";b.style.top="-20px";b.style.setProperty("--drift",(Math.random()*180-90)+"px");b.style.animationDelay=(Math.random()*.7)+"s";box.appendChild(b)}});setTimeout(()=>box.innerHTML="",4500)}
+    function renderReview(){
+      $("resultScreen").classList.remove("show");$("reviewScreen").classList.add("show");let html="";
+      for(let g=0;g<5;g++){html+=`<div class="review-group"><h3>${categoryNames[g]} (${questions.filter((q,i)=>q.group===g&&answers[i]?.correct).length}/4)</h3>`;
+        questions.forEach((q,i)=>{if(q.group!==g)return;const a=answers[i],student=q.type==="single-choice"?a.selected:a.selected.join(", "),correct=q.type==="single-choice"?q.correctAnswer:q.correctSynonyms.join(", ");
+          html+=`<article class="review-item ${a.correct?"correct-review":"wrong-review"}"><p><b>Question ${i+1}:</b> ${q.type==="single-choice"?q.task:`Target Word: ${q.targetWord}`}</p><p>Student Answer: <span class="${a.correct?"answer-good":"answer-bad"}">${student}</span></p><p>Correct Answer: <span class="answer-good">${correct}</span></p>${q.type==="three-synonyms"?`<p>Antonym distractor: <span class="answer-bad">${q.antonym}</span></p>`:""}<p><b>Explanation:</b> ${q.explanation}</p></article>`});html+="</div>"}$("reviewContent").innerHTML=html}
+    function saveResults(){const text=`${quizConfig.title} — ${quizConfig.lesson}\nFinal Score: ${getScore().toFixed(2)} /20\nCorrect: ${getScore()} | Wrong: ${20-getScore()}\nTime Taken: ${timer.format()}\n\n${categoryNames.map((n,g)=>`${n}: ${questions.filter((q,i)=>q.group===g&&answers[i]?.correct).length}/4`).join("\n")}`;const blob=new Blob([text],{type:"text/plain"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="education-vocabulary-quiz-results.txt";a.click();URL.revokeObjectURL(url)}
+    function restart(){completed=false;current=0;answers=[];window.pendingSynonyms=[];$("resultScreen").classList.remove("show");$("reviewScreen").classList.remove("show");$("quizView").style.display="grid";makeQuestions();timer.reset();timer.start();renderQuestion()}
+    $("previousBtn").onclick=()=>navigate(-1);$("nextBtn").onclick=()=>navigate(1);$("reviewBtn").onclick=renderReview;$("backResultBtn").onclick=()=>{$("reviewScreen").classList.remove("show");$("resultScreen").classList.add("show")};$("restartBtn").onclick=restart;$("printBtn").onclick=()=>window.print();$("saveBtn").onclick=saveResults;
+    document.addEventListener("keydown",e=>{if(completed)return;const q=questions[current];if(["1","2","3","4"].includes(e.key)){e.preventDefault();const opts=q.type==="single-choice"?q.choices:q.options;const choice=opts[Number(e.key)-1];if(q.type==="single-choice")answerSingle(choice);else toggleSynonym(choice)}if(e.key==="ArrowLeft")navigate(-1);if(e.key==="ArrowRight"||e.key==="Enter"||e.key===" ")navigate(1)});
+    makeQuestions();timer.reset();timer.start();renderQuestion();
+  </script>
+ 
+</body></html>

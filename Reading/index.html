@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English2BAC Quizzes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&amp;family=Poppins:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#1e3a5f;--blue:#2563eb;--pale:#eaf4ff;--green:#16803b;--red:#c93434;--gray:#edf1f5}
+    *{box-sizing:border-box} body{margin:0;font-family:Poppins,sans-serif;color:#16304e;background:#f4f7fb}
+    button{font:inherit} button:focus-visible,.passage-paragraph:focus-visible{outline:3px solid #f5b400;outline-offset:3px}
+    .app{width:100%;min-height:calc(100 * min(var(--vh, 1vh), 1vh));padding-bottom:24px}
+    .quiz-header{background-color:#eaf4ff;padding:14px 22px;display:grid;grid-template-columns:1fr minmax(220px,2fr) 1fr;align-items:center;gap:12px;border-bottom:1px solid #c8ddf2}
+    .header-teacher-img,.header-logo-img{height:64px;width:auto;max-width:none;object-fit:contain}
+    .header-teacher-img{justify-self:start}.header-logo-img{justify-self:end}
+    .header-title{text-align:center;line-height:1.2}.title-line1{font-family:'Poppins',sans-serif;font-size:26px;font-weight:800;color:#1e3a5f}.title-line2{font-family:'Poppins',sans-serif;font-size:18px;font-weight:400;color:#2563eb}.title-line3{font-family:'Poppins',sans-serif;font-size:14px;font-weight:400;color:#64748b}
+    .quiz-shell{width:100%;max-width:1060px;margin:0 auto;padding:18px}
+    .info-bar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:12px 16px;color:#1e3a5f;font-size:13px;font-weight:700;letter-spacing:.04em}.info-bar span:nth-child(2){text-align:center}.info-bar span:last-child{text-align:right}
+    .card{background:#fff;border:1px solid #d7e6f7;border-radius:14px;box-shadow:0 5px 16px rgba(30,58,95,.08)}
+    .passage-toggle{width:100%;padding:14px;background:#fff;border:0;color:#1e3a5f;font-weight:700;font-size:16px;cursor:pointer;border-radius:14px}
+    .passage-content{display:none;border-top:1px solid #d7e6f7;padding:16px 18px;max-height:calc(40 * min(var(--vh, 1vh), 1vh));overflow-y:auto}
+    .passage-content.open{display:block}.passage-title{font-size:18px;font-weight:700;margin:0 0 12px}
+    .passage-paragraph{display:flex;align-items:flex-start;padding:10px;border-radius:10px;transition:.18s;background:transparent;margin:3px 0}.paragraph-text{font-size:16px;line-height:1.6;text-align:justify;flex:1}
+    .paragraph-number{display:inline-block;font-weight:700;color:#fff;background-color:#1e3a5f;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:13px;margin-right:8px;flex-shrink:0}
+    .evidence-active .passage-paragraph{cursor:pointer}.evidence-active .passage-paragraph:hover,.evidence-active .passage-paragraph:focus{background:#dcecff}.evidence-active .passage-paragraph:hover .paragraph-number{background:#2563eb}.paragraph-selected{background:#bfdbfe!important}.paragraph-correct{background:#dcfce7!important}.paragraph-wrong{background:#fee2e2!important}.paragraph-correct .paragraph-number{background:var(--green)!important}.paragraph-wrong .paragraph-number{background:var(--red)!important}
+    .question-card{margin-top:16px;padding:18px}.instruction{background:#1e3a5f;color:#fff;border-radius:10px;padding:15px 18px;font-size:16px;font-weight:800;letter-spacing:.025em}.task{font-size:18px;line-height:1.55;margin:22px 2px;color:#16304e;font-weight:600}.choices{display:grid;gap:10px}.choice{border:2px solid #d9e2ec;background:#fff;color:#17314f;padding:13px 15px;border-radius:10px;text-align:left;cursor:pointer;transition:.18s;font-size:15px}.choice:hover:not(:disabled){border-color:#2563eb;background:#f1f7ff}.choice:disabled{cursor:default}.choice.correct{border-color:var(--green);background:#dcfce7;color:#14532d}.choice.wrong{border-color:var(--red);background:#fee2e2;color:#7f1d1d}
+    .check-btn,.nav-btn,.result-btn{border:0;border-radius:10px;padding:12px 18px;font-weight:700;cursor:pointer;box-shadow:0 3px 9px rgba(30,58,95,.13)}.check-btn{margin-top:16px;background:#2563eb;color:#fff}.check-btn:disabled{background:#b7c2d0;cursor:not-allowed}.feedback{margin-top:16px;padding:13px 15px;border-radius:10px;font-weight:600}.feedback.good{color:#14532d;background:#dcfce7}.feedback.bad{color:#7f1d1d;background:#fee2e2}.explanation{margin-top:10px;font-size:14px;line-height:1.55;color:#40536a}
+    .navigation{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;margin-top:16px}.nav-btn{background:#1e3a5f;color:#fff}.nav-btn:last-child{justify-self:end}.nav-btn:disabled{background:#aebac7;cursor:not-allowed}.counter{font-weight:700;color:#1e3a5f}.stats{margin-top:12px;padding:13px 16px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;color:#264362;font-size:14px;font-weight:600}.hidden{display:none!important}
+    .results{padding:22px}.result-head{text-align:center;color:#1e3a5f}.score-badge{margin:20px auto;width:158px;height:158px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#1e3a5f;border:9px solid #b9d8ff;color:#fff;font-size:31px;font-weight:800}.remark{font-size:28px;font-weight:800;color:#2563eb;min-height:42px}.reading-score{font-size:18px;font-weight:700;margin:16px 0 5px}.summary{margin-top:22px;padding:18px;background:#f7fbff;border-radius:12px;line-height:1.9}.summary h2{font-size:20px;margin:0 0 8px}.breakdown{margin:10px 0;padding-left:20px}.actions{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:20px}.result-btn{background:#1e3a5f;color:#fff}.result-btn.alt{background:#2563eb}.review{padding:20px}.review h2{color:#1e3a5f}.review-task{margin:20px 0}.review-item{border-left:5px solid #b8c8d8;background:#fff;padding:14px;margin-top:10px;border-radius:0 10px 10px 0;box-shadow:0 3px 9px rgba(30,58,95,.06)}.review-item.good{border-left-color:var(--green)}.review-item.bad{border-left-color:var(--red)}.review-item p{margin:6px 0;line-height:1.5}.review-passage{margin-top:12px}
+    #confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden}.confetti{position:absolute;width:10px;height:16px;animation:fall 2.8s linear forwards}@keyframes fall{to{transform:translateY(calc(100 * min(var(--vh, 1vh), 1vh))) rotate(720deg);opacity:0}}
+    @media(min-width:600px){.header-teacher-img,.header-logo-img{height:80px}} @media(min-width:1024px){.header-teacher-img,.header-logo-img{height:96px}}
+    @media(max-width:640px){.header-teacher-img,.header-logo-img{height:45px}.quiz-header{padding:8px 12px;grid-template-columns:auto 1fr auto}.title-line1{font-size:17px}.title-line2{font-size:12px}.title-line3{font-size:10px}.quiz-shell{padding:12px}.info-bar{padding:10px 2px;font-size:10px}.paragraph-text{text-align:left}.passage-content{max-height:calc(50 * min(var(--vh, 1vh), 1vh));padding:12px}.question-card{padding:13px}.instruction{font-size:13px}.task{font-size:16px}.stats{justify-content:flex-start;gap:8px 14px;font-size:12px}.navigation{gap:7px}.nav-btn{padding:11px 10px;font-size:13px}.score-badge{width:130px;height:130px;font-size:27px}}
+    @media print{.quiz-header{padding:8px}.actions,.navigation,.stats,.passage-card,.review-toggle{display:none!important}.app{background:#fff}.results{box-shadow:none}.card{border:0;box-shadow:none}}
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  
+  
+ <script>(function(){var ok=true;try{window.localStorage.getItem("__t")}catch(e){ok=false}
+if(!ok){var m={};try{Object.defineProperty(window,"localStorage",{configurable:true,value:{
+getItem:function(k){return Object.prototype.hasOwnProperty.call(m,k)?m[k]:null},
+setItem:function(k,v){m[k]=String(v)},removeItem:function(k){delete m[k]},clear:function(){m={}}}})}catch(e2){}}})();</script></head>
+ <body>
+  <div class="app">
+   <header class="quiz-header">
+    <img class="header-teacher-img" loading="lazy" src="teacher.png" alt="Teacher Soufiane">
+    <div class="header-title">
+     <div class="title-line1">
+      English2BAC Quizzes
+     </div>
+     <div class="title-line2">
+      Learn • Practice • Succeed
+     </div>
+     <div class="title-line3">
+      with Teacher.Soufiane
+     </div>
+    </div><img class="header-logo-img" loading="lazy" src="logo.png" alt="Level-UP 2BAC">
+   </header>
+   <main class="quiz-shell">
+    <section class="info-bar" aria-label="Quiz information">
+     <span>UNIT: 3</span><span>EDUCATION</span><span>READING COMPREHENSION</span>
+    </section>
+    <section id="passageCard" class="card passage-card" aria-label="Reading passage">
+     <button id="passageToggle" class="passage-toggle" type="button" aria-expanded="false">📖 Read the Passage</button>
+     <div id="passageContent" class="passage-content">
+      <div id="passageText">
+       <div class="passage-paragraph" data-paragraph-id="p1" tabindex="-1"><span class="paragraph-number">1</span><span class="paragraph-text">Literacy is often described as the light that helps individuals and societies find their way toward progress. Being able to read, write, and understand information opens doors to better jobs, informed decision-making, and active citizenship. However, literacy is not only acquired inside classrooms; it can be gained through three different paths: formal, non-formal, and informal education. Understanding the differences between these three approaches shows just how many opportunities exist for people to become literate at any stage of their lives.</span>
+       </div>
+       <div class="passage-paragraph" data-paragraph-id="p2" tabindex="-1"><span class="paragraph-number">2</span><span class="paragraph-text">Formal education is the most structured of the three. It usually takes place in schools, colleges, and universities, following a fixed curriculum, timetable, and set of examinations. Students who complete formal education receive official certificates or diplomas that are recognized by employers and institutions. Because it is carefully planned and monitored by the government or educational authorities, formal education tends to build strong, systematic literacy skills over many years.</span>
+       </div>
+       <div class="passage-paragraph" data-paragraph-id="p3" tabindex="-1"><span class="paragraph-number">3</span><span class="paragraph-text">Non-formal education, on the other hand, is organized but takes place outside the traditional school system. It includes adult literacy programs, vocational training courses, and community workshops designed for people who missed the chance to attend formal school. These programs are usually more flexible, with shorter schedules and practical goals, such as teaching a farmer to read agricultural instructions or helping a mother learn to write a simple letter. Non-formal education plays a crucial role in reducing illiteracy among adults and out-of-school youth.</span>
+       </div>
+       <div class="passage-paragraph" data-paragraph-id="p4" tabindex="-1"><span class="paragraph-number">4</span><span class="paragraph-text">Informal education is the least structured type, yet it may be the most constant throughout a person's life. It happens naturally through daily experiences: conversations with family members, observing others, watching television, or exploring the internet. Unlike formal and non-formal education, informal learning has no fixed curriculum, no classroom, and no certificate at the end. Nevertheless, it plays an essential role in shaping vocabulary, general knowledge, and communication skills from early childhood onward.</span>
+       </div>
+       <div class="passage-paragraph" data-paragraph-id="p5" tabindex="-1"><span class="paragraph-number">5</span><span class="paragraph-text">Rather than competing with one another, these three types of education actually complement each other. A child may begin developing early language skills informally at home, continue building literacy formally at school, and later strengthen practical skills through non-formal training as an adult. Together, they ensure that literacy remains accessible to everyone, regardless of age or circumstance. In this way, literacy truly lights the way — not through a single path, but through many roads that all lead toward the same destination: a more informed and capable society.</span>
+       </div>
+      </div>
+     </div>
+    </section>
+    <section id="quizScreen" class="card question-card">
+     <div id="instruction" class="instruction"></div>
+     <div id="taskArea" class="task"></div>
+     <div id="answerArea"></div>
+    </section>
+    <nav id="navigation" class="navigation" aria-label="Question navigation">
+     <button id="previousButton" class="nav-btn" type="button">◀ Previous</button> <span id="counter" class="counter" aria-live="polite">1 / 15</span> <button id="nextButton" class="nav-btn" type="button">Next ▶</button>
+    </nav>
+    <section id="stats" class="card stats" aria-live="polite">
+     <span>✅ Correct: <b id="correctCount">0</b></span> <span>❌ Wrong: <b id="wrongCount">0</b></span> <span>Remaining: <b id="remainingCount">15</b></span> <span>Score: <b id="scoreCount">0 /15</b></span> <span>Timer <b id="timerDisplay">00:00</b></span>
+    </section>
+    <section id="resultScreen" class="card results hidden"></section>
+    <section id="reviewScreen" class="card review hidden"></section>
+   </main>
+  </div>
+  <div id="confetti"></div>
+  <script>
+    const quizConfig = {
+      totalPoints:15, randomizeChoices:true,
+      questions:[
+        ["single-choice","Best Title","CHOOSE THE BEST TITLE FOR THE PASSAGE.","Which title best represents the main idea of the passage?",["Literacy Lights The Way","The History of Universities","How to Become a Teacher","The Benefits of Television"],"Literacy Lights The Way","The whole passage discusses how formal, non-formal, and informal education all help people become literate, which matches this title."],
+        ["single-choice","True / False / Not Given","DECIDE IF THE STATEMENT IS TRUE, FALSE, OR NOT GIVEN.","Formal education leads to official certificates or diplomas.",["True","False","Not Given"],"True","Paragraph 2 states that students who complete formal education receive official certificates or diplomas recognized by employers and institutions."],
+        ["single-choice","True / False / Not Given","DECIDE IF THE STATEMENT IS TRUE, FALSE, OR NOT GIVEN.","The passage gives the exact number of people enrolled in non-formal education programs worldwide.",["True","False","Not Given"],"Not Given","The passage describes non-formal education but never gives a specific number or statistic of enrolled people."],
+        ["single-choice","Multiple Choice","CHOOSE THE BEST ANSWER ACCORDING TO THE TEXT.","According to the passage, what is one feature of non-formal education?",["It always takes place in a university","It is organized but takes place outside the traditional school system","It never has any goals","It replaces formal education completely"],"It is organized but takes place outside the traditional school system","Paragraph 3 states that non-formal education is organized but takes place outside the traditional school system."],
+        ["single-choice","Multiple Choice","CHOOSE THE BEST ANSWER ACCORDING TO THE TEXT.","According to the passage, how does informal education mainly happen?",["Through official exams","Through daily experiences such as conversations, observation, and media","Through government certificates","Through fixed classroom lessons"],"Through daily experiences such as conversations, observation, and media","Paragraph 4 states that informal education happens naturally through daily experiences such as conversations, observation, television, or the internet."],
+        ["evidence-click","Find the Evidence","CLICK THE PARAGRAPH THAT SUPPORTS THIS ANSWER.","People who complete formal education receive official documents recognized by employers.","p2","Paragraph 2 states that students who complete formal education receive official certificates or diplomas recognized by employers and institutions."],
+        ["evidence-click","Find the Evidence","CLICK THE PARAGRAPH THAT SUPPORTS THIS ANSWER.","Non-formal education can help an out-of-school adult learn practical skills, like reading farming instructions.","p3","Paragraph 3 gives the example of teaching a farmer to read agricultural instructions as a practical non-formal education goal."],
+        ["single-choice","Vocabulary in Context","CHOOSE THE MEANING THAT FITS THE WORD AS USED IN THE PASSAGE.","Read this sentence from paragraph 2: 'Because it is carefully planned and monitored by the government or educational authorities...' What does 'monitored' mean here?",["ignored","supervised or checked","forgotten","paid for"],"supervised or checked","Here, 'monitored' means supervised or checked regularly by authorities."],
+        ["single-choice","Vocabulary in Context","CHOOSE THE MEANING THAT FITS THE WORD AS USED IN THE PASSAGE.","Read this sentence from paragraph 4: 'Informal education is the least structured type, yet it may be the most constant throughout a person's life.' What does 'constant' mean here?",["occasional","continuous or ongoing","expensive","difficult"],"continuous or ongoing","Here, 'constant' means continuous or ongoing throughout a person's life."],
+        ["single-choice","Reference Words","WHAT DOES THE UNDERLINED WORD REFER TO?","Read this sentence from paragraph 3: 'These programs are usually more flexible, with shorter schedules and practical goals...' What does 'These programs' refer to?",["formal schools and universities","non-formal education programs like adult literacy classes and workshops","informal daily experiences","government exams"],"non-formal education programs like adult literacy classes and workshops","'These programs' refers to the adult literacy programs, vocational training courses, and community workshops named earlier."],
+        ["single-choice","Reference Words","WHAT DOES THE UNDERLINED WORD REFER TO?","Read this sentence from paragraph 5: 'Together, they ensure that literacy remains accessible to everyone...' What does 'they' refer to?",["teachers and students","the three types of education (formal, non-formal, and informal)","certificates and diplomas","families and children"],"the three types of education (formal, non-formal, and informal)","'They' refers to the three types of education mentioned at the beginning of paragraph 5."],
+        ["single-choice","Inference","CHOOSE THE MOST LOGICAL CONCLUSION BASED ON THE TEXT.","Based on the passage, what can we infer about a person who never attended formal school but joined an adult literacy program?",["They cannot become literate at all","They can still gain literacy skills through non-formal education","They must go back to primary school","They are not allowed to learn to read"],"They can still gain literacy skills through non-formal education","Non-formal education includes adult literacy programs designed for people who missed formal school."],
+        ["single-choice","Inference","CHOOSE THE MOST LOGICAL CONCLUSION BASED ON THE TEXT.","What can be inferred about the overall message of the passage?",["Only formal education truly matters","The three types of education work best when combined, not in competition","Informal education is more important than the other two","Literacy is impossible without a university degree"],"The three types of education work best when combined, not in competition","Paragraph 5 says the three types complement each other and together make literacy accessible."],
+        ["single-choice","Cause & Effect","CHOOSE THE EFFECT THAT MATCHES THE CAUSE.","Cause: A person cannot regularly attend a traditional school. Effect (according to the passage)?",["They can never learn to read or write","They can still gain literacy skills through non-formal education programs","They automatically become a teacher","They lose the right to informal learning"],"They can still gain literacy skills through non-formal education programs","Paragraph 3 explains that non-formal education offers another path to literacy for people who missed formal school."],
+        ["single-choice","Cause & Effect","CHOOSE THE EFFECT THAT MATCHES THE CAUSE.","Cause: A child regularly has conversations with family members and observes people around them. Effect?",["Their vocabulary and communication skills gradually develop through informal learning","They immediately receive a diploma","They stop learning at school","They forget how to speak"],"Their vocabulary and communication skills gradually develop through informal learning","Paragraph 4 says informal daily experiences shape vocabulary and communication skills from early childhood onward."]
+      ].map((q,i)=>({type:q[0],category:q[1],question:q[2],task:q[3],choices:q[0]==="single-choice"?q[4]:null,correctAnswer:q[0]==="single-choice"?q[5]:null,correctParagraphId:q[0]==="evidence-click"?q[4]:null,explanation:q[0]==="single-choice"?q[6]:q[5],points:1,id:i}))
+    };
+
+    let currentIndex=0, answers=[], selectedParagraph=null;
+    const $=id=>document.getElementById(id);
+
+    /* Timer module remains independent of question rendering. */
+    const timer=(()=>{let seconds=0,interval=null;const format=s=>String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");const paint=()=>$("timerDisplay").textContent=format(seconds);return{start(){if(!interval)interval=setInterval(()=>{seconds++;paint()},1000)},pause(){clearInterval(interval);interval=null},reset(){this.pause();seconds=0;paint()},value(){return seconds},format}})();
+
+    function sound(type){
+      try{const audio=new (window.AudioContext||window.webkitAudioContext)(),o=audio.createOscillator(),g=audio.createGain();o.frequency.value=type==="good"?620:type==="complete"?760:type==="click"?420:180;g.gain.setValueAtTime(.06,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+.18);o.connect(g);g.connect(audio.destination);o.start();o.stop(audio.currentTime+.18)}catch(e){}
+    }
+
+    /* Passage module controls visibility and temporary evidence-selection styling. */
+    const passagePanel=(()=>{
+      const content=$("passageContent"),toggle=$("passageToggle"),paras=[...document.querySelectorAll(".passage-paragraph")];
+      function open(){content.classList.add("open");toggle.textContent="📖 Hide the Passage";toggle.setAttribute("aria-expanded","true")}
+      function close(){content.classList.remove("open");toggle.textContent="📖 Read the Passage";toggle.setAttribute("aria-expanded","false")}
+      function clear(){selectedParagraph=null;$("passageText").classList.remove("evidence-active");paras.forEach(p=>{p.classList.remove("paragraph-selected","paragraph-correct","paragraph-wrong");p.tabIndex=-1;p.onclick=null})}
+      function evidence(onSelect){clear();open();$("passageText").classList.add("evidence-active");paras.forEach(p=>{p.tabIndex=0;const select=()=>{selectedParagraph=p.dataset.paragraphId;paras.forEach(x=>x.classList.remove("paragraph-selected"));p.classList.add("paragraph-selected");sound("click");onSelect()};p.onclick=select;p.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();select()}}});setTimeout(()=>$("passageCard").scrollIntoView({behavior:"smooth",block:"start"}),50)}
+      toggle.onclick=()=>content.classList.contains("open")?close():open();
+      return{open,close,clear,evidence,paras};
+    })();
+
+    function shuffled(a){return quizConfig.randomizeChoices?[...a].sort(()=>Math.random()-.5):a}
+    function updateStats(){const done=answers.filter(Boolean),correct=done.filter(a=>a.correct).length;$("correctCount").textContent=correct;$("wrongCount").textContent=done.length-correct;$("remainingCount").textContent=15-done.length;$("scoreCount").textContent=correct+" /15"}
+    function feedback(correct,explanation){return `<div class="feedback ${correct?"good":"bad"}">${correct?["Excellent!","Great Job!","Perfect!","Keep Going!"][Math.floor(Math.random()*4)]:["Almost!","Review the passage.","Keep learning!","You'll get the next one!"][Math.floor(Math.random()*4)]}</div><div class="explanation"><b>Explanation:</b> ${explanation}</div>`}
+
+    function renderSingle(question,answer){
+      $("taskArea").textContent=question.task;const area=$("answerArea");area.innerHTML='<div class="choices"></div><div id="response"></div>';const choices=answer?answer.order:shuffled(question.choices);if(!answer)answer={order:choices,locked:false};answers[currentIndex]=answer;
+      choices.forEach(choice=>{const b=document.createElement("button");b.className="choice";b.type="button";b.textContent=choice;b.disabled=answer.locked;if(answer.locked){if(choice===question.correctAnswer)b.classList.add("correct");if(choice===answer.value&&!answer.correct)b.classList.add("wrong")}b.onclick=()=>{if(answer.locked)return;answer.value=choice;answer.correct=choice===question.correctAnswer;answer.locked=true;sound(answer.correct?"good":"wrong");renderQuestion()};area.querySelector(".choices").appendChild(b)});
+      if(answer.locked)$("response").innerHTML=feedback(answer.correct,question.explanation);
+    }
+
+    /* Find the Evidence selection and evaluation stays separate from Type A logic. */
+    function renderEvidence(question,answer){
+      $("taskArea").textContent=question.task;const area=$("answerArea");area.innerHTML='<div id="evidenceResponse"></div><button id="checkEvidence" class="check-btn" type="button" disabled>Check Evidence</button>';
+      const check=$("checkEvidence");
+      if(answer&&answer.locked){passagePanel.clear();passagePanel.open();passagePanel.paras.forEach(p=>{if(p.dataset.paragraphId===question.correctParagraphId)p.classList.add("paragraph-correct");if(p.dataset.paragraphId===answer.value&&!answer.correct)p.classList.add("paragraph-wrong")});check.classList.add("hidden");$("evidenceResponse").innerHTML=feedback(answer.correct,question.explanation)}
+      else{passagePanel.evidence(()=>check.disabled=!selectedParagraph);check.onclick=()=>{if(!selectedParagraph)return;const result={value:selectedParagraph,correct:selectedParagraph===question.correctParagraphId,locked:true};answers[currentIndex]=result;sound(result.correct?"good":"wrong");renderQuestion()}}
+    }
+
+    function renderQuestion(){
+      const q=quizConfig.questions[currentIndex];passagePanel.clear();$("instruction").textContent=q.question;$("counter").textContent=(currentIndex+1)+" / 15";$("previousButton").disabled=currentIndex===0;
+      const existing=answers[currentIndex];if(q.type==="single-choice")renderSingle(q,existing);else renderEvidence(q,existing);
+      $("nextButton").disabled=!answers[currentIndex]?.locked;$("nextButton").textContent=currentIndex===14&&answers[currentIndex]?.locked?"View Results ▶":"Next ▶";updateStats()
+    }
+    function move(direction){if(direction<0&&currentIndex>0){currentIndex--;renderQuestion()}else if(direction>0&&answers[currentIndex]?.locked){if(currentIndex===14)showResults();else{currentIndex++;renderQuestion()}}}
+    $("previousButton").onclick=()=>move(-1);$("nextButton").onclick=()=>move(1);
+
+    document.addEventListener("keydown",e=>{if($("quizScreen").classList.contains("hidden"))return;const q=quizConfig.questions[currentIndex];if(q.type==="single-choice"&&!answers[currentIndex]?.locked&&/^[1-4]$/.test(e.key)){document.querySelectorAll(".choice")[Number(e.key)-1]?.click()}if(e.key==="ArrowLeft")move(-1);if(e.key==="ArrowRight"||e.key==="Enter"||e.key===" "){if(document.activeElement.tagName!=="BUTTON")move(1)}});
+
+    function taskBreakdown(){const groups={};quizConfig.questions.forEach((q,i)=>{if(!groups[q.category])groups[q.category]=[0,0];groups[q.category][1]++;if(answers[i]?.correct)groups[q.category][0]++});return Object.entries(groups).map(([k,v])=>`<li>${k}: ${v[0]}/${v[1]}</li>`).join("")}
+    function remark(score){return score<=7?"Fail":score<=9?"Pass":score<=11?"Fairly Good":score===12?"Good":score===13?"Very Good":"Excellent!"}
+    function encouragement(r){return({"Fail":"Keep practicing —","Pass":"Nice effort —","Fairly Good":"Good progress —","Good":"Well done —","Very Good":"Great work —","Excellent!":"Excellent work!"})[r]}
+    function showResults(){
+      timer.pause();passagePanel.clear();passagePanel.close();$("quizScreen").classList.add("hidden");$("navigation").classList.add("hidden");$("stats").classList.add("hidden");
+      const score=answers.filter(a=>a?.correct).length,r=remark(score),wrong=15-score,accuracy=Math.round(score/15*100),attempts=(Number(localStorage.getItem("educationAttempts"))||0)+1,best=Math.max(Number(localStorage.getItem("educationBestScore"))||0,score);
+      localStorage.setItem("educationAttempts",attempts);localStorage.setItem("educationBestScore",best);localStorage.setItem("educationLastScore",score);localStorage.setItem("educationTimeTaken",timer.format(timer.value()));
+      $("resultScreen").classList.remove("hidden");$("resultScreen").innerHTML=`<div class="result-head"><b>QUIZ / UNIT 3 / EDUCATION / READING COMPREHENSION</b><div class="score-badge">${score} /15</div><div id="remark" class="remark">...</div><div class="reading-score">Reading Score: ${score}/15</div><div>${r==="Excellent!"?"Excellent work! You correctly answered "+score+" out of 15 questions.":encouragement(r)+", You correctly answered "+score+" out of 15 questions."}</div></div><div class="summary"><h2>Performance Summary</h2><div>Final Score: ${score}/15</div><div>Correct Answers: ${score}</div><div>Wrong Answers: ${wrong}</div><div>Accuracy Percentage: ${accuracy}%</div><div>Time Taken: ${timer.format(timer.value())}</div><div>Number of Attempts: ${attempts}</div><div>Best Score: ${best}/15</div><div>Total Time Taken: ${timer.format(timer.value())}</div><ul class="breakdown">${taskBreakdown()}</ul></div><div class="actions"><button class="result-btn alt" id="reviewButton" type="button">Review My Answers</button><button class="result-btn" id="printButton" type="button">Print Results</button><button class="result-btn" id="saveButton" type="button">Save Results</button><button class="result-btn alt" id="restartButton" type="button">Restart Quiz</button></div>`;
+      animateRemark(r);sound("complete");if(score>=14)confetti();$("reviewButton").onclick=showReview;$("printButton").onclick=()=>window.print();$("saveButton").onclick=saveReport;$("restartButton").onclick=restartQuiz
+    }
+    function animateRemark(final){const list=["Fail","Pass","Fairly Good","Good","Very Good","Excellent!"];let i=0,delay=90,elapsed=0;const el=$("remark");function tick(){el.textContent=list[i++%list.length];elapsed+=delay;if(elapsed<3000){delay=Math.min(delay+24,450);setTimeout(tick,delay)}else el.textContent=final}tick()}
+    function confetti(){const box=$("confetti");for(let i=0;i<80;i++){const d=document.createElement("i");d.className="confetti";d.style.left=Math.random()*100+"%";d.style.top=(-10-Math.random()*30)+"px";d.style.background=["#2563eb","#16a34a","#f5b400","#ef4444"][i%4];d.style.animationDelay=Math.random()*.9+"s";box.appendChild(d);setTimeout(()=>d.remove(),4000)}}
+    function saveReport(){const score=answers.filter(a=>a?.correct).length;const text=`English2BAC Quizzes\nUNIT 3 / EDUCATION / READING COMPREHENSION\nReading Score: ${score}/15\nTime Taken: ${timer.format(timer.value())}\n\n${Object.entries(quizConfig.questions.reduce((a,q,i)=>{if(!a[q.category])a[q.category]=[0,0];a[q.category][1]++;if(answers[i]?.correct)a[q.category][0]++;return a},{})).map(x=>x[0]+": "+x[1][0]+"/"+x[1][1]).join("\n")}`;const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([text],{type:"text/plain"}));a.download="education-quiz-results.txt";a.click();URL.revokeObjectURL(a.href)}
+    function showReview(){
+      $("resultScreen").classList.add("hidden");const review=$("reviewScreen");review.classList.remove("hidden");let html=`<h2>Review My Answers</h2><button id="reviewPassageToggle" class="check-btn review-toggle" type="button">📖 Show Passage</button><div id="reviewPassage" class="review-passage hidden"></div>`;let last="";
+      quizConfig.questions.forEach((q,i)=>{if(q.category!==last){if(last)html+="</div>";html+=`<div class="review-task"><h3>${q.category}</h3>`;last=q.category}const a=answers[i],good=a.correct;html+=`<article class="review-item ${good?"good":"bad"}"><b>Question ${i+1}</b><p>${q.type==="evidence-click"?"Claim: "+q.task:q.task}</p>${q.type==="evidence-click"?`<p>Student's Selected Paragraph: ${a.value.replace("p","")}</p><p>Correct Paragraph: ${q.correctParagraphId.replace("p","")}</p>`:`<p>Student Answer: <b>${a.value}</b></p><p>Correct Answer: <b>${q.correctAnswer}</b></p>`}<p>Explanation: ${q.explanation}</p></article>`});html+="</div><div class='actions'><button id='backResults' class='result-btn' type='button'>Back to Results</button><button id='restartReview' class='result-btn alt' type='button'>Restart Quiz</button></div>";review.innerHTML=html;
+      $("reviewPassage").innerHTML=$("passageText").innerHTML;quizConfig.questions.forEach((q,i)=>{if(q.type==="evidence-click"){const a=answers[i];const root=$("reviewPassage");root.querySelector(`[data-paragraph-id="${q.correctParagraphId}"]`).classList.add("paragraph-correct");if(!a.correct)root.querySelector(`[data-paragraph-id="${a.value}"]`).classList.add("paragraph-wrong")}});$("reviewPassageToggle").onclick=()=>{$("reviewPassage").classList.toggle("hidden");$("reviewPassageToggle").textContent=$("reviewPassage").classList.contains("hidden")?"📖 Show Passage":"📖 Hide Passage"};$("backResults").onclick=()=>{review.classList.add("hidden");$("resultScreen").classList.remove("hidden")};$("restartReview").onclick=restartQuiz
+    }
+    function restartQuiz(){answers=[];currentIndex=0;selectedParagraph=null;timer.reset();passagePanel.clear();passagePanel.close();$("resultScreen").classList.add("hidden");$("reviewScreen").classList.add("hidden");$("quizScreen").classList.remove("hidden");$("navigation").classList.remove("hidden");$("stats").classList.remove("hidden");timer.start();renderQuestion()}
+    timer.start();renderQuestion();
+  </script>
+  
+ 
+</body></html>

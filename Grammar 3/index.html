@@ -1,0 +1,1050 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Past Perfect Continuous Grammar Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&amp;family=Poppins:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #1e3a5f;
+      --action: #2563eb;
+      --pale-blue: #eaf4ff;
+      --green: #15803d;
+      --green-bg: #dcfce7;
+      --red: #dc2626;
+      --red-bg: #fee2e2;
+      --gray: #64748b;
+      --line: #dbe5f0;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: calc(100 * min(var(--vh, 1vh), 1vh));
+      background: #f1f5f9;
+      font-family: "Poppins", "Cairo", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    button:focus-visible {
+      outline: 3px solid #fbbf24;
+      outline-offset: 3px;
+    }
+
+    .quiz-container {
+      width: 100%;
+      max-width: 100%;
+      min-height: calc(100 * min(var(--vh, 1vh), 1vh));
+      box-sizing: border-box;
+      padding: 18px;
+    }
+
+    .quiz-card {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      box-sizing: border-box;
+      overflow: hidden;
+      background: #ffffff;
+      border-radius: 22px;
+      box-shadow: 0 18px 45px rgba(30, 58, 95, 0.13);
+    }
+
+    .quiz-header {
+      background-color: #eaf4ff;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 18px;
+      padding: 14px 24px;
+      border-bottom: 1px solid #cfe2f7;
+    }
+
+    .header-teacher-img,
+    .header-logo-img {
+      height: 64px;
+      width: auto;
+      max-width: none;
+      object-fit: contain;
+      display: block;
+    }
+
+    .header-title {
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .title-line1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: #1e3a5f;
+    }
+
+    .title-line2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: #2563eb;
+    }
+
+    .title-line3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #64748b;
+    }
+
+    .info-bar {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr 1fr;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 24px;
+      color: #1e3a5f;
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .info-center { text-align: center; }
+    .info-right { text-align: right; }
+
+    .quiz-main { padding: 26px; }
+
+    .instruction-box {
+      background: #1e3a5f;
+      color: #ffffff;
+      border-radius: 14px;
+      padding: 16px 20px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .task-panel {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+      color: #0f2743;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.55;
+      min-height: 104px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hint-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin: 16px 0;
+    }
+
+    .hint-button, .nav-button, .result-button {
+      border: 0;
+      border-radius: 11px;
+      padding: 11px 16px;
+      font-weight: 700;
+      transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+    }
+
+    .hint-button:hover, .nav-button:hover, .result-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(30,58,95,.16);
+    }
+
+    .hint-button {
+      color: #1e3a5f;
+      background: #eaf4ff;
+      border: 1px solid #bfdbfe;
+      white-space: nowrap;
+    }
+
+    .hint-text {
+      display: none;
+      color: #475569;
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      border-radius: 8px;
+      padding: 10px 12px;
+      line-height: 1.45;
+      flex: 1;
+    }
+
+    .hint-text.visible { display: block; }
+
+    .choices-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 16px 0 18px;
+    }
+
+    .choice-tile {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      min-height: 78px;
+      text-align: left;
+      padding: 16px;
+      border: 2px solid #d7e1eb;
+      border-radius: 14px;
+      color: #1e3a5f;
+      background: #ffffff;
+      font-weight: 600;
+      line-height: 1.4;
+      transition: border-color .18s ease, background .18s ease, transform .18s ease;
+    }
+
+    .choice-tile:hover:not(:disabled) {
+      transform: translateY(-2px);
+      border-color: #2563eb;
+      background: #f8fbff;
+    }
+
+    .choice-tile:disabled { cursor: default; }
+    .choice-tile.correct { background: var(--green-bg); border-color: var(--green); color: #14532d; }
+    .choice-tile.incorrect { background: var(--red-bg); border-color: var(--red); color: #7f1d1d; }
+
+    .choice-letter {
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #eaf4ff;
+      color: #1e3a5f;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .feedback-area {
+      display: none;
+      border-radius: 14px;
+      padding: 15px 18px;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .feedback-area.visible { display: block; }
+    .feedback-area.correct-feedback { background: #ecfdf5; border: 1px solid #86efac; color: #14532d; }
+    .feedback-area.wrong-feedback { background: #fff7ed; border: 1px solid #fdba74; color: #9a3412; }
+
+    .feedback-title {
+      display: block;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .navigation-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 16px;
+      padding-top: 6px;
+    }
+
+    .nav-button {
+      background: #2563eb;
+      color: #ffffff;
+      min-width: 128px;
+    }
+
+    .nav-button.previous { justify-self: start; background: #475569; }
+    .nav-button.next { justify-self: end; }
+    .nav-button:disabled { opacity: .45; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    .counter {
+      color: #1e3a5f;
+      font-weight: 800;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .stats-row {
+      margin-top: 17px;
+      padding: 13px 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 19px;
+      flex-wrap: nowrap;
+      background: #f8fafc;
+      color: #334155;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .stats-row span { white-space: nowrap; }
+    .timer-stat { color: #1e3a5f; }
+
+    .result-view, .review-view { display: none; padding: 28px; }
+    .result-view.active, .review-view.active { display: block; }
+    .quiz-view.hidden { display: none; }
+
+    .result-heading { color: #1e3a5f; text-align: center; margin: 0; font-size: 28px; font-weight: 800; }
+    .result-meta { text-align: center; color: #64748b; font-weight: 600; margin: 8px 0 24px; }
+
+    .result-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+      gap: 30px;
+      align-items: center;
+    }
+
+    .score-badge {
+      width: min(250px, 100%);
+      aspect-ratio: 1;
+      margin: 0 auto;
+      display: grid;
+      place-content: center;
+      text-align: center;
+      border: 11px solid #2563eb;
+      border-radius: 50%;
+      color: #1e3a5f;
+      background: #eaf4ff;
+    }
+
+    .score-badge strong { font-size: 42px; line-height: 1; }
+    .score-badge span { font-weight: 700; margin-top: 8px; }
+
+    .remark-panel {
+      text-align: center;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #f8fafc;
+    }
+
+    .remark-label { color: #64748b; font-size: 13px; font-weight: 800; letter-spacing: .08em; }
+    .animated-remark { color: #1e3a5f; font-size: 31px; font-weight: 800; min-height: 48px; margin: 8px 0; }
+    .remark-description { color: #475569; margin: 0; line-height: 1.55; }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 28px 0 20px;
+    }
+
+    .summary-item {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 14px;
+    }
+
+    .summary-item span { display: block; color: #64748b; font-size: 12px; font-weight: 700; }
+    .summary-item strong { display: block; margin-top: 5px; color: #1e3a5f; font-size: 18px; }
+
+    .level-breakdown {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 19px;
+    }
+
+    .level-breakdown h2 { margin: 0 0 10px; color: #1e3a5f; font-size: 19px; }
+    .level-row { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid #e2e8f0; color: #334155; }
+    .level-row:last-child { border-bottom: 0; }
+    .level-row strong { color: #1e3a5f; white-space: nowrap; }
+
+    .result-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 11px;
+      margin-top: 24px;
+    }
+
+    .result-button { background: #2563eb; color: #fff; }
+    .result-button.secondary { background: #eaf4ff; color: #1e3a5f; border: 1px solid #bfdbfe; }
+    .result-button.green { background: #15803d; }
+
+    .review-header { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 20px; }
+    .review-header h1 { color: #1e3a5f; margin: 0; font-size: 28px; font-weight: 800; }
+    .review-level { margin: 25px 0 13px; padding-bottom: 8px; border-bottom: 2px solid #bfdbfe; color: #1e3a5f; font-size: 21px; }
+    .review-item { background: #fff; border: 1px solid var(--line); border-left: 6px solid #94a3b8; border-radius: 13px; padding: 18px; margin-bottom: 13px; }
+    .review-item.correct-review { border-left-color: #15803d; }
+    .review-item.wrong-review { border-left-color: #dc2626; }
+    .review-task { color: #1e3a5f; font-weight: 700; line-height: 1.5; margin-bottom: 12px; }
+    .review-answer { margin: 6px 0; line-height: 1.45; }
+    .review-answer strong { color: #334155; }
+    .review-correct { color: #15803d; }
+    .review-wrong { color: #dc2626; }
+    .review-explanation { color: #475569; margin: 10px 0 0; line-height: 1.5; }
+
+    .confetti-layer { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 50; }
+    .confetti-piece { position: absolute; top: -20px; width: 10px; height: 16px; opacity: .9; animation: fall 3.7s linear forwards; }
+    @keyframes fall { to { transform: translateY(calc(100 * min(var(--vh, 1vh), 1vh))) rotate(720deg); opacity: 0; } }
+
+    @media (min-width: 600px) {
+      .header-teacher-img, .header-logo-img { height: 80px; }
+    }
+
+    @media (min-width: 1024px) {
+      .header-teacher-img, .header-logo-img { height: 96px; }
+    }
+
+    @media (max-width: 640px) {
+      .quiz-container { padding: 0; }
+      .quiz-card { border-radius: 0; min-height: calc(100 * min(var(--vh, 1vh), 1vh)); }
+      .header-teacher-img, .header-logo-img { height: 45px; }
+      .quiz-header { padding: 8px 12px; gap: 8px; }
+      .title-line1 { font-size: 17px; }
+      .title-line2 { font-size: 12px; }
+      .title-line3 { font-size: 10px; }
+      .info-bar { padding: 10px 12px; grid-template-columns: 1fr 1.35fr 1fr; gap: 7px; font-size: 9px; }
+      .quiz-main, .result-view, .review-view { padding: 17px 14px; }
+      .task-panel { font-size: 17px; padding: 17px; }
+      .choices-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+      .choice-tile { min-height: 94px; padding: 12px; font-size: 13px; gap: 8px; }
+      .choice-letter { width: 25px; height: 25px; font-size: 11px; }
+      .navigation-row { gap: 8px; }
+      .nav-button { min-width: 0; padding: 10px 11px; font-size: 13px; }
+      .counter { font-size: 13px; }
+      .stats-row { justify-content: flex-start; flex-wrap: wrap; gap: 8px 14px; font-size: 12px; }
+      .result-top { grid-template-columns: 1fr; }
+      .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .review-header { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .quiz-header, .info-bar, .result-actions, .review-header button, .confetti-layer { display: none !important; }
+      .quiz-container, .quiz-card { padding: 0; box-shadow: none; max-width: 100%; }
+      .result-view.active { display: block !important; }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  
+  
+  
+ <script>(function(){var ok=true;try{window.localStorage.getItem("__t")}catch(e){ok=false}
+if(!ok){var m={};try{Object.defineProperty(window,"localStorage",{configurable:true,value:{
+getItem:function(k){return Object.prototype.hasOwnProperty.call(m,k)?m[k]:null},
+setItem:function(k,v){m[k]=String(v)},removeItem:function(k){delete m[k]},clear:function(){m={}}}})}catch(e2){}}})();</script></head>
+ <body>
+  <div class="quiz-container">
+   <section class="quiz-card" aria-label="Past Perfect Continuous quiz">
+    <header class="quiz-header"><img class="header-teacher-img" loading="lazy" src="teacher.png" alt="Teacher Soufiane">
+     <div class="header-title">
+      <div class="title-line1">
+       English2BAC Quizzes
+      </div>
+      <div class="title-line2">
+       Learn • Practice • Succeed
+      </div>
+      <div class="title-line3">
+       with Teacher.Soufiane
+      </div>
+     </div><img class="header-logo-img" loading="lazy" src="logo.png" alt="Level-UP 2BAC">
+    </header>
+    <section class="info-bar" aria-label="Quiz information"><span class="">UNIT: 3</span> <span class="info-center">PAST PERFECT CONTINUOUS</span> <span class="info-right">GRAMMAR QUIZ 3</span>
+    </section>
+    <main id="quizView" class="quiz-view quiz-main">
+     <section aria-live="polite">
+      <div id="instructionBox" class="instruction-box"></div>
+      <div id="taskPanel" class="task-panel"></div>
+      <div class="hint-row"><button id="hintButton" class="hint-button" type="button">💡 Hint</button>
+       <div id="hintText" class="hint-text" role="status"></div>
+      </div>
+      <div id="choicesGrid" class="choices-grid" aria-label="Answer choices"></div>
+      <div id="feedbackArea" class="feedback-area" aria-live="polite"><span id="feedbackTitle" class="feedback-title"></span> <span id="feedbackExplanation"></span>
+      </div>
+      <nav class="navigation-row" aria-label="Question navigation"><button id="previousButton" class="nav-button previous" type="button">◀ Previous</button>
+       <div id="questionCounter" class="counter" aria-live="polite"></div><button id="nextButton" class="nav-button next" type="button">Next ▶</button>
+      </nav>
+      <section class="stats-row" aria-label="Live quiz statistics"><span id="correctStat">✅ Correct: 0</span> <span id="wrongStat">❌ Wrong: 0</span> <span id="remainingStat">Remaining: 20</span> <span id="scoreStat">Score: 0.00 /20</span> <span id="timerStat" class="timer-stat">Timer 00:00</span>
+      </section>
+     </section>
+    </main>
+    <section id="resultView" class="result-view" aria-live="polite">
+     <h1 class="result-heading">QUIZ RESULTS</h1>
+     <p id="resultMeta" class="result-meta"></p>
+     <div class="result-top">
+      <div class="score-badge"><strong id="finalScore">0.00</strong> <span>/20 FINAL SCORE</span>
+      </div>
+      <div class="remark-panel">
+       <div class="remark-label">
+        FINAL REMARK
+       </div>
+       <div id="animatedRemark" class="animated-remark">
+        Excellent!
+       </div>
+       <p id="remarkDescription" class="remark-description"></p>
+      </div>
+     </div>
+     <section class="summary-grid" aria-label="Performance summary">
+      <div class="summary-item">
+       <span>Final Score</span><strong id="summaryScore"></strong>
+      </div>
+      <div class="summary-item">
+       <span>Correct Answers</span><strong id="summaryCorrect"></strong>
+      </div>
+      <div class="summary-item">
+       <span>Wrong Answers</span><strong id="summaryWrong"></strong>
+      </div>
+      <div class="summary-item">
+       <span>Accuracy Percentage</span><strong id="summaryAccuracy"></strong>
+      </div>
+      <div class="summary-item">
+       <span>Time Taken</span><strong id="summaryTime"></strong>
+      </div>
+      <div class="summary-item">
+       <span>Number of Attempts</span><strong id="summaryAttempts"></strong>
+      </div>
+      <div class="summary-item">
+       <span>Best Score</span><strong id="summaryBest"></strong>
+      </div>
+     </section>
+     <section class="level-breakdown">
+      <h2>Per-Level Breakdown</h2>
+      <div id="levelBreakdown"></div>
+     </section>
+     <div class="result-actions"><button id="reviewButton" class="result-button" type="button">Review My Answers</button> <button id="restartButton" class="result-button green" type="button">Restart Quiz</button> <button id="printButton" class="result-button secondary" type="button">Print Results</button> <button id="saveButton" class="result-button secondary" type="button">Save Results</button>
+     </div>
+    </section>
+    <section id="reviewView" class="review-view">
+     <div class="review-header">
+      <h1 class="">Review My Answers</h1><button id="backToResultsButton" class="result-button secondary" type="button">Back to Results</button>
+     </div>
+     <div id="reviewContent"></div>
+    </section>
+   </section>
+  </div>
+  <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
+  <script>
+    // Quiz configuration and fixed instructional level progression.
+    const quizConfig = {
+      unit: "3",
+      title: "PAST PERFECT CONTINUOUS",
+      lesson: "GRAMMAR QUIZ 3",
+      teacherName: "Teacher Soufiane",
+      teacherImage: "https://i.imgur.com/vvyZAnr.png",
+      logo: "https://i.imgur.com/XPOYllA.png",
+      randomizeQuestions: false,
+      randomizeChoices: true,
+      timerEnabled: true,
+      timerMode: "countup",
+      countdownSeconds: 600,
+      showConfetti: true,
+      enableSounds: true,
+      questions: [
+        {level:1,category:"Form Detective",question:"CHOOSE THE CORRECT FORM.",task:"The pavement was muddy because it ______ all night. (rain)",choices:["rained","has rained","had been raining","is raining"],correctAnswer:"had been raining",explanation:"'Had been raining' shows an activity that continued for a period (all night) before the past result (the muddy pavement).",hint:"Think about what continuous activity caused this past result.",points:1},
+        {level:1,category:"Form Detective",question:"CHOOSE THE CORRECT FORM.",task:"She felt dizzy because she ______ on the phone for so long. (talk)",choices:["talked","has talked","was talk","had been talking"],correctAnswer:"had been talking",explanation:"'Had been talking' emphasizes the activity and its duration before she felt dizzy.",hint:"Think about the ongoing activity that caused her dizziness.",points:1},
+        {level:1,category:"Form Detective",question:"CHOOSE THE CORRECT FORM.",task:"He ______ here for years before he found another job. (work)",choices:["worked","has been working","had been working","was working"],correctAnswer:"had been working",explanation:"'Had been working' shows an activity continuing for years before another past event (finding a new job).",hint:"Think about which activity started earlier and continued up to the second past event.",points:1},
+        {level:2,category:"Context Clues",question:"CHOOSE THE CORRECT FORM.",task:"He ______ anything for many days before this job offer came. (not / do)",choices:["did not do","has not been doing","had not been doing","was not doing"],correctAnswer:"had not been doing",explanation:"The negative Past Perfect Continuous is 'had not been + verb-ing': the activity continued for many days before the job offer came.",hint:"Think about the negative form: had not been + verb-ing.",points:1},
+        {level:2,category:"Context Clues",question:"CHOOSE THE CORRECT FORM.",task:"She ______ the advanced maths class since the beginning of the school year. (attend)",choices:["attended","has attended","had been attending","was attending"],correctAnswer:"had been attending",explanation:"'Since' marks the starting point of a continuing activity before a past reference point, so we need 'had been attending'.",hint:"Think about the time expression 'since' and what structure it signals here.",points:1},
+        {level:2,category:"Context Clues",question:"CHOOSE THE CORRECT FORM.",task:"Before Jim finally decided to go to Thailand, he ______ about it for months. (think)",choices:["thought","has thought","was thinking","had been thinking"],correctAnswer:"had been thinking",explanation:"'For months' shows duration before another past event, so we need 'had been thinking'.",hint:"Think about the duration expression 'for months' and the later past event.",points:1},
+        {level:3,category:"Duration Detective",question:"CHOOSE THE CORRECT FORM.",task:"I ______ for three hours before the exam started. (study)",choices:["studied","have studied","had been studying","was studying"],correctAnswer:"had been studying",explanation:"'For three hours... before' shows duration before another past event, so we need 'had been studying'.",hint:"Think about the duration before the exam started.",points:1},
+        {level:3,category:"Duration Detective",question:"CHOOSE THE CORRECT FORM.",task:"Had you ______ long before the bus arrived? (wait)",choices:["waited","been waiting","waiting","wait"],correctAnswer:"been waiting",explanation:"The question form is 'Had + subject + been + verb-ing?', so after 'Had you', we need 'been waiting'.",hint:"Think about the exact question structure: Had + subject + been + verb-ing?",points:1},
+        {level:3,category:"Duration Detective",question:"CHOOSE THE CORRECT FORM.",task:"The players were tired because they ______ for two hours. (practice)",choices:["practiced","have practiced","had been practicing","were practicing"],correctAnswer:"had been practicing",explanation:"'Had been practicing' shows the continuing activity that caused the past result (being tired).",hint:"Think about the activity that explains why the players were tired.",points:1},
+        {level:4,category:"Result Detective",question:"CHOOSE THE CORRECT FORM.",task:"Before they reached the village, they ______ for six hours. (travel)",choices:["traveled","have traveled","had been traveling","were traveling"],correctAnswer:"had been traveling",explanation:"'For six hours... before' shows duration before another past event, so we need 'had been traveling'.",hint:"Think about the duration before they reached the village.",points:1},
+        {level:4,category:"Result Detective",question:"CHOOSE THE CORRECT FORM.",task:"The mechanic was exhausted because he ______ the engine all morning. (repair)",choices:["repaired","has repaired","had been repairing","was repairing"],correctAnswer:"had been repairing",explanation:"'Had been repairing' shows the continuing activity that caused the past result (exhaustion).",hint:"Think about the activity that explains the mechanic's exhaustion.",points:1},
+        {level:4,category:"Result Detective",question:"CHOOSE THE CORRECT FORM.",task:"By noon, the scientists ______ for evidence for several hours. (search)",choices:["searched","have searched","had been searching","were searching"],correctAnswer:"had been searching",explanation:"'Had been searching' shows an activity continuing for several hours before a past reference point.",hint:"Think about the duration before the reference point 'by noon'.",points:1},
+        {level:5,category:"Past Perfect Continuous in Context",question:"COMPLETE THE SENTENCE.",task:"By the time the teacher arrived, the students ______ the problem for twenty minutes. (discuss)",choices:["discussed","have discussed","had been discussing","were discussing"],correctAnswer:"had been discussing",explanation:"'By the time... for twenty minutes' shows duration before a past reference point, so we need 'had been discussing'.",hint:"Think about the duration before the teacher arrived.",points:1},
+        {level:5,category:"Past Perfect Continuous in Context",question:"COMPLETE THE SENTENCE.",task:"When the family moved, they ______ in that house since 2012. (live)",choices:["lived","have lived","had been living","were living"],correctAnswer:"had been living",explanation:"'Since 2012' marks the starting point of a continuing activity before a past reference point, so we need 'had been living'.",hint:"Think about the starting point marked by 'since 2012'.",points:1},
+        {level:5,category:"Past Perfect Continuous in Context",question:"COMPLETE THE SENTENCE.",task:"Choose the sentence that correctly combines these ideas using the Past Perfect Continuous: “The athlete started training in January. The competition took place in June.”",choices:["The athlete had been training since January before the competition took place.","The athlete trained since January before the competition took place.","The athlete has been training since January before the competition took place.","The athlete was training since January before the competition took place."],correctAnswer:"The athlete had been training since January before the competition took place.",explanation:"The training continued from January up to the later past event, so it needs the Past Perfect Continuous: 'had been training'.",hint:"Think about which activity started first and continued up to the later past event.",points:1},
+        {level:6,category:"Error Detector",question:"CHOOSE THE CORRECT FORM.",task:"The kitchen smelled wonderful because the chef ______ for hours. (cook)",choices:["cooked","has cooked","had been cooking","was cooking"],correctAnswer:"had been cooking",explanation:"'Had been cooking' shows the continuing activity that caused the past result (the wonderful smell).",hint:"Think about the activity that explains the wonderful smell.",points:1},
+        {level:6,category:"Error Detector",question:"CHOOSE THE CORRECT FORM.",task:"When I entered the library, Nadia ______ for two hours. (read)",choices:["read","has read","had been reading","was reading"],correctAnswer:"had been reading",explanation:"'For two hours' shows duration before another past event, so we need 'had been reading'.",hint:"Think about the duration before you entered the library.",points:1},
+        {level:7,category:"Transformation Challenge",question:"COMPLETE THE SENTENCE.",task:"The classroom looked spotless because the students ______ it all morning before the inspection. (clean)",choices:["cleaned","have cleaned","had been cleaning","were cleaning"],correctAnswer:"had been cleaning",explanation:"'All morning... before the inspection' shows duration before a past reference point, so we need 'had been cleaning'.",hint:"Think about the duration expression 'all morning' and the past reference point.",points:1},
+        {level:7,category:"Transformation Challenge",question:"COMPLETE THE SENTENCE.",task:"He was exhausted when he arrived because he ______ for five hours. (drive)",choices:["drove","has driven","had been driving","was driving"],correctAnswer:"had been driving",explanation:"'Had been driving' shows the continuing activity that caused the past result (exhaustion on arrival).",hint:"Think about the activity that explains why he was exhausted.",points:1},
+        {level:8,category:"BAC Final Challenge",question:"FINAL CHALLENGE — CHOOSE THE CORRECT FORM.",task:"By the time the guests arrived, we ______ the meal for three hours. (prepare)",choices:["prepared","have prepared","had been preparing","were preparing"],correctAnswer:"had been preparing",explanation:"'By the time... for three hours' shows duration before a past reference point, so we need 'had been preparing'.",hint:"Think about the duration before the guests arrived.",points:1}
+      ]
+    };
+
+    const levelNames = {
+      1: "Form Detective",
+      2: "Context Clues",
+      3: "Duration Detective",
+      4: "Result Detective",
+      5: "Past Perfect Continuous in Context",
+      6: "Error Detector",
+      7: "Transformation Challenge",
+      8: "BAC Final Challenge"
+    };
+
+    const correctMessages = ["Excellent!", "Great Job!", "Perfect!", "Keep Going!"];
+    const incorrectMessages = ["Almost!", "Review this rule.", "Keep learning!", "You'll get the next one!"];
+
+    const state = {
+      currentIndex: 0,
+      answers: Array(quizConfig.questions.length).fill(null),
+      displayOrders: Array(quizConfig.questions.length).fill(null),
+      hintVisible: Array(quizConfig.questions.length).fill(false),
+      completed: false,
+      finalTime: 0
+    };
+
+    // Independent count-up/count-down timer module.
+    const timer = (() => {
+      let intervalId = null;
+      let seconds = quizConfig.timerMode === "countdown" ? quizConfig.countdownSeconds : 0;
+
+      function format(value) {
+        const minutes = Math.floor(value / 60).toString().padStart(2, "0");
+        const remainder = (value % 60).toString().padStart(2, "0");
+        return `${minutes}:${remainder}`;
+      }
+
+      function updateDisplay() {
+        document.getElementById("timerStat").textContent = `Timer ${format(seconds)}`;
+      }
+
+      function start() {
+        if (!quizConfig.timerEnabled || intervalId) return;
+        intervalId = setInterval(() => {
+          if (quizConfig.timerMode === "countdown") {
+            seconds = Math.max(0, seconds - 1);
+            updateDisplay();
+            if (seconds === 0) {
+              pause();
+              finishQuiz();
+            }
+          } else {
+            seconds += 1;
+            updateDisplay();
+          }
+        }, 1000);
+      }
+
+      function pause() {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+
+      function reset() {
+        pause();
+        seconds = quizConfig.timerMode === "countdown" ? quizConfig.countdownSeconds : 0;
+        updateDisplay();
+      }
+
+      function getSeconds() { return seconds; }
+      return { start, pause, reset, format, getSeconds, updateDisplay };
+    })();
+
+    function shuffleIndices(length) {
+      const indices = Array.from({ length }, (_, index) => index);
+      for (let index = indices.length - 1; index > 0; index--) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+        [indices[index], indices[randomIndex]] = [indices[randomIndex], indices[index]];
+      }
+      return indices;
+    }
+
+    // Fixed order is generated once per question and never shuffled during evaluation re-renders.
+    function getDisplayOrder(questionIndex) {
+      if (!state.displayOrders[questionIndex]) {
+        state.displayOrders[questionIndex] = quizConfig.randomizeChoices
+          ? shuffleIndices(quizConfig.questions[questionIndex].choices.length)
+          : [0, 1, 2, 3];
+      }
+      return state.displayOrders[questionIndex];
+    }
+
+    function calculateStats() {
+      const answered = state.answers.filter(Boolean);
+      const correct = answered.filter((answer) => answer.isCorrect).length;
+      return {
+        correct,
+        wrong: answered.length - correct,
+        remaining: quizConfig.questions.length - answered.length,
+        score: correct
+      };
+    }
+
+    function updateStats() {
+      const stats = calculateStats();
+      document.getElementById("correctStat").textContent = `✅ Correct: ${stats.correct}`;
+      document.getElementById("wrongStat").textContent = `❌ Wrong: ${stats.wrong}`;
+      document.getElementById("remainingStat").textContent = `Remaining: ${stats.remaining}`;
+      document.getElementById("scoreStat").textContent = `Score: ${stats.score.toFixed(2)} /20`;
+    }
+
+    function playSound(type) {
+      if (!quizConfig.enableSounds || !window.AudioContext && !window.webkitAudioContext) return;
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      const audioContext = new AudioContextClass();
+      const oscillator = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      oscillator.connect(gain);
+      gain.connect(audioContext.destination);
+
+      const settings = type === "correct"
+        ? { frequency: 660, end: 880, duration: 0.16, wave: "sine" }
+        : type === "wrong"
+          ? { frequency: 180, end: 120, duration: 0.22, wave: "sine" }
+          : { frequency: 523, end: 1046, duration: 0.55, wave: "triangle" };
+
+      oscillator.type = settings.wave;
+      oscillator.frequency.setValueAtTime(settings.frequency, audioContext.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(settings.end, audioContext.currentTime + settings.duration);
+      gain.gain.setValueAtTime(0.05, audioContext.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + settings.duration);
+      oscillator.start();
+      oscillator.stop(audioContext.currentTime + settings.duration);
+    }
+
+    // One reusable Type A renderer used for every level and question.
+    function renderQuestion() {
+      const question = quizConfig.questions[state.currentIndex];
+      const answer = state.answers[state.currentIndex];
+      const order = getDisplayOrder(state.currentIndex);
+
+      document.getElementById("instructionBox").textContent = question.question;
+      document.getElementById("taskPanel").textContent = question.task;
+      document.getElementById("questionCounter").textContent = `${state.currentIndex + 1} / ${quizConfig.questions.length}`;
+
+      const hintText = document.getElementById("hintText");
+      hintText.textContent = question.hint;
+      hintText.classList.toggle("visible", state.hintVisible[state.currentIndex]);
+
+      const choicesGrid = document.getElementById("choicesGrid");
+      choicesGrid.innerHTML = "";
+
+      order.forEach((choiceIndex, displayIndex) => {
+        const choice = question.choices[choiceIndex];
+        const button = document.createElement("button");
+        const letter = String.fromCharCode(65 + displayIndex);
+        button.type = "button";
+        button.className = "choice-tile";
+        button.setAttribute("aria-label", `Choice ${letter}: ${choice}`);
+        button.disabled = Boolean(answer);
+
+        if (answer) {
+          if (choice === question.correctAnswer) button.classList.add("correct");
+          if (!answer.isCorrect && choice === answer.selectedAnswer) button.classList.add("incorrect");
+        }
+
+        const letterBadge = document.createElement("span");
+        letterBadge.className = "choice-letter";
+        letterBadge.textContent = letter;
+
+        const choiceText = document.createElement("span");
+        choiceText.textContent = choice;
+
+        button.append(letterBadge, choiceText);
+        button.addEventListener("click", () => selectChoice(choice));
+        choicesGrid.appendChild(button);
+      });
+
+      const feedback = document.getElementById("feedbackArea");
+      if (answer) {
+        feedback.className = `feedback-area visible ${answer.isCorrect ? "correct-feedback" : "wrong-feedback"}`;
+        document.getElementById("feedbackTitle").textContent = answer.feedback;
+        document.getElementById("feedbackExplanation").textContent = question.explanation;
+      } else {
+        feedback.className = "feedback-area";
+      }
+
+      const previousButton = document.getElementById("previousButton");
+      const nextButton = document.getElementById("nextButton");
+      previousButton.disabled = state.currentIndex === 0;
+      nextButton.disabled = !answer;
+      nextButton.textContent = state.currentIndex === quizConfig.questions.length - 1 ? "Finish Quiz ▶" : "Next ▶";
+
+      updateStats();
+    }
+
+    function selectChoice(selectedAnswer) {
+      if (state.answers[state.currentIndex]) return;
+      const question = quizConfig.questions[state.currentIndex];
+      const isCorrect = selectedAnswer === question.correctAnswer;
+      const feedbackList = isCorrect ? correctMessages : incorrectMessages;
+
+      state.answers[state.currentIndex] = {
+        selectedAnswer,
+        isCorrect,
+        feedback: feedbackList[Math.floor(Math.random() * feedbackList.length)]
+      };
+
+      playSound(isCorrect ? "correct" : "wrong");
+      renderQuestion();
+    }
+
+    function showHint() {
+      state.hintVisible[state.currentIndex] = true;
+      renderQuestion();
+    }
+
+    function nextQuestion() {
+      if (!state.answers[state.currentIndex]) return;
+      if (state.currentIndex === quizConfig.questions.length - 1) {
+        finishQuiz();
+        return;
+      }
+      state.currentIndex += 1;
+      renderQuestion();
+    }
+
+    function previousQuestion() {
+      if (state.currentIndex === 0) return;
+      state.currentIndex -= 1;
+      renderQuestion();
+    }
+
+    function getRemark(score) {
+      if (score < 10) return { label: "Fail", description: "Keep going! Review the structure and practice more examples." };
+      if (score < 12) return { label: "Pass", description: "Well done! Keep practicing the form and its use in context." };
+      if (score < 14) return { label: "Fairly Good", description: "Nice effort! Review HAD BEEN + VERB-ING and the use of FOR and SINCE." };
+      if (score < 16) return { label: "Good", description: "Good work! Review duration expressions and keep practicing." };
+      if (score < 18) return { label: "Very Good", description: "Very good! You understand the main uses and structure." };
+      return { label: "Excellent!", description: "Excellent work! You have a strong understanding of the Past Perfect Continuous." };
+    }
+
+    function animateRemark(finalRemark) {
+      const labels = ["Fail", "Pass", "Fairly Good", "Good", "Very Good", "Excellent!"];
+      const element = document.getElementById("animatedRemark");
+      let count = 0;
+      let delay = 85;
+
+      function cycle() {
+        element.textContent = labels[count % labels.length];
+        count += 1;
+        if (count < 22) {
+          delay += 16;
+          setTimeout(cycle, delay);
+        } else {
+          element.textContent = finalRemark;
+        }
+      }
+      cycle();
+    }
+
+    function renderLevelBreakdown() {
+      const breakdown = document.getElementById("levelBreakdown");
+      breakdown.innerHTML = "";
+
+      Object.keys(levelNames).forEach((level) => {
+        const numericLevel = Number(level);
+        const levelQuestions = quizConfig.questions.filter((question) => question.level === numericLevel);
+        const levelScore = levelQuestions.reduce((total, question) => {
+          const questionIndex = quizConfig.questions.indexOf(question);
+          return total + (state.answers[questionIndex]?.isCorrect ? 1 : 0);
+        }, 0);
+
+        const row = document.createElement("div");
+        row.className = "level-row";
+        row.innerHTML = `<span>Level ${level} — ${levelNames[level]}</span><strong>${levelScore}/${levelQuestions.length}</strong>`;
+        breakdown.appendChild(row);
+      });
+    }
+
+    function saveLocalResults(score) {
+      const oldAttempts = Number(localStorage.getItem("ppcQuizAttempts") || 0);
+      const oldBest = Number(localStorage.getItem("ppcQuizBestScore") || 0);
+      const attempts = oldAttempts + 1;
+      const best = Math.max(oldBest, score);
+
+      localStorage.setItem("ppcQuizAttempts", attempts);
+      localStorage.setItem("ppcQuizBestScore", best);
+      localStorage.setItem("ppcQuizLastScore", score);
+      localStorage.setItem("ppcQuizTimeTaken", timer.format(state.finalTime));
+
+      return { attempts, best };
+    }
+
+    function finishQuiz() {
+      if (state.completed) return;
+
+      // Any unanswered items caused by countdown are recorded as incorrect.
+      state.answers.forEach((answer, index) => {
+        if (!answer) {
+          state.answers[index] = {
+            selectedAnswer: "No answer",
+            isCorrect: false,
+            feedback: "Time is up!"
+          };
+        }
+      });
+
+      state.completed = true;
+      timer.pause();
+      state.finalTime = timer.getSeconds();
+
+      const stats = calculateStats();
+      const saved = saveLocalResults(stats.score);
+      const remark = getRemark(stats.score);
+      const accuracy = (stats.correct / quizConfig.questions.length) * 100;
+
+      document.getElementById("quizView").classList.add("hidden");
+      document.getElementById("resultView").classList.add("active");
+      document.getElementById("resultMeta").textContent = `QUIZ / UNIT ${quizConfig.unit} / ${quizConfig.title} / ${quizConfig.lesson}`;
+      document.getElementById("finalScore").textContent = stats.score.toFixed(2);
+      document.getElementById("remarkDescription").textContent = remark.description;
+      document.getElementById("summaryScore").textContent = `${stats.score.toFixed(2)} /20`;
+      document.getElementById("summaryCorrect").textContent = stats.correct;
+      document.getElementById("summaryWrong").textContent = stats.wrong;
+      document.getElementById("summaryAccuracy").textContent = `${accuracy.toFixed(2)}%`;
+      document.getElementById("summaryTime").textContent = timer.format(state.finalTime);
+      document.getElementById("summaryAttempts").textContent = saved.attempts;
+      document.getElementById("summaryBest").textContent = `${saved.best.toFixed(2)} /20`;
+
+      renderLevelBreakdown();
+      animateRemark(remark.label);
+      playSound("complete");
+
+      if (quizConfig.showConfetti && stats.score >= 18) createConfetti();
+    }
+
+    function createConfetti() {
+      const layer = document.getElementById("confettiLayer");
+      layer.innerHTML = "";
+      const colors = ["#2563eb", "#15803d", "#f59e0b", "#dc2626", "#7c3aed"];
+
+      for (let index = 0; index < 80; index++) {
+        const piece = document.createElement("span");
+        piece.className = "confetti-piece";
+        piece.style.left = `${Math.random() * 100}%`;
+        piece.style.background = colors[index % colors.length];
+        piece.style.animationDelay = `${Math.random() * 0.9}s`;
+        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+        layer.appendChild(piece);
+      }
+
+      setTimeout(() => { layer.innerHTML = ""; }, 4700);
+    }
+
+    function showReview() {
+      const reviewContent = document.getElementById("reviewContent");
+      reviewContent.innerHTML = "";
+
+      Object.keys(levelNames).forEach((level) => {
+        const levelHeading = document.createElement("h2");
+        levelHeading.className = "review-level";
+        levelHeading.textContent = `Level ${level} — ${levelNames[level]}`;
+        reviewContent.appendChild(levelHeading);
+
+        quizConfig.questions.forEach((question, questionIndex) => {
+          if (question.level !== Number(level)) return;
+          const answer = state.answers[questionIndex];
+          const item = document.createElement("article");
+          item.className = `review-item ${answer.isCorrect ? "correct-review" : "wrong-review"}`;
+          item.innerHTML = `
+            <div class="review-task">${questionIndex + 1}. ${question.task}</div>
+            <p class="review-answer ${answer.isCorrect ? "review-correct" : "review-wrong"}"><strong>Student Answer:</strong> ${answer.selectedAnswer}</p>
+            <p class="review-answer review-correct"><strong>Correct Answer:</strong> ${question.correctAnswer}</p>
+            <p class="review-explanation"><strong>Explanation:</strong> ${question.explanation}</p>
+          `;
+          reviewContent.appendChild(item);
+        });
+      });
+
+      document.getElementById("resultView").classList.remove("active");
+      document.getElementById("reviewView").classList.add("active");
+    }
+
+    function restartQuiz() {
+      state.currentIndex = 0;
+      state.answers = Array(quizConfig.questions.length).fill(null);
+      state.displayOrders = Array(quizConfig.questions.length).fill(null);
+      state.hintVisible = Array(quizConfig.questions.length).fill(false);
+      state.completed = false;
+      state.finalTime = 0;
+
+      document.getElementById("resultView").classList.remove("active");
+      document.getElementById("reviewView").classList.remove("active");
+      document.getElementById("quizView").classList.remove("hidden");
+      document.getElementById("confettiLayer").innerHTML = "";
+
+      timer.reset();
+      timer.start();
+      renderQuestion();
+    }
+
+    function buildReport() {
+      const stats = calculateStats();
+      const lines = [
+        "PAST PERFECT CONTINUOUS — GRAMMAR QUIZ 3",
+        `Unit: ${quizConfig.unit}`,
+        `Final Score: ${stats.score.toFixed(2)} /20`,
+        `Correct Answers: ${stats.correct}`,
+        `Wrong Answers: ${stats.wrong}`,
+        `Accuracy: ${((stats.correct / 20) * 100).toFixed(2)}%`,
+        `Time Taken: ${timer.format(state.finalTime)}`,
+        "",
+        "PER-LEVEL BREAKDOWN"
+      ];
+
+      Object.keys(levelNames).forEach((level) => {
+        const levelQuestions = quizConfig.questions.filter((question) => question.level === Number(level));
+        const levelScore = levelQuestions.reduce((sum, question) => {
+          const index = quizConfig.questions.indexOf(question);
+          return sum + (state.answers[index].isCorrect ? 1 : 0);
+        }, 0);
+        lines.push(`Level ${level} — ${levelNames[level]}: ${levelScore}/${levelQuestions.length}`);
+      });
+
+      return lines.join("\n");
+    }
+
+    function saveResults() {
+      const blob = new Blob([buildReport()], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "past-perfect-continuous-quiz-results.txt";
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function handleKeyboard(event) {
+      if (state.completed || document.getElementById("reviewView").classList.contains("active")) return;
+      const activeElement = document.activeElement;
+      if (activeElement && ["BUTTON"].includes(activeElement.tagName)) return;
+
+      if (/^[1-4]$/.test(event.key) && !state.answers[state.currentIndex]) {
+        const choicePosition = Number(event.key) - 1;
+        const order = getDisplayOrder(state.currentIndex);
+        selectChoice(quizConfig.questions[state.currentIndex].choices[order[choicePosition]]);
+      }
+
+      if (event.key === "ArrowLeft") previousQuestion();
+      if (event.key === "ArrowRight" && state.answers[state.currentIndex]) nextQuestion();
+
+      if ((event.key === "Enter" || event.key === " ") && state.answers[state.currentIndex]) {
+        event.preventDefault();
+        nextQuestion();
+      }
+    }
+
+    document.getElementById("hintButton").addEventListener("click", showHint);
+    document.getElementById("previousButton").addEventListener("click", previousQuestion);
+    document.getElementById("nextButton").addEventListener("click", nextQuestion);
+    document.getElementById("reviewButton").addEventListener("click", showReview);
+    document.getElementById("restartButton").addEventListener("click", restartQuiz);
+    document.getElementById("printButton").addEventListener("click", () => window.print());
+    document.getElementById("saveButton").addEventListener("click", saveResults);
+    document.getElementById("backToResultsButton").addEventListener("click", () => {
+      document.getElementById("reviewView").classList.remove("active");
+      document.getElementById("resultView").classList.add("active");
+    });
+    document.addEventListener("keydown", handleKeyboard);
+
+    document.addEventListener("DOMContentLoaded", () => {
+      timer.updateDisplay();
+      timer.start();
+      renderQuestion();
+    });
+  </script>
+ 
+</body></html>

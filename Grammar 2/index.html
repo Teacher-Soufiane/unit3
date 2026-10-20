@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Past Perfect Simple Grammar Quiz 2</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&amp;family=Poppins:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    :root { --blue:#123d6a; --blue2:#2563eb; --pale:#eaf4ff; --green:#16814c; --red:#c93636; --gray:#edf1f5; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; padding:0; width:100%; min-height:calc(100 * min(var(--vh, 1vh), 1vh)); }
+    body { font-family:'Poppins',sans-serif; background:#edf4fa; color:#19324e; }
+    button { font:inherit; }
+    button:focus-visible { outline:3px solid #f6b73c; outline-offset:3px; }
+    .quiz-container { width:100%; max-width:100%; min-height:calc(100 * min(var(--vh, 1vh), 1vh)); box-sizing:border-box; padding:18px; }
+    .quiz-card { width:100%; max-width:1100px; margin:0 auto; box-sizing:border-box; background:#fff; border-radius:22px; overflow:hidden; box-shadow:0 14px 42px rgba(22,55,91,.14); }
+    .quiz-header { background-color:#eaf4ff; display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:18px; padding:14px 26px; border-bottom:1px solid #d4e7f7; }
+    .header-teacher-img,.header-logo-img { height:64px; width:auto; max-width:none; object-fit:contain; display:block; }
+    .header-title { text-align:center; line-height:1.2; }
+    .title-line1 { font-family:'Poppins',sans-serif; font-size:26px; font-weight:800; color:#1e3a5f; }
+    .title-line2 { font-family:'Poppins',sans-serif; font-size:18px; font-weight:400; color:#2563eb; }
+    .title-line3 { font-family:'Poppins',sans-serif; font-size:14px; font-weight:400; color:#64748b; }
+    .info-bar { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; padding:12px 28px; background:#fff; border-bottom:1px solid #dfe8f0; color:#42617f; font-size:13px; font-weight:700; letter-spacing:.06em; }
+    .info-bar span:nth-child(2){ text-align:center; color:var(--blue); }
+    .info-bar span:last-child { text-align:right; }
+    .quiz-view,.results-view,.review-view { padding:28px; }
+    .instruction { background:var(--blue); color:#fff; border-radius:14px; padding:16px 20px; text-align:center; font-size:19px; font-weight:800; letter-spacing:.035em; }
+    .task { margin:22px 0 15px; padding:19px 20px; background:#f6f9fc; border-left:5px solid #4c86d9; border-radius:10px; font-size:18px; line-height:1.65; min-height:86px; display:flex; align-items:center; }
+    .hint-row { min-height:42px; display:flex; align-items:center; gap:12px; margin-bottom:13px; }
+    .hint-btn,.secondary-btn,.nav-btn { border:0; cursor:pointer; border-radius:10px; font-weight:700; transition:.2s transform,.2s background,.2s opacity; }
+    .hint-btn:hover,.secondary-btn:hover,.nav-btn:hover { transform:translateY(-1px); }
+    .hint-btn { background:#e9f1fc; color:#235d9d; padding:9px 14px; font-size:14px; }
+    .hint-text { color:#5c6f81; font-size:14px; font-style:italic; }
+    .choices { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .choice { width:100%; min-height:78px; border:2px solid #d9e3ec; background:#fff; text-align:left; border-radius:13px; padding:15px 17px; cursor:pointer; color:#203d5c; display:flex; align-items:flex-start; gap:13px; transition:.18s; line-height:1.45; }
+    .choice:hover:not(:disabled) { border-color:#4a83cf; background:#f3f8ff; transform:translateY(-2px); }
+    .choice:disabled { cursor:default; }
+    .choice-key { flex:0 0 28px; height:28px; border-radius:50%; background:#e8eef5; color:#2c5c89; display:grid; place-items:center; font-weight:800; font-size:13px; }
+    .choice.correct { border-color:#24945a; background:#eaf9f0; color:#146337; }
+    .choice.correct .choice-key { background:#24945a; color:#fff; }
+    .choice.wrong { border-color:#d74b4b; background:#fff0f0; color:#a32d2d; }
+    .choice.wrong .choice-key { background:#d74b4b; color:#fff; }
+    .feedback { margin-top:18px; padding:14px 17px; border-radius:11px; display:none; }
+    .feedback.show { display:block; }
+    .feedback.good { background:#eaf9f0; color:#146337; border-left:5px solid #24945a; }
+    .feedback.bad { background:#fff0f0; color:#992f2f; border-left:5px solid #d74b4b; }
+    .feedback strong { display:block; margin-bottom:4px; }
+    .navigation { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:14px; margin-top:24px; }
+    .nav-btn { padding:12px 18px; color:#fff; background:var(--blue2); }
+    .nav-btn:first-child { justify-self:start; }
+    .nav-btn:last-child { justify-self:end; }
+    .nav-btn:disabled { cursor:not-allowed; opacity:.42; transform:none; }
+    .counter { font-weight:800; color:#315573; }
+    .stats { margin-top:14px; padding:13px 15px; border-radius:11px; background:#f2f6fa; color:#3b5974; display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:10px 22px; font-size:14px; font-weight:600; }
+    .stats b { color:#173c65; }
+    .hidden { display:none !important; }
+    .result-top { text-align:center; }
+    .result-kicker { color:#55708b; font-size:13px; font-weight:800; letter-spacing:.1em; }
+    .score-badge { width:190px; height:190px; margin:18px auto; border-radius:50%; display:grid; place-content:center; background:#eaf4ff; border:12px solid var(--blue); color:var(--blue); }
+    .score-badge span { font-size:39px; font-weight:800; line-height:1; }
+    .score-badge small { font-weight:700; margin-top:6px; }
+    .remark { color:var(--blue); font-size:30px; font-weight:800; min-height:46px; }
+    .remark-desc { max-width:720px; margin:8px auto 24px; color:#5b6e81; line-height:1.6; }
+    .summary-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:22px 0; }
+    .summary-item { background:#f5f8fb; border-radius:12px; padding:14px; text-align:center; }
+    .summary-item b { display:block; color:var(--blue); font-size:21px; }
+    .summary-item span { color:#66809a; font-size:12px; font-weight:700; }
+    .breakdown { border:1px solid #dfe8f0; border-radius:13px; overflow:hidden; }
+    .breakdown h2 { font-size:17px; background:#f4f8fc; margin:0; padding:14px 17px; color:var(--blue); }
+    .level-row { display:flex; justify-content:space-between; gap:18px; padding:12px 17px; border-top:1px solid #e7edf3; font-size:14px; }
+    .level-row strong { color:#1d4e7d; white-space:nowrap; }
+    .action-row { display:flex; justify-content:center; flex-wrap:wrap; gap:12px; margin-top:24px; }
+    .secondary-btn { padding:12px 16px; background:#e8f0f8; color:#244e78; }
+    .primary-btn { background:var(--blue2); color:#fff; }
+    .review-level { margin-bottom:25px; }
+    .review-level h2 { color:var(--blue); font-size:20px; border-bottom:2px solid #dceafa; padding-bottom:8px; }
+    .review-question { border:1px solid #dbe5ee; border-radius:13px; padding:16px; margin:12px 0; }
+    .review-question p { margin:7px 0; line-height:1.55; }
+    .answer-good { color:#137543; font-weight:700; }
+    .answer-bad { color:#ba3030; font-weight:700; }
+    .confetti { position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:10; }
+    .confetti i { position:absolute; width:10px; height:16px; animation:fall 2.8s linear forwards; }
+    @keyframes fall { to { transform:translateY(calc(100 * min(var(--vh, 1vh), 1vh))) rotate(720deg); opacity:0; } }
+    @media (min-width:600px){ .header-teacher-img,.header-logo-img{height:80px;} }
+    @media (min-width:1024px){ .header-teacher-img,.header-logo-img{height:96px;} }
+    @media (max-width:640px){
+      .quiz-container { padding:0; }
+      .quiz-card { border-radius:0; min-height:calc(100 * min(var(--vh, 1vh), 1vh)); }
+      .header-teacher-img,.header-logo-img { height:45px; }
+      .quiz-header { padding:8px 12px; gap:8px; }
+      .title-line1 { font-size:16px; }
+      .title-line2 { font-size:12px; }
+      .title-line3 { font-size:10px; }
+      .info-bar { padding:10px 12px; font-size:10px; gap:6px; }
+      .quiz-view,.results-view,.review-view { padding:18px 14px; }
+      .instruction { font-size:15px; padding:14px 10px; }
+      .task { font-size:16px; padding:15px; }
+      .choices { gap:10px; }
+      .choice { min-height:92px; padding:12px; font-size:13px; gap:9px; }
+      .choice-key { flex-basis:24px; height:24px; }
+      .navigation { gap:7px; }
+      .nav-btn { padding:11px 12px; font-size:13px; }
+      .stats { gap:8px 13px; font-size:12px; }
+      .summary-grid { grid-template-columns:repeat(2,1fr); }
+      .score-badge { width:160px; height:160px; }
+      .score-badge span { font-size:32px; }
+      .remark { font-size:25px; }
+      .level-row { font-size:12px; }
+    }
+    @media print {
+      body { background:#fff; }
+      .quiz-container { padding:0; }
+      .quiz-card { box-shadow:none; max-width:100%; }
+      .quiz-header,.info-bar,.result-top,.action-row { display:none !important; }
+      .results-view { display:block !important; padding:0; }
+      .breakdown { border-color:#999; }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  
+  
+  
+ <script>(function(){var ok=true;try{window.localStorage.getItem("__t")}catch(e){ok=false}
+if(!ok){var m={};try{Object.defineProperty(window,"localStorage",{configurable:true,value:{
+getItem:function(k){return Object.prototype.hasOwnProperty.call(m,k)?m[k]:null},
+setItem:function(k,v){m[k]=String(v)},removeItem:function(k){delete m[k]},clear:function(){m={}}}})}catch(e2){}}})();</script></head>
+ <body>
+  <main class="quiz-container">
+   <section class="quiz-card" aria-label="Past Perfect Simple grammar quiz">
+    <header class="quiz-header"><img class="header-teacher-img" loading="lazy" src="teacher.png" alt="Teacher Soufiane">
+     <div class="header-title">
+      <div class="title-line1">English2BAC Quizzes</div>
+      <div class="title-line2">Learn • Practice • Succeed</div>
+      <div class="title-line3">with Teacher.Soufiane</div>
+     </div><img class="header-logo-img" loading="lazy" src="logo.png" alt="Level-UP 2BAC">
+    </header>
+    <section class="info-bar" aria-label="Quiz information"><span class="">UNIT: 3</span> <span class=""></span> <span class="">GRAMMAR QUIZ 2</span>
+    </section>
+    <section id="quizView" class="quiz-view">
+     <div id="instruction" class="instruction" aria-live="polite"></div>
+     <div id="task" class="task"></div>
+     <div class="hint-row"><button class="hint-btn" id="hintButton" type="button"></button> <span id="hintText" class="hint-text" aria-live="polite"></span>
+     </div>
+     <div id="choices" class="choices" role="group" aria-label="Answer choices"></div>
+     <div id="feedback" class="feedback" aria-live="polite"></div>
+     <nav class="navigation" aria-label="Question navigation"><button class="nav-btn" id="previousButton" type="button">◀ Previous</button> <span id="counter" class="counter" aria-live="polite"></span> <button class="nav-btn" id="nextButton" type="button">Next ▶</button>
+     </nav>
+     <section class="stats" aria-label="Quiz statistics"><span>✅ Correct: <b id="correctStat">0</b></span> <span>❌ Wrong: <b id="wrongStat">0</b></span> <span>Remaining: <b id="remainingStat">20</b></span> <span>Score: <b id="scoreStat">0.00 /20</b></span> <span>Timer <b id="timerStat">00:00</b></span>
+     </section>
+    </section>
+    <section id="resultsView" class="results-view hidden">
+     <div class="result-top">
+      <div class="result-kicker"></div>
+      <div class="score-badge">
+       <span id="finalScore"></span><small>/20</small>
+      </div>
+      <div id="remark" class="remark" aria-live="polite"></div>
+      <p id="remarkDescription" class="remark-desc"></p>
+     </div>
+     <div class="summary-grid">
+      <div class="summary-item">
+       <b id="summaryScore"></b><span>FINAL SCORE</span>
+      </div>
+      <div class="summary-item">
+       <b id="summaryCorrect"></b><span>CORRECT ANSWERS</span>
+      </div>
+      <div class="summary-item">
+       <b id="summaryWrong"></b><span>WRONG ANSWERS</span>
+      </div>
+      <div class="summary-item">
+       <b id="summaryAccuracy"></b><span>ACCURACY</span>
+      </div>
+      <div class="summary-item">
+       <b id="summaryTime"></b><span>TIME TAKEN</span>
+      </div>
+      <div class="summary-item">
+       <b id="summaryAttempts"></b><span>ATTEMPTS</span>
+      </div>
+      <div class="summary-item">
+       <b id="summaryBest"></b><span>BEST SCORE</span>
+      </div>
+     </div>
+     <section class="breakdown">
+      <h2>Per-Level Breakdown</h2>
+      <div id="levelBreakdown"></div>
+     </section>
+     <div class="action-row"><button class="secondary-btn" id="reviewButton" type="button">Review My Answers</button> <button class="secondary-btn" id="printButton" type="button">Print Results</button> <button class="secondary-btn" id="saveButton" type="button">Save Results</button> <button class="secondary-btn primary-btn" id="restartButton" type="button">Restart Quiz</button>
+     </div>
+    </section>
+    <section id="reviewView" class="review-view hidden">
+     <div id="reviewContent"></div>
+     <div class="action-row"><button class="secondary-btn" id="backResultsButton" type="button">Back to Results</button> <button class="secondary-btn primary-btn" id="restartButtonReview" type="button">Review My Answers</button>
+     </div>
+    </section>
+   </section>
+  </main>
+  <div id="confetti" class="confetti hidden" aria-hidden="true"></div>
+  <script>
+    const quizConfig = {
+      unit:"3", title:"PAST PERFECT SIMPLE", lesson:"GRAMMAR QUIZ 2", teacherName:"Teacher Soufiane",
+      randomizeQuestions:false, randomizeChoices:true, timerEnabled:true, timerMode:"countup", countdownSeconds:600, showConfetti:true, enableSounds:true,
+      questions:[
+        [1,"Recognize the Sequence","CHOOSE THE CORRECT SENTENCE.","Look at the timeline: The train left the station → Sara arrived at the station. Which sentence correctly describes these two past events?",["When Sara arrived, the train has left.","When Sara had arrived, the train left.","When Sara arrived, the train had left.","When Sara arrives, the train had left."],"When Sara arrived, the train had left.","The train left FIRST, so that earlier action takes the Past Perfect ('had left'); Sara's arrival, the later action, takes the Past Simple ('arrived').","Think about which action happened first — the earlier action needs the Past Perfect."],
+        [1,"Recognize the Sequence","CHOOSE THE CORRECT SENTENCE.","Bill joined the gym last summer. His diet had begun four months earlier. Choose the correct sentence.",["Bill starts his diet four months before he joined the gym.","Bill has started his diet four months before he joined the gym.","Bill was start his diet four months before he joined the gym.","Bill had started his diet four months before he joined the gym."],"Bill had started his diet four months before he joined the gym.","The diet started BEFORE Bill joined the gym, so the earlier action needs the Past Perfect: 'had started'.","Think about which of the two actions happened first."],
+        [1,"Recognize the Sequence","CHOOSE THE CORRECT SENTENCE.","Choose the correct sentence using the booklet's train context.",["When she got to the station, the train has already left.","When she had got to the station, the train already left.","When she got to the station, the train had already left.","When she gets to the station, the train had already left."],"When she got to the station, the train had already left.","The train's departure happened before she got to the station, so it takes the Past Perfect ('had already left'), while her arrival takes the Past Simple ('got').","Think back to the train/station timeline — which event happened first?"],
+        [2,"Complete the Form","CHOOSE THE CORRECT FORM.","They lost the documents that he ______ them before. (give)",["giving","had given","gives","has given"],"had given","The giving happened before the losing, so the earlier action needs the Past Perfect: 'had given'.","Think about which action happened first — giving the documents, or losing them."],
+        [2,"Complete the Form","CHOOSE THE CORRECT FORM.","After Laura ______ the pills, she felt better. (take)",["will take","takes","had taken","has taken"],"had taken","Taking the pills happened before feeling better, so the earlier action needs the Past Perfect: 'had taken'.","Think about which action happened first."],
+        [2,"Complete the Form","CHOOSE THE CORRECT FORM.","Ahlam went to bed after she ______ her favourite TV programme. (watch)",["has watched","watches","will watch","had watched"],"had watched","Watching the programme happened before going to bed, so the earlier action needs the Past Perfect: 'had watched'.","Think about which action happened first."],
+        [3,"Apply in Context","COMPLETE THE SENTENCE.","James did not take the exam last Monday because he ______ sick. (be)",["had been","will be","is","has been"],"had been","Being sick happened before (and caused) missing the exam, so the earlier action needs the Past Perfect: 'had been'.","Think about which happened first — feeling sick, or missing the exam."],
+        [3,"Apply in Context","COMPLETE THE SENTENCE.","Susan was very upset because Tom ______ her emails and phone calls. (not/answer)",["does not answer","had not answered","has not answered","will not answer"],"had not answered","Tom's silence happened before Susan's upset feeling, so the earlier action needs the Past Perfect negative: 'had not answered'.","Think about which happened first — Tom's silence, or Susan's reaction to it."],
+        [3,"Apply in Context","COMPLETE THE SENTENCE.","Rachid was pleased because he ______ from university before he applied for the job. (graduate)",["had graduated","graduates","will graduate","has graduated"],"had graduated","Graduating happened before applying for the job, so the earlier action needs the Past Perfect: 'had graduated'.","Think about which happened first — graduating, or applying for the job."],
+        [4,"Diagnose: Choose the Correct Structure","CHOOSE THE CORRECT SENTENCE.","Choose the sentence with the correct Past Perfect structure.",["The teacher had explains the lesson before the students started the exercise.","The teacher had explaining the lesson before the students started the exercise.","The teacher had explain the lesson before the students started the exercise.","The teacher had explained the lesson before the students started the exercise."],"The teacher had explained the lesson before the students started the exercise.","The Past Perfect is formed with 'had' + the past participle — 'had explained', not 'had explains', 'had explaining', or 'had explain'.","Think about the exact structure: had + past participle."],
+        [4,"Diagnose: Choose the Correct Structure","CHOOSE THE CORRECT SENTENCE.","Choose the correct sentence.",["Helen had broken her leg twice before she turned twenty.","Helen has broken her leg twice before she turned twenty.","Helen breaks her leg twice before she turned twenty.","Helen will break her leg twice before she turned twenty."],"Helen had broken her leg twice before she turned twenty.","Breaking her leg happened before turning twenty (a past reference point), so the earlier action needs the Past Perfect: 'had broken'.","Think about which event happened first, relative to her turning twenty."],
+        [5,"Understand the Meaning","CHOOSE THE CORRECT COMPLETION.","Choose the correct negative form: The students could not use the classroom because another group ______ it. (not/vacate)",["had not vacated","not had vacated","did not vacated","has not vacated"],"had not vacated","The other group's not having vacated the room happened before the students being unable to use it, so it needs the Past Perfect negative: 'had not vacated'.","Think about the correct word order and form for a Past Perfect negative."],
+        [5,"Understand the Meaning","CHOOSE THE CORRECT COMPLETION.","By the time the firemen arrived, the fire ______ the roof. (reach)",["had reached","will reach","reaches","has reached"],"had reached","The fire reaching the roof happened before the firemen arrived, so the earlier action needs the Past Perfect: 'had reached'.","Think about which happened first — the fire reaching the roof, or the firemen arriving."],
+        [5,"Understand the Meaning","CHOOSE THE CORRECT COMPLETION.","By the time the students entered the examination room, the invigilator ______ the instructions. (explain)",["explains","will explain","had explained","has explained"],"had explained","Explaining the instructions happened before the students entered, so the earlier action needs the Past Perfect: 'had explained'.","Think about which happened first — explaining the instructions, or the students entering."],
+        [6,"Transform","CHOOSE THE CORRECT TRANSFORMATION.","Choose the correct question: Jack revised all his lessons before he left for school.",["Did Jack had revised all his lessons before he left for school?","Had Jack revised all his lessons before he left for school?","Jack had revised all his lessons before did he leave for school?","Has Jack revised all his lessons before he left for school?"],"Had Jack revised all his lessons before he left for school?","To form a Past Perfect question, 'had' moves before the subject: 'Had Jack revised...?', not 'Did Jack had...?'.","Think about which auxiliary verb moves to the front in a Past Perfect question."],
+        [6,"Transform","CHOOSE THE CORRECT TRANSFORMATION.","Rewrite the sentence using the Past Perfect: \"The lesson finished before the teacher arrived.\"",["The lesson finished had before the teacher arrived.","The lesson had finished before the teacher arrived.","The lesson has finished before the teacher arrived.","The lesson had finish before the teacher arrived."],"The lesson had finished before the teacher arrived.","The lesson finishing happened before the teacher arrived, so the earlier action takes the Past Perfect: 'had finished'.","Think about where 'had' goes and which form of 'finish' follows it."],
+        [7,"Grammar in Context","COMPLETE THE CONTEXT.","Choose the correct completion: As soon as the students ______ the assignment, they submitted it to the teacher. (complete)",["complete","have completed","had completed","will complete"],"had completed","Completing the assignment happened before submitting it, so the earlier action needs the Past Perfect: 'had completed'.","Think about which happened first — completing the assignment, or submitting it."],
+        [7,"Grammar in Context","COMPLETE THE CONTEXT.","Choose the best sentence to complete the mini-story: \"Last night, I arrived home late. My family had already eaten dinner, so I ______ something for myself.\"",["prepare","prepared","had prepared","have prepared"],"prepared","Preparing dinner for yourself happens AFTER the family had already eaten, so this later action stays in the Past Simple: 'prepared'.","Think about which action happened second, after the earlier Past Perfect action."],
+        [8,"Final Challenge: Mixed Grammar","CHOOSE THE CORRECT SENTENCE.","Choose the correct form: When we moved to this place in 2015, I ______ my new job. (already/start)",["had already started","already start","already starting","have already started"],"had already started","Starting the new job happened before moving to this place, so the earlier action needs the Past Perfect: 'had already started'.","Think about which happened first — starting the job, or moving to this place."],
+        [8,"Final Challenge: Mixed Grammar","CHOOSE THE CORRECT SENTENCE.","Final Challenge: Choose the sentence that correctly uses the Past Perfect Simple to show the complete sequence of events.",["When the conference begins, the organizers had prepared everything.","When the conference began, the organizers have prepared everything.","When the conference began, the organizers had prepared everything.","When the conference had began, the organizers prepared everything."],"When the conference began, the organizers had prepared everything.","The organizers' preparation happened before the conference began, so the earlier action needs the Past Perfect ('had prepared'), while the conference beginning stays in the Past Simple ('began').","Think about which action happened first, and check that the verb tenses in both clauses are correctly formed."]
+      ].map((q,i)=>({type:"single-choice",level:q[0],category:q[1],question:q[2],task:q[3],choices:q[4],correctAnswer:q[5],explanation:q[6],hint:q[7],points:1,id:i}))
+    };
+
+    const levelNames = ["","Recognize the Sequence","Complete the Form","Apply in Context","Diagnose","Understand the Meaning","Transform","Grammar in Context","Final Challenge"];
+    const correctMessages = ["Excellent!","Great Job!","Perfect!","Keep Going!"];
+    const wrongMessages = ["Almost!","Review this rule.","Keep learning!","You'll get the next one!"];
+    let currentIndex = 0, states = [], completed = false, finalSeconds = 0;
+    const $ = id => document.getElementById(id);
+
+    /* Independent timer module: question rendering never resets or recreates it. */
+    const timer = (() => {
+      let seconds = quizConfig.timerMode === "countdown" ? quizConfig.countdownSeconds : 0, interval = null, running = false;
+      const format = value => `${String(Math.floor(value / 60)).padStart(2,"0")}:${String(value % 60).padStart(2,"0")}`;
+      function paint(){ $("timerStat").textContent = format(seconds); }
+      function start(){
+        if (!quizConfig.timerEnabled || running) return;
+        running = true;
+        interval = setInterval(() => {
+          quizConfig.timerMode === "countdown" ? seconds-- : seconds++;
+          paint();
+          if (quizConfig.timerMode === "countdown" && seconds <= 0) { seconds = 0; paint(); pause(); finishQuiz(); }
+        },1000);
+      }
+      function pause(){ running=false; clearInterval(interval); interval=null; }
+      function reset(){ pause(); seconds=quizConfig.timerMode==="countdown"?quizConfig.countdownSeconds:0; paint(); }
+      return { start,pause,reset,format,get seconds(){return seconds;} };
+    })();
+
+    function resetStates(){
+      states = quizConfig.questions.map(() => ({answered:false,selected:null,displayOrder:null,hintShown:false}));
+    }
+    function shuffledOrder(){
+      const order = [0,1,2,3];
+      for(let i=order.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [order[i],order[j]]=[order[j],order[i]]; }
+      return order;
+    }
+    function stats(){
+      const correct=states.filter((s,i)=>s.answered&&quizConfig.questions[i].choices[s.selected]===quizConfig.questions[i].correctAnswer).length;
+      const wrong=states.filter(s=>s.answered).length-correct;
+      return {correct,wrong,remaining:20-correct-wrong,score:correct};
+    }
+    function updateStats(){
+      const s=stats();
+      $("correctStat").textContent=s.correct; $("wrongStat").textContent=s.wrong; $("remainingStat").textContent=s.remaining;
+      $("scoreStat").textContent=`${s.score.toFixed(2)} /20`;
+    }
+    function sound(kind){
+      if(!quizConfig.enableSounds || !window.AudioContext) return;
+      const ctx=new AudioContext(), osc=ctx.createOscillator(), gain=ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination); gain.gain.setValueAtTime(.06,ctx.currentTime);
+      const freq=kind==="good"?660:kind==="bad"?220:520;
+      osc.frequency.setValueAtTime(freq,ctx.currentTime); osc.frequency.exponentialRampToValueAtTime(kind==="bad"?150:880,ctx.currentTime+.18);
+      gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.25); osc.start(); osc.stop(ctx.currentTime+.25);
+    }
+
+    /* Reusable Type A renderer for all eight levels. Stored order prevents answer movement after evaluation. */
+    function renderQuestion(){
+      const q=quizConfig.questions[currentIndex], state=states[currentIndex];
+      if(!state.displayOrder) state.displayOrder=quizConfig.randomizeChoices?shuffledOrder():[0,1,2,3];
+      $("instruction").textContent=q.question; $("task").textContent=q.task; $("counter").textContent=`${currentIndex+1} / 20`;
+      $("hintText").textContent=state.hintShown ? q.hint : "";
+      $("hintButton").style.display=state.answered?"none":"inline-block";
+      $("previousButton").disabled=currentIndex===0;
+      $("nextButton").disabled=!state.answered;
+      $("nextButton").textContent=currentIndex===19 ? "Finish ▶" : "Next ▶";
+      const choices=$("choices"); choices.innerHTML="";
+      state.displayOrder.forEach((choiceIndex,position)=>{
+        const choice=q.choices[choiceIndex], button=document.createElement("button");
+        button.type="button"; button.className="choice"; button.dataset.choiceIndex=choiceIndex;
+        button.innerHTML=`<span class="choice-key">${String.fromCharCode(65+position)}</span><span>${choice}</span>`;
+        if(state.answered){
+          button.disabled=true;
+          if(choice===q.correctAnswer) button.classList.add("correct");
+          if(choiceIndex===state.selected && choice!==q.correctAnswer) button.classList.add("wrong");
+        } else button.addEventListener("click",()=>answer(choiceIndex));
+        choices.appendChild(button);
+      });
+      const feedback=$("feedback"); feedback.className="feedback";
+      if(state.answered){
+        const good=q.choices[state.selected]===q.correctAnswer;
+        feedback.className=`feedback show ${good?"good":"bad"}`;
+        feedback.innerHTML=`<strong>${good?correctMessages[Math.floor(Math.random()*correctMessages.length)]:wrongMessages[Math.floor(Math.random()*wrongMessages.length)]}</strong>${q.explanation}`;
+      }
+      updateStats();
+    }
+    function answer(choiceIndex){
+      const state=states[currentIndex]; if(state.answered) return;
+      state.selected=choiceIndex; state.answered=true;
+      sound(quizConfig.questions[currentIndex].choices[choiceIndex]===quizConfig.questions[currentIndex].correctAnswer?"good":"bad");
+      renderQuestion();
+    }
+    function next(){
+      if(!states[currentIndex].answered) return;
+      if(currentIndex===19) finishQuiz(); else { currentIndex++; renderQuestion(); }
+    }
+    function previous(){ if(currentIndex>0){currentIndex--;renderQuestion();} }
+    function remarkFor(score){
+      if(score<=10.99)return ["Keep Practising","Review how the Past Perfect shows which of two past actions happened first, and practice its 'had + past participle' structure."];
+      if(score<=14.99)return ["Good Progress","You understand the basics, but you need more practice deciding which action happened first in a sequence."];
+      if(score<=17.99)return ["Very Good","You handle most Past Perfect structures well. Review negative forms and questions."];
+      return ["Excellent","You have a very strong command of the Past Perfect Simple, including negatives, questions, and sequencing."];
+    }
+    function animateRemark(text){
+      const options=["Keep Practising","Good Progress","Very Good","Excellent"]; let step=0, delay=85;
+      const cycle=()=>{ $("remark").textContent=step<16?options[step%4]:text; step++; if(step<17){delay+=20;setTimeout(cycle,delay);} };
+      cycle();
+    }
+    function finishQuiz(){
+      if(completed) return; completed=true; timer.pause(); finalSeconds=timer.seconds; sound("done");
+      const s=stats(), attempts=(Number(localStorage.getItem("ppAttempts"))||0)+1, best=Math.max(Number(localStorage.getItem("ppBest"))||0,s.score);
+      localStorage.setItem("ppAttempts",attempts); localStorage.setItem("ppBest",best); localStorage.setItem("ppLast",s.score); localStorage.setItem("ppTime",timer.format(finalSeconds));
+      $("quizView").classList.add("hidden"); $("resultsView").classList.remove("hidden");
+      $("finalScore").textContent=s.score.toFixed(2); $("summaryScore").textContent=`${s.score.toFixed(2)} /20`; $("summaryCorrect").textContent=s.correct;
+      $("summaryWrong").textContent=s.wrong; $("summaryAccuracy").textContent=`${((s.correct/20)*100).toFixed(0)}%`; $("summaryTime").textContent=timer.format(finalSeconds);
+      $("summaryAttempts").textContent=attempts; $("summaryBest").textContent=`${best.toFixed(2)} /20`;
+      const [title,desc]=remarkFor(s.score); animateRemark(title); $("remarkDescription").textContent=desc; renderBreakdown();
+      if(quizConfig.showConfetti && s.score>=18) confetti();
+    }
+    function renderBreakdown(){
+      $("levelBreakdown").innerHTML="";
+      for(let level=1;level<=8;level++){
+        const qs=quizConfig.questions.filter(q=>q.level===level), earned=qs.filter(q=>states[q.id].answered&&q.choices[states[q.id].selected]===q.correctAnswer).length;
+        const row=document.createElement("div"); row.className="level-row"; row.innerHTML=`<span>Level ${level} — ${levelNames[level]}</span><strong>${earned}/${qs.length}</strong>`;
+        $("levelBreakdown").appendChild(row);
+      }
+    }
+    function confetti(){
+      const holder=$("confetti"); holder.innerHTML=""; holder.classList.remove("hidden");
+      ["#2563eb","#f3bb28","#1d9a59","#e34b4b","#8c55d6"].forEach((c,n)=>{for(let i=0;i<12;i++){const bit=document.createElement("i");bit.style.background=c;bit.style.left=`${Math.random()*100}%`;bit.style.top=`${-10-Math.random()*35}%`;bit.style.animationDelay=`${Math.random()*.9}s`;holder.appendChild(bit);}});
+      setTimeout(()=>holder.classList.add("hidden"),4000);
+    }
+    function renderReview(){
+      $("resultsView").classList.add("hidden"); $("reviewView").classList.remove("hidden"); const target=$("reviewContent"); target.innerHTML="";
+      for(let level=1;level<=8;level++){
+        const section=document.createElement("section"); section.className="review-level"; section.innerHTML=`<h2>Level ${level} — ${levelNames[level]}</h2>`;
+        quizConfig.questions.filter(q=>q.level===level).forEach(q=>{
+          const state=states[q.id], selected=q.choices[state.selected], good=selected===q.correctAnswer;
+          const card=document.createElement("article"); card.className="review-question";
+          card.innerHTML=`<p><strong>${q.id+1}. ${q.task}</strong></p><p class="${good?"answer-good":"answer-bad"}">Student Answer: ${selected}</p><p class="answer-good">Correct Answer: ${q.correctAnswer}</p><p><strong>Explanation:</strong> ${q.explanation}</p>`;
+          section.appendChild(card);
+        }); target.appendChild(section);
+      }
+    }
+    function restart(){
+      currentIndex=0; completed=false; resetStates(); timer.reset(); $("resultsView").classList.add("hidden"); $("reviewView").classList.add("hidden"); $("quizView").classList.remove("hidden"); renderQuestion(); timer.start();
+    }
+    function saveResults(){
+      const s=stats(), lines=["PAST PERFECT SIMPLE — GRAMMAR QUIZ 2",`Final Score: ${s.score.toFixed(2)} /20`,`Correct Answers: ${s.correct}`,`Wrong Answers: ${s.wrong}`,`Time Taken: ${timer.format(finalSeconds)}`,"","PER-LEVEL BREAKDOWN"];
+      for(let l=1;l<=8;l++){const qs=quizConfig.questions.filter(q=>q.level===l),e=qs.filter(q=>quizConfig.questions[q.id].choices[states[q.id].selected]===q.correctAnswer).length;lines.push(`Level ${l} — ${levelNames[l]}: ${e}/${qs.length}`);}
+      const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([lines.join("\n")],{type:"text/plain"})); a.download="past-perfect-quiz-results.txt"; a.click(); URL.revokeObjectURL(a.href);
+    }
+    $("hintButton").addEventListener("click",()=>{states[currentIndex].hintShown=true;renderQuestion();});
+    $("previousButton").addEventListener("click",previous); $("nextButton").addEventListener("click",next); $("reviewButton").addEventListener("click",renderReview);
+    $("backResultsButton").addEventListener("click",()=>{$("reviewView").classList.add("hidden");$("resultsView").classList.remove("hidden");});
+    $("restartButton").addEventListener("click",restart); $("restartButtonReview").addEventListener("click",restart); $("printButton").addEventListener("click",()=>window.print()); $("saveButton").addEventListener("click",saveResults);
+    document.addEventListener("keydown",e=>{
+      if($("quizView").classList.contains("hidden")) return;
+      if(["1","2","3","4"].includes(e.key) && !states[currentIndex].answered){const index=states[currentIndex].displayOrder[Number(e.key)-1];answer(index);}
+      if(e.key==="ArrowLeft") previous(); if((e.key==="ArrowRight"||e.key==="Enter"||e.key===" ")&&states[currentIndex].answered){e.preventDefault();next();}
+    });
+    resetStates(); renderQuestion(); timer.reset(); timer.start();
+  </script>
+ 
+</body></html>
