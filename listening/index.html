@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en"><head><script>(function(){var ok=true;try{window.localStorage.getItem("__t")}catch(e){ok=false}
+if(!ok){var m={};try{Object.defineProperty(window,"localStorage",{configurable:true,value:{
+getItem:function(k){return Object.prototype.hasOwnProperty.call(m,k)?m[k]:null},
+setItem:function(k,v){m[k]=String(v)},removeItem:function(k){delete m[k]},clear:function(){m={}}}})}catch(e2){}}})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>English2BAC Quizzes — Expressing Purpose</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&amp;family=Poppins:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+:root{--navy:#1e3a5f;--blue:#2563eb;--pale:#eaf4ff;--green:#15803d;--red:#b91c1c}
+*{box-sizing:border-box}html,body{margin:0;width:100%}body{font-family:Poppins,sans-serif;color:#18324f;background:#f3f7fb}
+button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.48}button:focus-visible,.chip:focus-visible,summary:focus-visible{outline:3px solid #f59e0b;outline-offset:3px}
+.quiz-header{background-color:#eaf4ff;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%}
+.header-teacher-img,.header-logo-img{height:64px;width:auto;max-width:none;object-fit:contain;flex:none}
+.header-title{text-align:center;line-height:1.2;min-width:0}
+.title-line1{font-family:Poppins,sans-serif;font-size:26px;font-weight:800;color:#1e3a5f}
+.title-line2{font-family:Poppins,sans-serif;font-size:18px;font-weight:400;color:#2563eb}
+.title-line3{font-family:Poppins,sans-serif;font-size:14px;font-weight:400;color:#64748b}
+@media(min-width:600px){.header-teacher-img,.header-logo-img{height:80px}}
+@media(min-width:1024px){.header-teacher-img,.header-logo-img{height:96px}}
+@media(max-width:640px){.header-teacher-img,.header-logo-img{height:45px}.quiz-header{padding:8px 12px}.title-line1{font-size:clamp(12px,3.4vw,26px)}.title-line2{font-size:clamp(10px,2.65vw,18px)}.title-line3{font-size:clamp(9px,2.2vw,14px)}}
+.shell{width:100%;max-width:1080px;margin:auto;padding:14px clamp(12px,3vw,32px) 40px}
+.info{display:grid;grid-template-columns:1fr 1.5fr 1fr;align-items:center;gap:8px;font-weight:700;font-size:clamp(10px,1.7vw,14px);padding:12px 4px;color:var(--navy)}.info span:nth-child(2){text-align:center}.info span:last-child{text-align:right}
+.phase{background:#dbeafe;color:#17385f;font-weight:800;border-left:5px solid var(--blue);padding:13px 16px;border-radius:8px;margin-bottom:16px}
+.card{background:white;border:1px solid #dce7f3;border-radius:18px;box-shadow:0 10px 30px #1e3a5f0d;padding:clamp(16px,3vw,28px);margin-bottom:16px}
+.instruction{background:var(--navy);color:white;font-weight:800;letter-spacing:.025em;padding:18px 20px;border-radius:12px}
+.task{font-size:clamp(17px,2.6vw,22px);font-weight:600;line-height:1.55;margin:22px 0}
+.choice,.tile,.order-item,.chip{border:2px solid #d7e3f2;background:#f8fbff;color:#17385f;border-radius:12px;padding:13px 16px;text-align:left;transition:background .15s,border-color .15s;min-width:0;overflow-wrap:anywhere}
+.choice:hover:not(:disabled),.tile:hover:not(:disabled){border-color:var(--blue)}.choice,.tile{width:100%}
+.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.selected{border-color:var(--blue)!important;background:#dbeafe!important}.correct{border-color:var(--green)!important;background:#dcfce7!important;color:#14532d!important}.wrong{border-color:var(--red)!important;background:#fee2e2!important;color:#7f1d1d!important}.dimmed{background:#e5e7eb!important;color:#475569!important}
+.feedback{margin-top:18px;padding:15px;border-radius:10px;background:#f0f5fb;line-height:1.6}.feedback:empty{display:none}
+.primary{border:0;border-radius:10px;background:#2563eb;color:white;font-weight:700;padding:12px 20px}.primary:hover:not(:disabled){background:#1d4ed8}.secondary{background:#eaf4ff;color:var(--navy);border:1px solid #bed5f3;border-radius:10px;padding:11px 16px;font-weight:700}
+.navrow{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:18px 0}.counter{font-weight:800;color:var(--navy)}
+.stats{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;background:#eaf4ff;border-radius:10px;padding:12px;font-size:clamp(11px,1.5vw,14px);font-weight:700}
+.match-layout{display:grid;grid-template-columns:minmax(0,2fr) minmax(180px,1fr);gap:16px}.match-rows,.chip-tray,.order-list{display:flex;flex-direction:column;gap:10px;min-width:0}.match-row{background:#f5f9fe;border:1px solid #dbe7f4;border-radius:12px;padding:12px;min-width:0}.row-label{margin-bottom:9px}.drop-slot{min-height:54px;border:2px dashed #9bb7d8;border-radius:10px;display:flex;align-items:center;padding:5px;min-width:0}.chip{display:inline-block;max-width:100%;width:100%;cursor:grab;touch-action:none;user-select:none;position:relative;z-index:1;font:inherit}.chip.dragging,.order-item.dragging{z-index:20;opacity:.82;box-shadow:0 10px 25px #17385f44;pointer-events:none}.chip-tray{background:#edf5ff;padding:12px;border-radius:12px;min-height:74px}.order-item{display:flex;align-items:center;justify-content:space-between;gap:8px;touch-action:none;user-select:none;position:relative}.order-item>span{flex:1}.order-actions{display:flex;gap:4px}.order-actions button{border:1px solid #b9cde6;background:white;border-radius:6px;padding:4px 8px;touch-action:manipulation}
+.audio-panel{background:#eaf4ff;border:1px solid #c9ddf7;border-radius:16px;padding:16px;margin-bottom:16px}.avatars{display:flex;justify-content:center;gap:46px;margin-bottom:14px}.speaker{text-align:center;font-weight:600}.emoji{display:grid;place-items:center;background:white;border:2px solid #bad4f4;border-radius:50%;width:58px;height:58px;font-size:30px;margin:0 auto 5px}.audio-controls{display:flex;justify-content:center;gap:12px}.audio-controls button{background:#1e3a5f;color:white;border:0;border-radius:10px;padding:9px 16px;font-weight:800;min-width:70px}.progress{height:7px;border-radius:10px;background:#c4d8f1;overflow:hidden;margin-top:14px}.progress>div{height:100%;width:0;background:var(--blue)}.audio-error{color:var(--red);font-weight:700;margin:10px 0 0}
+details{border:1px solid #cdddf0;border-radius:12px;padding:14px;margin:16px 0}summary{cursor:pointer;font-weight:700;color:var(--navy)}.transcript p{margin:9px 0;line-height:1.6}.result-score{width:170px;height:170px;border-radius:50%;border:10px solid #2563eb;display:grid;place-items:center;text-align:center;font-size:26px;font-weight:800;color:var(--navy);margin:20px auto}.remark{text-align:center;font-size:25px;font-weight:800;color:var(--blue);min-height:38px}.summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.summary-grid div,.review-entry{background:#f1f6fc;padding:12px;border-radius:9px}.review-entry{margin:12px 0;line-height:1.6}.review-entry h3{font-size:17px;margin:0 0 8px}.button-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+@media(max-width:640px){.choices{grid-template-columns:1fr}.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.match-layout{grid-template-columns:1fr}.chip-tray{flex-direction:row;flex-wrap:wrap}.chip-tray .chip{width:auto;flex:1 1 42%}.stats{justify-content:center}.audio-controls button{min-width:0;padding:9px 12px}}
+@media print{.quiz-header,.info,.phase,.button-row,.audio-panel,.navrow,.stats{display:none!important}.shell{max-width:none}.card{box-shadow:none;border:0}details{display:block}details>*{display:block!important}}
+</style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  
+  
+  
+ <style>[hidden]{display:none!important}</style></head>
+ <body data-template-id="__page-root">
+  <header class="quiz-header canva-header" data-template-id="quiz-header" id="quiz-header"><img class="header-teacher-img canva-image" data-template-id="teacher-image" loading="lazy" id="teacher-image" src="teacher.png" alt="Teacher Soufiane">
+   <div class="header-title">
+    <div class="title-line1 canva-text" data-template-id="title-line1" id="title-line1">English2BAC Quizzes</div>
+    <div class="title-line2 canva-text" data-template-id="title-line2" id="title-line2">Learn • Practice • Succeed</div>
+    <div class="title-line3 canva-text" data-template-id="title-line3" id="title-line3">with Teacher.Soufiane</div>
+   </div><img class="header-logo-img canva-image" data-template-id="logo-image" loading="lazy" id="logo-image" src="logo.png" alt="Level-UP 2BAC">
+  </header>
+  <main class="shell">
+   <div class="info"><span class="canva-text" data-template-id="unit-text" id="unit-text">UNIT: 3</span> <span class="canva-text" data-template-id="subject-text" id="subject-text">EXPRESSING PURPOSE</span> <span class="canva-text" data-template-id="lesson-text" id="lesson-text">LISTENING - QUIZ 1</span>
+   </div>
+   <div id="phase" class="phase" aria-live="polite"></div>
+   <section id="quizView">
+    <div id="audioPanel" class="audio-panel" hidden="">
+     <div class="avatars">
+      <div class="speaker">
+       <span class="emoji" aria-hidden="true">👨</span><span class="canva-text" data-template-id="speaker-male" id="speaker-male">Youssef</span>
+      </div>
+      <div class="speaker">
+       <span class="emoji" aria-hidden="true">👩</span><span class="canva-text" data-template-id="speaker-female" id="speaker-female">Sara</span>
+      </div>
+     </div>
+     <div class="audio-controls" role="group" aria-label="Dialogue playback">
+      <button id="backAudio" type="button" aria-label="Skip back 10 seconds">◀◀ 10</button><button id="playAudio" type="button" aria-label="Play or pause">▶</button><button id="forwardAudio" type="button" aria-label="Skip forward 10 seconds">10 ▶▶</button>
+     </div>
+     <div class="progress" aria-label="Playback progress">
+      <div id="progressFill"></div>
+     </div>
+     <p id="audioError" class="audio-error" role="alert" hidden=""></p>
+    </div>
+    <section class="card" aria-label="Current question">
+     <h1 id="instruction" class="instruction"></h1>
+     <p id="task" class="task"></p>
+     <div id="answerArea"></div>
+     <div id="feedback" class="feedback" aria-live="polite"></div>
+     <div class="navrow">
+      <button id="previous" type="button" class="secondary">◀ Previous</button><span id="counter" class="counter"></span><button id="next" type="button" class="primary">Next ▶</button>
+     </div>
+     <div class="stats" aria-live="polite">
+      <span id="correctStat"></span><span id="wrongStat"></span><span id="remainingStat"></span><span id="scoreStat"></span><span id="timerStat"></span>
+     </div>
+    </section>
+   </section>
+   <section id="resultView" class="card" hidden=""></section>
+   <section id="reviewView" class="card" hidden=""></section>
+  </main>
+  <script>
+'use strict';
+/* Question content is runtime quiz data, not editable presentation copy. */
+const questions=[
+{type:'A',label:'Task 1 — Complete the Sentence',phase:0,q:'COMPLETE THE SENTENCE.',task:'Students watch short videos ______ understand grammar rules.',choices:['so that','so as not to','in order to','unless'],correct:'in order to',explanation:"After the gap we need a verb (understand), so 'in order to' + infinitive expresses the purpose.",points:1},
+{type:'A',label:'Task 1 — Complete the Sentence',phase:0,q:'COMPLETE THE SENTENCE.',task:"We need clear rules ______ the group doesn't become distracting.",choices:['so that','to','so as not to','in order to'],correct:'so that',explanation:"A full clause follows the gap (the group doesn't become...), so 'so that' is the correct expression of purpose.",points:1},
+{type:'A',label:'Task 1 — Complete the Sentence',phase:0,q:'COMPLETE THE SENTENCE.',task:'He switched off his notifications ______ be distracted while studying.',choices:['so that','to','so as not to','because'],correct:'so as not to',explanation:"The purpose is negative (avoiding distraction), so 'so as not to' + infinitive is used.",points:1},
+{type:'A',label:'Task 1 — Complete the Sentence',phase:0,q:'COMPLETE THE SENTENCE.',task:'Many students go online ______ practise their English.',choices:['so that','so as not to','unless','to'],correct:'to',explanation:"'To' + infinitive is the simplest way to express purpose when the subject is the same.",points:1},
+{type:'C',label:'Task 2 — Match the Word with its Meaning',phase:0,q:'MATCH THE WORD WITH ITS MEANING.',task:'Drag each word to the meaning it matches.',rows:['Written words at the bottom of a video showing what is said','Improvement over a period of time','Not connected to the internet','Stopping you from concentrating on something','Easy to reach, use or understand'],chips:['subtitles','progress','offline','distracting','accessible'],explanation:'These five words appear in the conversation: subtitles, progress, offline, distracting and accessible.',points:5},
+{type:'D',label:'Task 3 — Predict the Listening',phase:0,q:'PREDICT THE LISTENING.',task:'You are going to hear two students planning a school project about technology and learning. Which topics are you most likely to hear? Select THREE.',options:['Educational videos','A football tournament','Online quizzes','A holiday abroad','A class messaging group','A cooking competition'],correct:['Educational videos','Online quizzes','A class messaging group'],explanation:'The students plan a technology project, so they discuss educational videos, online quizzes and a class messaging group. A football tournament, a holiday abroad and a cooking competition are unrelated.',points:3},
+{type:'A',label:'Task 4 — Choose the Best Summary',phase:1,q:'CHOOSE THE BEST SUMMARY.',task:'What is the conversation mainly about?',choices:['Two students plan how technology can help classmates learn English.','Two students argue about banning phones inside school classrooms.','Two students prepare together for an important English grammar exam.','Two students choose a new online game to play together.'],correct:'Two students plan how technology can help classmates learn English.',explanation:'Youssef and Sara plan a project about using technology (videos, quizzes, a messaging group, offline files) to help students learn English.',points:1},
+{type:'A',label:'Task 5 — Identify the Main Aim',phase:1,q:'IDENTIFY THE MAIN AIM.',task:'According to Sara, what is the main aim of their project?',choices:['To make students buy useful educational apps online','To make English learning easier and more accessible to students','To replace classroom teachers with recorded online videos',"To test students' grammar knowledge with online quizzes"],correct:'To make English learning easier and more accessible to students',explanation:"Sara says: 'our main aim is to use technology to make English learning easier and more accessible.'",points:1},
+{type:'C',label:'Task 6 — Match the Tool with its Purpose',phase:2,q:'MATCH THE TOOL WITH ITS PURPOSE.',task:'Drag each tool to the purpose mentioned in the conversation.',rows:['To explain difficult grammar rules','So that students can understand new words more easily','To help students practise after each lesson','To share useful learning resources'],chips:['Short videos','Subtitles','Online quizzes','A class messaging group'],explanation:'Youssef and Sara link each tool to a purpose: videos explain grammar, subtitles help with new words, quizzes give practice, and the messaging group shares resources.',points:4},
+{type:'A',label:'Task 7 — Understand the Reason',phase:2,q:'UNDERSTAND THE REASON.',task:'Why should the videos be kept short?',choices:['So that students can download them much faster',"So as not to waste the students' precious time",'Because the teacher asked for much shorter videos','So that students can repeat them during class'],correct:"So as not to waste the students' precious time",explanation:"Youssef says: 'We should also keep the videos short so as not to waste students' time.'",points:1},
+{type:'A',label:'Task 8 — Understand the Solution',phase:2,q:'UNDERSTAND THE SOLUTION.',task:'Why do they suggest downloading the videos and worksheets?',choices:['To print them for every student in the class','To make them available offline for students with poor internet','To sell them to other schools in the region','To check which students have finished each video'],correct:'To make them available offline for students with poor internet',explanation:"Youssef suggests downloading them 'in order to make them available offline', which helps students without a good internet connection.",points:1},
+{type:'A',label:'Task 9 — Understand the Reason',phase:2,q:'UNDERSTAND THE REASON.',task:'Why do they decide to use free websites?',choices:['Because free websites are always better than any paid app','So as not to make students pay for extra resources','Because paid learning apps are forbidden at their school','In order to avoid using the internet at home'],correct:'So as not to make students pay for extra resources',explanation:"Sara says they could use free websites 'so as not to make students pay for extra resources'.",points:1},
+{type:'A',label:'Task 10 — Who Does What?',phase:2,q:'WHO DOES WHAT?',task:'How do Sara and Youssef divide the work?',choices:['Sara: messaging groups and offline resources; Youssef: videos and quizzes','Sara: videos and online quizzes; Youssef: messaging groups and offline resources','Sara: the slides and design; Youssef: the whole speaking part','Sara: recordings and free websites; Youssef: videos and subtitles'],correct:'Sara: videos and online quizzes; Youssef: messaging groups and offline resources',explanation:'Sara prepares the section about videos and online quizzes; Youssef explains messaging groups and offline resources.',points:1},
+{type:'A',label:'Task 11 — True or False',phase:2,q:'CHOOSE TRUE OR FALSE.',task:"Sara wants some rules so that the messaging group doesn't become distracting.",choices:['True','False'],correct:'True',explanation:"Sara says: 'we need some rules so that the group doesn't become distracting.'",points:1},
+{type:'A',label:'Task 11 — True or False',phase:2,q:'CHOOSE TRUE OR FALSE.',task:'Youssef thinks the messaging group should also be used for unrelated messages.',choices:['True','False'],correct:'False',explanation:'Youssef says the group is for questions and educational materials, not unrelated messages.',points:1},
+{type:'A',label:'Task 11 — True or False',phase:2,q:'CHOOSE TRUE OR FALSE.',task:'Students can save files on their phones so that they can study without using mobile data.',choices:['True','False'],correct:'True',explanation:'Sara explains that students could save the files on their phones so that they can study without mobile data.',points:1},
+{type:'A',label:'Task 11 — True or False',phase:2,q:'CHOOSE TRUE OR FALSE.',task:'Shy students will record their answers in class before speaking.',choices:['True','False'],correct:'False',explanation:'They will record their answers at home so that they can practise before speaking in class.',points:1},
+{type:'A',label:'Task 12 — Identify the Expression of Purpose',phase:3,q:'IDENTIFY THE EXPRESSION OF PURPOSE.',task:'"We could use online quizzes in order to help students practise after each lesson." Which expression of purpose is used?',choices:['to','in order to','so that','so as not to'],correct:'in order to',explanation:"The sentence uses 'in order to' + infinitive (help).",points:1},
+{type:'A',label:'Task 12 — Identify the Expression of Purpose',phase:3,q:'IDENTIFY THE EXPRESSION OF PURPOSE.',task:"\"We should also keep the videos short so as not to waste students' time.\" Which expression of purpose is used?",choices:['to','in order to','so that','so as not to'],correct:'so as not to',explanation:"The sentence uses the negative expression 'so as not to' + infinitive (waste).",points:1},
+{type:'A',label:'Task 12 — Identify the Expression of Purpose',phase:3,q:'IDENTIFY THE EXPRESSION OF PURPOSE.',task:'"We could let them record their answers at home so that they can practise before speaking in class." Which expression of purpose is used?',choices:['to','in order to','so that','so as not to'],correct:'so that',explanation:"The sentence uses 'so that' followed by a full clause (they can practise).",points:1},
+{type:'A',label:'Task 12 — Identify the Expression of Purpose',phase:3,q:'IDENTIFY THE EXPRESSION OF PURPOSE.',task:'"We should also create a class messaging group to share useful learning resources." Which expression of purpose is used?',choices:['to','in order to','so that','so as not to'],correct:'to',explanation:"The sentence uses 'to' + infinitive (share).",points:1},
+{type:'A',label:'Task 13 — Identify the Purpose',phase:3,q:'IDENTIFY THE PURPOSE.',task:'Why will students listen to their own recordings?',choices:["To compare them with a native speaker's voice",'In order to notice their own pronunciation mistakes','So that the teacher can mark each recording','So as not to forget new vocabulary words'],correct:'In order to notice their own pronunciation mistakes',explanation:"Sara says students could listen to their recordings 'in order to notice their pronunciation mistakes'.",points:1},
+{type:'A',label:'Task 14 — Identify the Purpose',phase:3,q:'IDENTIFY THE PURPOSE.',task:'Why does Sara think they need rules for the messaging group?',choices:["So that the group doesn't become distracting",'So as not to share educational materials there','In order to stop students asking any questions','To make the group private for every student'],correct:"So that the group doesn't become distracting",explanation:"Sara says they need rules 'so that the group doesn't become distracting'.",points:1},
+{type:'A',label:'Task 15 — Choose the Correct Expression',phase:4,q:'CHOOSE THE CORRECT EXPRESSION.',task:'Students should record themselves ______ notice their mistakes.',choices:['so as not to','in order to','so that','unless'],correct:'in order to',explanation:"A verb follows the gap (notice), so 'in order to' + infinitive expresses the purpose.",points:1},
+{type:'A',label:'Task 15 — Choose the Correct Expression',phase:4,q:'CHOOSE THE CORRECT EXPRESSION.',task:"We use short videos ______ students don't get bored.",choices:['so that','to','so as not to','in order to'],correct:'so that',explanation:"A full clause follows the gap (students don't get bored), so 'so that' is needed.",points:1},
+{type:'A',label:'Task 15 — Choose the Correct Expression',phase:4,q:'CHOOSE THE CORRECT EXPRESSION.',task:'They use free websites ______ spend money on apps.',choices:['so that','so as not to','to','in order that'],correct:'so as not to',explanation:"The purpose is to avoid spending money, so the negative form 'so as not to' is correct.",points:1},
+{type:'A',label:'Task 15 — Choose the Correct Expression',phase:4,q:'CHOOSE THE CORRECT EXPRESSION.',task:'Sara and Youssef will meet tomorrow ______ put everything together.',choices:['so as not to','in case','so that','to'],correct:'to',explanation:"'To' + infinitive (put) expresses the purpose of the meeting.",points:1},
+{type:'A',label:'Task 16 — Choose the Correct Sentence',phase:4,q:'CHOOSE THE CORRECT SENTENCE.',task:'Which sentence is grammatically correct?',choices:['We keep the videos short so as not waste time.','We keep the videos short so as not to waste time.','We keep the videos short so that not to waste time.','We keep the videos short in order for not waste time.'],correct:'We keep the videos short so as not to waste time.',explanation:"The correct structure is 'so as not to' + base verb.",points:1},
+{type:'A',label:'Task 17 — Choose the Sentence with the Same Meaning',phase:4,q:'CHOOSE THE SENTENCE WITH THE SAME MEANING.',task:'"We should finish early so that we have enough time to practise."',choices:['We should finish early in order to have enough time to practise.','We should finish early so as not to have enough time to practise.','We should finish early in order not to practise at all.','We should finish early even though we have enough time to practise.'],correct:'We should finish early in order to have enough time to practise.',explanation:"'So that we have' can be rewritten as 'in order to have' with the same meaning.",points:1},
+{type:'E',label:'Task 18 — Put the Ideas in Order',phase:4,q:'PUT THE IDEAS IN ORDER.',task:'Put the ideas in the order in which they are discussed in the conversation.',items:['Online quizzes to practise after each lesson','A class messaging group','Downloading videos for offline use','Recording answers at home','Using free websites'],explanation:'The students first talk about quizzes, then the messaging group, then offline files, then recording answers at home, and finally free websites.',points:5},
+{type:'C',label:'Task 19 — Match the Problem with the Solution',phase:4,q:'MATCH THE PROBLEM WITH THE SOLUTION.',task:'Drag each solution to the problem it solves.',rows:['The messaging group could become distracting.','Some students have a poor internet connection.','Some students are shy about speaking English.','Not everyone can afford paid learning apps.'],chips:['Set some rules for the group','Download videos and worksheets for offline use','Let them record answers at home first','Use free websites'],explanation:'Each problem raised in the conversation has a matching solution: rules, offline files, recording at home, and free websites.',points:4},
+{type:'A',label:'Task 20 — Overall Listening Check',phase:4,q:'OVERALL LISTENING CHECK.',task:'What does Sara hope at the end of the conversation?',choices:['That the project will be finished before the deadline','That the teacher will give them a high mark','That the project encourages students to use technology wisely','That every student will buy a new smartphone'],correct:'That the project encourages students to use technology wisely',explanation:"Sara ends by saying: 'I hope our project encourages more students to use technology wisely.'",points:1}
+];
+const transcript=[
+['Youssef',"Hey Sara, have you decided what we're going to do for our English presentation?"],
+['Sara','Not completely. I was thinking about using technology to help students improve their English.'],
+['Youssef',"That's a good idea. We could create short videos to explain difficult grammar rules."],
+['Sara','Exactly! We could also add subtitles so that students can understand new words more easily.'],
+['Youssef','Great. And we could use online quizzes in order to help students practise after each lesson.'],
+['Sara','I like that. Students could repeat the quizzes whenever they want to check their progress.'],
+['Youssef','We should also create a class messaging group to share useful learning resources.'],
+['Sara',"Yes, but we need some rules so that the group doesn't become distracting."],
+['Youssef','True. We should use it to ask questions and share educational materials, not to send unrelated messages.'],
+['Sara',"What about students who don't have a good internet connection? How can we help them?"],
+['Youssef','We could download the videos and worksheets in order to make them available offline.'],
+['Sara','That’s useful. Students could save the files on their phones so that they can study without using mobile data.'],
+['Youssef',"Exactly. We should also keep the videos short so as not to waste students' time."],
+['Sara','Good point. Short videos might help them concentrate instead of getting bored.'],
+['Youssef','We could even record students explaining vocabulary to each other to make learning more enjoyable.'],
+['Sara',"I agree. But why don't we include some activities for students who are shy about speaking English?"],
+['Youssef','We could let them record their answers at home so that they can practise before speaking in class.'],
+['Sara','That’s a great idea. They could listen to their recordings in order to notice their pronunciation mistakes.'],
+['Youssef','Right. We should explain that the goal is to improve, not to sound perfect.'],
+['Sara','Definitely. We could also use free websites so as not to make students pay for extra resources.'],
+['Youssef','Good thinking. Not everyone can afford paid learning apps.'],
+['Sara','So, our main aim is to use technology to make English learning easier and more accessible.'],
+['Youssef','Exactly. We want to help students practise more often, even outside the classroom.'],
+['Sara',"Then let's divide the work. I'll prepare the section about videos and online quizzes."],
+['Youssef',"Perfect. I'll explain how messaging groups and offline resources can support students."],
+['Sara','We should finish early so that we have enough time to practise our presentation together.'],
+['Youssef',"Agreed. Let's meet tomorrow after school to put everything together."],
+['Sara',"Great! Let's do it. I hope our project encourages more students to use technology wisely."]
+];
+const $=id=>document.getElementById(id);
+const node=(tag,cls,text)=>{const x=document.createElement(tag);if(cls)x.className=cls;if(text!==undefined)x.textContent=text;return x};
+const shuffle=a=>{let b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b};
+function nonIdentity(a){let b=shuffle(a);if(b.every((v,i)=>v===a[i]))[b[0],b[1]]=[b[1],b[0]];return b}
+let position=0,states=questions.map(()=>({locked:false,earned:0})),selectionTimeout=null;
+const phaseNames=['PRE-LISTENING','WHILE-LISTENING — First Listening: General Understanding','WHILE-LISTENING — Second Listening: Specific Information','WHILE-LISTENING — Third Listening: Understanding the Function','POST-LISTENING'];
+
+/* Independent count-up timer. */
+const timer={seconds:0,interval:null,start(){if(!this.interval)this.interval=setInterval(()=>{this.seconds++;$('timerStat').textContent='Timer '+this.format()},1000)},pause(){clearInterval(this.interval);this.interval=null},reset(){this.pause();this.seconds=0},format(){return `${String(Math.floor(this.seconds/60)).padStart(2,'0')}:${String(this.seconds%60).padStart(2,'0')}`}};
+
+/* Playback persists after its first load at Question 7. The external file may be blocked by the iframe. */
+const audioPlayer={
+ context:null,buffer:null,source:null,gain:null,startedAt:0,offset:0,loading:false,loaded:false,playing:false,duration:NaN,request:null,
+ async load(){
+  if(this.loaded||this.loading)return;
+  this.loading=true;
+  try{
+   this.context??=new (window.AudioContext||window.webkitAudioContext)();
+   const response=await fetch('https://raw.githubusercontent.com/Teacher-Soufiane/unit3-listening/main/Unit3_Expressing_Purpose_Quiz1_Audio1_Final.mp3');
+   if(!response.ok)throw Error('Audio request failed');
+   this.buffer=await this.context.decodeAudioData(await response.arrayBuffer());
+   this.duration=this.buffer.duration;this.loaded=true;this.error(false);
+  }catch(error){this.error(true);this.loading=false}
+ },
+ error(failed){$('audioError').hidden=!failed;$('audioError').textContent=failed?"Audio couldn't be loaded — ask your teacher for the printed transcript":'';for(const id of ['backAudio','playAudio','forwardAudio'])$(id).disabled=failed},
+ time(){return this.playing?Math.min(this.duration,this.offset+this.context.currentTime-this.startedAt):this.offset},
+ async play(){
+  if(!this.loaded){await this.load();if(!this.loaded)return}
+  try{
+   await this.context.resume();
+   if(this.offset>=this.duration)this.offset=0;
+   this.source=this.context.createBufferSource();this.source.buffer=this.buffer;
+   this.source.connect(this.context.destination);
+   this.startedAt=this.context.currentTime;this.playing=true;
+   const currentSource=this.source;
+   currentSource.onended=()=>{if(this.source!==currentSource||!this.playing)return;this.offset=this.duration;this.playing=false;this.paint()};
+   currentSource.start(0,this.offset);this.paint();
+  }catch(error){this.playing=false;this.paint();this.error(true)}
+ },
+ pause(){if(!this.playing)return;this.offset=this.time();this.playing=false;this.source.stop();this.source=null;this.paint()},
+ seek(value){if(!this.loaded)return;const wasPlaying=this.playing;if(wasPlaying)this.pause();this.offset=Math.max(0,Math.min(this.duration,value));if(wasPlaying)this.play();this.paint()},
+ paint(){$('playAudio').textContent=this.playing?'⏸':'▶';$('progressFill').style.width=this.loaded?`${100*this.time()/this.duration}%`:'0%'},
+ reset(){this.pause();this.offset=0;this.paint()}
+};
+setInterval(()=>audioPlayer.paint(),250);
+$('playAudio').addEventListener('click',()=>audioPlayer.playing?audioPlayer.pause():audioPlayer.play());
+$('backAudio').addEventListener('click',()=>{if(audioPlayer.loaded)audioPlayer.seek(Math.max(0,audioPlayer.time()-10))});
+$('forwardAudio').addEventListener('click',()=>{if(audioPlayer.loaded)audioPlayer.seek(Math.min(audioPlayer.duration,audioPlayer.time()+10))});
+
+let effects=null;
+function sound(kind){
+ if(audioPlayer.playing)return;
+ try{
+  effects??=new (window.AudioContext||window.webkitAudioContext)();
+  const oscillator=effects.createOscillator(),gain=effects.createGain(),now=effects.currentTime;
+  oscillator.type='sine';oscillator.frequency.setValueAtTime(kind==='wrong'?260:kind==='complete'?660:kind==='correct'?520:390,now);
+  oscillator.frequency.exponentialRampToValueAtTime(kind==='wrong'?190:kind==='complete'?990:kind==='correct'?740:460,now+.14);
+  gain.gain.setValueAtTime(.04,now);gain.gain.exponentialRampToValueAtTime(.001,now+.2);
+  oscillator.connect(gain).connect(effects.destination);oscillator.start(now);oscillator.stop(now+.21);
+ }catch(error){}
+}
+function stats(){
+ const answered=states.filter(s=>s.locked),score=states.reduce((n,s)=>n+s.earned,0);
+ $('correctStat').textContent=`✅ Correct: ${answered.filter((s,i)=>s.earned>0).length}`;
+ $('wrongStat').textContent=`❌ Wrong: ${answered.filter(s=>s.earned===0).length}`;
+ $('remainingStat').textContent=`Remaining: ${32-answered.length}`;
+ $('scoreStat').textContent=`Score: ${score.toFixed(2)} /48`;
+ $('timerStat').textContent=`Timer ${timer.format()}`;
+}
+function finishAnswer(earned,detail){
+ const s=states[position];if(s.locked)return;
+ s.locked=true;s.earned=earned;s.detail=detail;
+ sound(earned?'correct':'wrong');
+ $('feedback').textContent=`${earned?'Well done!':'Keep practising!'} ${questions[position].explanation}`;
+ $('next').disabled=false;stats();
+}
+function renderA(q,s,area){
+ if(!s.order)s.order=shuffle(q.choices);
+ const grid=node('div','choices');area.append(grid);
+ s.order.forEach(value=>{
+  const button=node('button','choice',value);button.type='button';grid.append(button);
+  if(s.locked){button.disabled=true;if(value===q.correct)button.classList.add('correct');else if(value===s.answer)button.classList.add('wrong')}
+  button.addEventListener('click',()=>{
+   if(s.locked)return;s.answer=value;
+   finishAnswer(value===q.correct?1:0,{answer:value});
+   [...grid.children].forEach(b=>{b.disabled=true;if(b.textContent===q.correct)b.classList.add('correct');else if(b===button)b.classList.add('wrong')});
+  });
+ });
+}
+/* Matching: pointer-captured chips can be moved between slots until a single graded check. */
+function renderC(q,s,area){
+ if(!s.order)s.order=nonIdentity(q.chips.map((_,i)=>i));
+ if(!s.placements)s.placements=Array(q.rows.length).fill(null);
+ const layout=node('div','match-layout'),rows=node('div','match-rows'),tray=node('div','chip-tray');
+ layout.append(rows,tray);area.append(layout);
+ q.rows.forEach((text,i)=>{
+  const row=node('div','match-row'),label=node('div','row-label',text),slot=node('div','drop-slot');
+  slot.dataset.slot=i;row.append(label,slot);rows.append(row);
+  if(s.locked){const good=s.placements[i]===i;row.classList.add(good?'correct':'wrong');if(!good)row.append(node('div','',`Correct: ${q.chips[i]}`))}
+ });
+ s.order.forEach(id=>{
+  const chip=node('button','chip',q.chips[id]);chip.type='button';chip.dataset.chip=id;
+  const target=s.placements.indexOf(id);
+  (target<0?tray:rows.children[target].querySelector('.drop-slot')).append(chip);
+  chip.disabled=s.locked;
+  chip.addEventListener('pointerdown',e=>{
+   if(s.locked)return;
+   chip.setPointerCapture(e.pointerId);
+   chip.classList.add('dragging');
+   chip._startX=e.clientX;chip._startY=e.clientY;
+  });
+  chip.addEventListener('pointermove',e=>{
+   if(!chip.hasPointerCapture(e.pointerId))return;
+   chip.style.transform=`translate(${e.clientX-chip._startX}px,${e.clientY-chip._startY}px)`;
+  });
+  const drop=e=>{
+   if(!chip.hasPointerCapture(e.pointerId))return;
+   chip.releasePointerCapture(e.pointerId);chip.classList.remove('dragging');
+   chip.style.transform='';
+   if(e.type==='pointercancel')return;
+   const target=document.elementFromPoint(e.clientX,e.clientY)?.closest('.drop-slot,.chip-tray');
+   if(!target||!layout.contains(target))return;
+   const previous=s.placements.indexOf(id);
+   if(previous>=0)s.placements[previous]=null;
+   if(target.classList.contains('chip-tray'))tray.append(chip);
+   else{
+    const index=Number(target.dataset.slot),occupant=s.placements[index];
+    if(occupant!==null&&occupant!==id){
+     s.placements[index]=null;
+     const displaced=layout.querySelector(`[data-chip="${occupant}"]`);
+     tray.append(displaced);
+    }
+    s.placements[index]=id;target.append(chip);sound('click');
+   }
+   check.disabled=s.placements.some(v=>v===null);
+  };
+  chip.addEventListener('pointerup',drop);chip.addEventListener('pointercancel',drop);
+ });
+ const check=node('button','primary','Check Answers');check.type='button';check.style.marginTop='18px';
+ check.disabled=s.locked||s.placements.some(v=>v===null);area.append(check);
+ check.addEventListener('click',()=>{
+  const earned=s.placements.filter((id,i)=>id===i).length;
+  finishAnswer(earned,{placements:[...s.placements]});render();
+ });
+}
+/* Exact-three selection: one state set, a cancellable 500 ms evaluation window. */
+function renderD(q,s,area){
+ if(!s.order)s.order=shuffle(q.options);
+ if(!s.selected)s.selected=[];
+ const grid=node('div','tiles');area.append(grid);
+ const update=()=>{
+  [...grid.children].forEach(b=>{
+   const value=b.textContent;b.className='tile';
+   if(s.locked)b.classList.add(q.correct.includes(value)?'correct':s.selected.includes(value)?'wrong':'dimmed');
+   else if(s.selected.includes(value))b.classList.add('selected');
+   b.disabled=s.locked;
+  });
+ };
+ s.order.forEach(value=>{
+  const tile=node('button','tile',value);tile.type='button';grid.append(tile);
+  tile.addEventListener('click',()=>{
+   if(s.locked)return;
+   clearTimeout(selectionTimeout);
+   s.selected=s.selected.includes(value)?s.selected.filter(v=>v!==value):s.selected.length<3?[...s.selected,value]:s.selected;
+   sound('click');update();
+   if(s.selected.length===3)selectionTimeout=setTimeout(()=>{
+    if(s.locked||s.selected.length!==3)return;
+    const exact=q.correct.every(v=>s.selected.includes(v));
+    finishAnswer(exact?3:0,{selected:[...s.selected]});update();
+   },500);
+  });
+ });
+ update();
+}
+/* Ordering: pointer drop and arrow buttons modify the same order; grading happens once. */
+function renderE(q,s,area){
+ if(!s.order)s.order=nonIdentity(q.items.map((_,i)=>i));
+ const list=node('div','order-list');area.append(list);
+ const draw=()=>{
+  list.replaceChildren();
+  s.order.forEach((id,index)=>{
+   const item=node('div','order-item');item.dataset.index=index;
+   item.append(node('span','',q.items[id]));
+   if(s.locked)item.classList.add(id===index?'correct':'wrong');
+   if(!s.locked){
+    const actions=node('div','order-actions');
+    [['▲',-1],['▼',1]].forEach(([symbol,delta])=>{
+     const button=node('button','',symbol);button.type='button';button.setAttribute('aria-label',`${delta<0?'Move up':'Move down'} ${q.items[id]}`);
+     button.disabled=index+delta<0||index+delta>=s.order.length;
+     button.addEventListener('click',()=>{[s.order[index],s.order[index+delta]]=[s.order[index+delta],s.order[index]];draw()});
+     actions.append(button);
+    });
+    item.append(actions);
+    item.addEventListener('pointerdown',e=>{
+     if(e.target.closest('button'))return;
+     item.setPointerCapture(e.pointerId);item.classList.add('dragging');item._y=e.clientY;
+    });
+    item.addEventListener('pointermove',e=>{if(item.hasPointerCapture(e.pointerId))item.style.transform=`translateY(${e.clientY-item._y}px)`});
+    const end=e=>{
+     if(!item.hasPointerCapture(e.pointerId))return;
+     item.releasePointerCapture(e.pointerId);item.style.transform='';item.classList.remove('dragging');
+     if(e.type==='pointercancel')return;
+     const target=document.elementFromPoint(e.clientX,e.clientY)?.closest('.order-item');
+     if(target&&list.contains(target)){
+      const destination=Number(target.dataset.index);
+      s.order.splice(index,1);s.order.splice(destination,0,id);draw();sound('click');
+     }
+    };
+    item.addEventListener('pointerup',end);item.addEventListener('pointercancel',end);
+   }
+   list.append(item);
+  });
+ };
+ draw();
+ if(s.locked){area.append(node('p','feedback','Correct order: '+q.items.join(' → ')));return}
+ const check=node('button','primary','Check Answers');check.type='button';check.style.marginTop='18px';area.append(check);
+ check.addEventListener('click',()=>{
+  const earned=s.order.filter((id,i)=>id===i).length;
+  finishAnswer(earned,{order:[...s.order]});render();
+ });
+}
+function render(){
+ clearTimeout(selectionTimeout);
+ const q=questions[position],s=states[position];
+ $('phase').textContent=phaseNames[q.phase];
+ $('audioPanel').hidden=q.phase===0;
+ if(q.phase>0&&!audioPlayer.loaded&&!audioPlayer.loading)audioPlayer.load();
+ $('instruction').textContent=q.q;$('task').textContent=q.task;
+ $('answerArea').replaceChildren();$('feedback').textContent=s.locked?`${s.earned?'Well done!':'Keep practising!'} ${q.explanation}`:'';
+ ({A:renderA,C:renderC,D:renderD,E:renderE})[q.type](q,s,$('answerArea'));
+ $('previous').disabled=position===0;$('next').disabled=!s.locked;
+ $('next').textContent=position===31?'See Results ▶':'Next ▶';
+ $('counter').textContent=`${position+1} / 32`;stats();
+}
+$('previous').addEventListener('click',()=>{if(position>0){position--;render()}});
+$('next').addEventListener('click',()=>{if(!states[position].locked)return;if(position===31)showResults();else{position++;render()}});
+document.addEventListener('keydown',e=>{
+ if(e.target.closest('button,summary,input,textarea'))return;
+ if(e.target.closest('.audio-panel')){
+  if(e.code==='Space'){e.preventDefault();$('playAudio').click()}
+  if(e.key==='ArrowLeft'){e.preventDefault();$('backAudio').click()}
+  if(e.key==='ArrowRight'){e.preventDefault();$('forwardAudio').click()}
+  return;
+ }
+ if(e.key==='ArrowLeft')$('previous').click();
+ if(e.key==='ArrowRight')$('next').click();
+ const buttons=$('answerArea').querySelectorAll('.choice,.tile');
+ if(/^[1-6]$/.test(e.key)&&buttons[Number(e.key)-1])buttons[Number(e.key)-1].click();
+ if((e.key==='Enter'||e.code==='Space')&&buttons.length&&!states[position].locked){e.preventDefault();buttons[0].click()}
+});
+function transcriptElement(){
+ const details=node('details'),summary=node('summary','','Show Transcript'),body=node('div','transcript');
+ transcript.forEach(([speaker,line])=>{const p=node('p');const strong=node('strong','',speaker+': ');p.append(strong,document.createTextNode(line));body.append(p)});
+ details.append(summary,body);return details;
+}
+function score(){return states.reduce((n,s)=>n+s.earned,0)}
+function breakdown(){
+ const tasks=new Map();
+ questions.forEach((q,i)=>{const v=tasks.get(q.label)||{earned:0,possible:0};v.earned+=states[i].earned;v.possible+=q.points;tasks.set(q.label,v)});
+ return tasks;
+}
+function storageNumber(key){try{return Number(localStorage.getItem('u3_'+key))||0}catch{return 0}}
+function store(key,value){try{localStorage.setItem('u3_'+key,String(value))}catch{}}
+function remark(value){return value<24?'Fail':value<28.8?'Pass':value<33.6?'Fairly Good':value<38.4?'Good':value<43.2?'Very Good':'Excellent!'}
+function showResults(){
+ timer.pause();audioPlayer.pause();$('quizView').hidden=true;$('reviewView').hidden=true;$('resultView').hidden=false;$('phase').hidden=true;
+ const total=score(),attempts=storageNumber('attempts')+1,best=Math.max(total,storageNumber('best'));
+ store('attempts',attempts);store('best',best);store('last',total);store('time',timer.format());
+ const result=$('resultView');result.replaceChildren();
+ result.append(node('h1','', 'English2BAC Quizzes — UNIT: 3'),node('h2','','EXPRESSING PURPOSE · LISTENING - QUIZ 1'));
+ result.append(node('div','result-score',`${total.toFixed(2)} /48`));
+ const animated=node('div','remark');result.append(animated);
+ const labels=['Fail','Pass','Fairly Good','Good','Very Good','Excellent!'];let cycles=0;
+ const spin=setInterval(()=>{animated.textContent=labels[cycles++%labels.length];if(cycles>=18){clearInterval(spin);animated.textContent=remark(total)}},160);
+ const answered=states.filter(s=>s.locked).length,correct=states.filter(s=>s.earned>0).length;
+ const summary=node('div','summary-grid');
+ [['Final Score',`${total.toFixed(2)} /48`],['Correct Answers',correct],['Wrong Answers',answered-correct],['Accuracy',`${(100*total/48).toFixed(2)}%`],['Time Taken',timer.format()],['Attempts',attempts],['Best Score',`${best.toFixed(2)} /48`]].forEach(([name,value])=>summary.append(node('div','',`${name}: ${value}`)));
+ result.append(summary,node('h2','','Per-task breakdown'));
+ breakdown().forEach((v,label)=>result.append(node('p','',`${label}: ${v.earned}/${v.possible}`)));
+ result.append(node('p','',`Total Time Taken: ${timer.format()}`),transcriptElement());
+ const actions=node('div','button-row');
+ const review=node('button','primary','Review My Answers'),restart=node('button','secondary','Restart Quiz'),print=node('button','secondary','Print Results'),save=node('button','secondary','Save Results');
+ [review,restart,print,save].forEach(b=>{b.type='button';actions.append(b)});
+ result.append(actions);
+ review.onclick=showReview;restart.onclick=restartQuiz;print.onclick=()=>window.print();
+ save.onclick=()=>{
+  const lines=['English2BAC Quizzes — UNIT: 3','EXPRESSING PURPOSE · LISTENING - QUIZ 1',`Final Score: ${total.toFixed(2)} /48`,`Time Taken: ${timer.format()}`,'',...Array.from(breakdown(),([label,v])=>`${label}: ${v.earned}/${v.possible}`),'','TRANSCRIPT',...transcript.map(([name,text])=>`${name}: ${text}`)];
+  const url=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/plain'}));
+  const a=document.createElement('a');a.href=url;a.download='expressing-purpose-results.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ };
+ if(total>=38.4)celebrate();
+}
+function celebrate(){
+ const layer=node('div');layer.style.cssText='position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:100';document.body.append(layer);
+ for(let i=0;i<55;i++){const piece=node('span');piece.style.cssText=`position:absolute;top:-20px;left:${Math.random()*100}%;width:8px;height:13px;background:${['#2563eb','#16a34a','#f59e0b','#ef4444'][i%4]};transform:rotate(${Math.random()*360}deg);animation:fall ${2+Math.random()*2}s linear forwards;animation-delay:${Math.random()}s`;layer.append(piece)}
+ const style=node('style');style.textContent='@keyframes fall{to{top:105%;transform:rotate(900deg)}}';layer.append(style);setTimeout(()=>layer.remove(),5000);sound('complete');
+}
+function showReview(){
+ $('resultView').hidden=true;$('reviewView').hidden=false;
+ const view=$('reviewView');view.replaceChildren(node('h1','','Review My Answers'),transcriptElement());
+ let last='';
+ questions.forEach((q,i)=>{
+  if(q.label!==last){view.append(node('h2','',q.label));last=q.label}
+  const s=states[i],entry=node('article','review-entry');entry.append(node('h3','',`Question ${i+1}: ${q.task}`));
+  if(q.type==='A')entry.append(node('p','',`Student Answer: ${s.answer} · Correct Answer: ${q.correct}`));
+  if(q.type==='D')entry.append(node('p','',`Student selections: ${s.selected.join(', ')} · Correct selections: ${q.correct.join(', ')}`));
+  if(q.type==='C')q.rows.forEach((row,j)=>entry.append(node('p',s.placements[j]===j?'correct':'wrong',`${row} — Your match: ${q.chips[s.placements[j]]}; correct: ${q.chips[j]}`)));
+  if(q.type==='E')s.order.forEach((id,j)=>entry.append(node('p',id===j?'correct':'wrong',`Position ${j+1}: ${q.items[id]} · Correct: ${q.items[j]}`)));
+  entry.append(node('p','',`Points: ${s.earned}/${q.points}. ${q.explanation}`));view.append(entry);
+ });
+ const actions=node('div','button-row'),back=node('button','primary','Back to Results'),restart=node('button','secondary','Restart Quiz');
+ back.onclick=()=>{$('reviewView').hidden=true;$('resultView').hidden=false};restart.onclick=restartQuiz;
+ actions.append(back,restart);view.append(actions);
+}
+function restartQuiz(){
+ clearTimeout(selectionTimeout);audioPlayer.reset();timer.reset();position=0;states=questions.map(()=>({locked:false,earned:0}));
+ $('resultView').hidden=true;$('reviewView').hidden=true;$('quizView').hidden=false;$('phase').hidden=false;
+ render();timer.start();
+}
+render();timer.start();
+</script>
+ 
+</body></html>
